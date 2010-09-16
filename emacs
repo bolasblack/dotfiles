@@ -1,11 +1,16 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;系统设置
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; 没有 toolbar
 (tool-bar-mode nil);
 ;; 没有 menubar
-;(setq menu-bar-mode nil)
+;(setq menu-bar-mode nil
+
+;; 行号
+
+;; 设置缩进
+(setq c-basic-offset 4)
 
 ;; 设置字体
 (set-face-attribute 'default nil :font "文泉驿等宽微米黑-9")
@@ -74,9 +79,6 @@
 ;;在标题栏显示buffer的名字，而不是 emacs@email.***这样没用的提示。
 (setq frame-title-format "emacs@%b")
 
-;;让 Emacs 可以直接打开和显示图片。
-(auto-image-file-mode)
-
 ;;语法加亮
 (global-font-lock-mode t)
 
@@ -107,10 +109,11 @@
 ;;时间的变化频率
 (setq display-time-interval 10)
 
+;;;}}}
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;按键设置
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;将 M+x 绑定为 C+x C+m 与 C+c C+m
 (global-set-key "\C-x\C-m" 'execute-extended-command)
@@ -121,31 +124,39 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;扩展载入
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;set the default file path
 (setq default-directory "~/.emacsfiles/")
 (add-to-list 'load-path "/")
+(add-to-list 'load-path "/usr/share/emacs23/site-lisp")
+(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
 
-(add-to-list 'load-path "Plugins/auto-complete/")
+;; ecb
+(require 'ecb)
+(require 'ecb-autoloads)
+
+;; auto-complete
+(add-to-list 'load-path "plugins/auto-complete/")
 (require 'auto-complete)
 
 ;;设置主题
-;(load-file "Plugins/color-theme.el")
+;(load-file "plugins/color-theme.el")
 ;(require 'color-theme)
+;(color-theme-initialize)
 ;(load-file "themes/color-theme-colorful-obsolescence.el")
 ;(color-theme-colorful-obsolescence)
 
 ;;载入w3m扩展  浏览网页
-(add-to-list 'load-path "Plugins/emacs-w3m/")
+(add-to-list 'load-path "plugins/emacs-w3m/")
 (require 'w3m)
 (require 'w3m-lnum)
 (require 'w3m-util)
 
 ;;载入muse扩展  wiki
-(add-to-list 'load-path "Plugins/muse/lisp/")
+(add-to-list 'load-path "plugins/muse/lisp/")
 (require 'muse-mode)     ; load authoring mode
 (require 'muse-html)     ; load publishing styles I use
 (require 'muse-latex)
@@ -153,9 +164,9 @@
 (require 'muse-docbook)
 (require 'muse-project)  ; publish files in projects
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;由扩展而生的设置
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;Org-mode,emacs 23已经默认支持
 ;(add-to-list 'auto-mode-alist '("\\.org\\" . org-mode))
@@ -197,7 +208,6 @@
          (:base "html" :path "wiki/public_html")
          (:Base "pdf" :path "wiki/public_html/pdf"))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;快捷键设置
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
