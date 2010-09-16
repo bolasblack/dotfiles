@@ -85,8 +85,8 @@ mkrcd() {
 	cd "$@";
 }
 
-# cdaxal = cd ~/下载/ && axal
-cdaxal() {
+# cdaxel = cd ~/下载/ && axel
+cdaxel() {
 	cd ~/下载/;
 	axal "$@";
 }
@@ -97,7 +97,7 @@ mkinstl() {
 
 #命令别名
 #alias cd=cdl
-alias wget=cdaxal
+alias axel=cdaxel
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
