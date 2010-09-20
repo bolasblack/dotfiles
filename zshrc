@@ -170,9 +170,6 @@ ubuntudy@204.12.194.130
 )
 zstyle ':completion:*:my-accounts' users-hosts $my_accounts
 
-#补全 notify
-#zstyle ':conpletion:*:sudo
-
 ####################################### E* 自定义补全
 
 ####################################### S* 自动补全设置
