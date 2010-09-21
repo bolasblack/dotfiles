@@ -3,11 +3,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; 没有 toolbar
-(tool-bar-mode nil);
+(tool-bar-mode nil)
 ;; 没有 menubar
-;(setq menu-bar-mode nil
+;(menu-bar-mode nil)
 
-;; 行号
+;; 行号 emacs23 支持
+(global-linum-mode t)
+
+;; change yes or no to y/n
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; 设置缩进
 (setq c-basic-offset 4)
@@ -29,19 +33,16 @@
 (put 'LaTeX-hide-environment 'disabled nil)
 
 ;;Ctrl+Space无效
-(global-set-key (kbd "C-SPC")'nil)
+;(global-set-key (kbd "C-SPC")'nil)
+
+;; 设置窗口的初始大小
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 75) (height . 38)))
 
 ;;关闭烦人的出错时的提示声。
 (setq visible-bell t)
 
 ;;显示列号
 (setq column-number-mode t)
-
-;;用一个很大的 kill ring. 这样防止不小心删掉重要的东西
-(setq kill-ring-max 200)
-
-;;把 fill-column 设为 60. 这样的文字更好读。
-(setq default-fill-column 60)
 
 ;;用一个很大的 kill ring. 这样防止不小心删掉重要的东西
 (setq kill-ring-max 200)
@@ -66,13 +67,10 @@
 (show-paren-mode t)
 (setq show-paren-style 'parentheses)
 
-;;高亮显示匹配的括号。
-(show-paren-mode 1)
-
 ;;光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线。
 (mouse-avoidance-mode 'animate)
 
-;;指针不闪，不恍花眼睛。
+;; 光标不闪，不恍花眼睛。
 (blink-cursor-mode -1)
 (transient-mark-mode 1)
 
@@ -99,17 +97,15 @@
 ;(setq make-backup-files nil) 
 
 ;;显示日期
-(setq display-time-day-and-date t)
+;(setq display-time-day-and-date t)
 ;;显示时间
-(display-time)
+;(display-time)
 ;;时间为24小时制
-(setq display-time-24hr-format t)
+;(setq display-time-24hr-format t)
 ;;时间显示包括日期和具体时间
-(setq display-time-day-and-date t)
+;(setq display-time-day-and-date t)
 ;;时间的变化频率
-(setq display-time-interval 10)
-
-;;;}}}
+;(setq display-time-interval 10)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;按键设置
@@ -129,25 +125,55 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;set the default file path
-(setq default-directory "~/.emacsfiles/")
+(setq default-directory "~/.emacs.d/")
 (add-to-list 'load-path "/")
-(add-to-list 'load-path "/usr/share/emacs23/site-lisp")
-(add-to-list 'load-path "/usr/share/emacs23/site-lisp/ecb")
+(add-to-list 'load-path "~/.emacs.d/plugins/")
+
+;; 高亮光标周围所有配对的括号
+(require 'highlight-parentheses)
+(highlight-parentheses-mode 1)
+
+;; number window 给 buffer 上所有窗口编号
+(require 'window-numbering)
+(window-numbering-mode 1)
+
+;; highlight-tail
+(require 'highlight-tail)
+(setq highlight-tail-colors
+      '(("black" . 0)
+        ("#606060" . 75)
+        ("black" . 100)));))
+(setq highlight-tail-posterior-type t)
+(highlight-tail-mode 1)
+
+;; kill-ring-search
+(autoload 'kill-ring-search "kill-ring-search"
+  "Search the kill ring in the minibuffer."
+  (interactive))
+(global-set-key "\M-\C-y" 'kill-ring-search)
 
 ;; ecb
-(require 'ecb)
-(require 'ecb-autoloads)
+;(require 'ecb)
+;(require 'ecb-autoloads)
 
 ;; auto-complete
-(add-to-list 'load-path "plugins/auto-complete/")
-(require 'auto-complete)
+(add-to-list 'load-path "~/.emacs.d/plugins/auto-complete/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete//ac-dict")
+(ac-config-default)
+
+;; for YAsnippet
+(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/plugins/yasnippet/snippets")
 
 ;;设置主题
-;(load-file "plugins/color-theme.el")
-;(require 'color-theme)
-;(color-theme-initialize)
-;(load-file "themes/color-theme-colorful-obsolescence.el")
-;(color-theme-colorful-obsolescence)
+(require 'color-theme)
+(load-file "plugins/themes/color-theme-colorful-obsolescence.el")
+(load-file "plugins/themes/color-theme-example.el")
+(load-file "plugins/themes/color-theme-library.el")
+(color-theme-colorful-obsolescence)
 
 ;;载入w3m扩展  浏览网页
 (add-to-list 'load-path "plugins/emacs-w3m/")
@@ -156,13 +182,14 @@
 (require 'w3m-util)
 
 ;;载入muse扩展  wiki
-(add-to-list 'load-path "plugins/muse/lisp/")
-(require 'muse-mode)     ; load authoring mode
-(require 'muse-html)     ; load publishing styles I use
-(require 'muse-latex)
-(require 'muse-texinfo)
-(require 'muse-docbook)
-(require 'muse-project)  ; publish files in projects
+;; 由于使用 dokuwiki 所以暂停使用 muse
+;(add-to-list 'load-path "plugins/muse/lisp/")
+;(require 'muse-mode)     ; load authoring mode
+;(require 'muse-html)     ; load publishing styles I use
+;(require 'muse-latex)
+;(require 'muse-texinfo)
+;(require 'muse-docbook)
+;(require 'muse-project)  ; publish files in projects
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;由扩展而生的设置
@@ -203,11 +230,28 @@
 (setq w3m-home-page "http://www.google.com")
 
 ;;emacs-muse的工程
-(setq muse-project-alist
-      '(("website" ("wiki/" :default "index")
-         (:base "html" :path "wiki/public_html")
-         (:Base "pdf" :path "wiki/public_html/pdf"))))
+;(setq muse-project-alist
+;      '(("website" ("wiki/" :default "index")
+;         (:base "html" :path "wiki/public_html")
+;         (:Base "pdf" :path "wiki/public_html/pdf"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;快捷键设置
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;emacs 自加的
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.32"))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
