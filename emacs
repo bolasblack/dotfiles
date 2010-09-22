@@ -1,5 +1,10 @@
-(add-to-list 'load-path "~/.emacs.d/plugins/")
 (add-to-list 'load-path "~/.emacs.d/plugins/conf/")
+(add-to-list 'load-path "~/.emacs.d/plugins/")
+
+(require 'global-seting)
+(require 'kbd-seting)
+(require 'php-mode-seting)
+(require 'emacs-w3m-seting)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;扩展载入
@@ -46,9 +51,9 @@
 
 ;;设置主题
 (require 'color-theme)
-(load-file "plugins/themes/color-theme-colorful-obsolescence.el")
-(load-file "plugins/themes/color-theme-example.el")
-(load-file "plugins/themes/color-theme-library.el")
+(load-file "~/.emacs.d/plugins/themes/color-theme-example.el")
+(load-file "~/.emacs.d/plugins/themes/color-theme-library.el")
+(load-file "~/.emacs.d/plugins/themes/color-theme-colorful-obsolescence.el")
 (color-theme-colorful-obsolescence)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
