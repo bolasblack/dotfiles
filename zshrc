@@ -19,7 +19,6 @@ bindkey "\e[3~" delete-char
 #以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
-
 #路径别名 进入相应的路径时只要 cd ~xxx
 #示例： hash -d WWW="/home/lighttpd/html"
 
@@ -31,16 +30,16 @@ PROMPT='%n@%M %/
 alias ls='ls -F'
 fi
 
-##在命令前插入 sudo 
+##在命令前插入 notify sudo
 #定义功能 
-sudo-command-line() {
+notify-sudo-command-line() {
     [[ -z $BUFFER ]] && zle up-history
-    [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
+    [[ $BUFFER != "notify sudo \*" ]] && BUFFER="notify sudo $BUFFER"
     zle end-of-line                 #光标移动到行末
 }
-zle -N sudo-command-line
+zle -N notify-sudo-command-line
 #定义快捷键为： [Esc] [Esc]
-bindkey "\e\e" sudo-command-line
+bindkey "\e\e\e" notify-sudo-command-line
 
 ##在命令前插入 notify
 #定义功能 
@@ -51,7 +50,7 @@ notify-command-line() {
 }
 zle -N notify-command-line
 #定义快捷键为： [Esc] [Esc] [Esc]
-bindkey "\e\e\e" notify-command-line
+bindkey "\e\e" notify-command-line
 
 ##拼音补全
 #定义功能
@@ -88,7 +87,7 @@ mkrcd() {
 # cdaxel = cd ~/下载/ && axel
 cdaxel() {
 	cd ~/下载/;
-	axal "$@";
+	axel "$@";
 }
 
 mkinstl() {
@@ -97,7 +96,7 @@ mkinstl() {
 
 #命令别名
 #alias cd=cdl
-alias axel=cdaxel
+#alias axel=cdaxel
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
