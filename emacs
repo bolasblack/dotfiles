@@ -3,7 +3,8 @@
 
 ;; 针对某种后缀名打开 mode 
 ;(add-to-list'auto-mode-alist '("\\.org\\'".org-mode))
-
+ 
+;;{{{  
 ;; 全局设定
 (require 'global-setting)
 ;; 快捷键设置
@@ -32,6 +33,12 @@
 (require 'yasnippet-setting)
 ;;设置主题
 (require 'color-theme-setting)
+;; zencoding
+(require 'zencoding-mode)
+;; fold.el
+(require 'fold)
+(fold-mode t)
+;;}}}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;emacs 自加的
