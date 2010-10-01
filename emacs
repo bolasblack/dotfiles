@@ -18,7 +18,7 @@
 ;; 使支持 txt2tags 语法
 (require 't2t-mode)
 ;; 模仿 Vim 中 (.) 的功能
-(require 'dot-mode)
+;(require 'dot-mode)
 ;; 高亮光标周围所有配对的括号
 (require 'highlight-parentheses)
 (highlight-parentheses-mode 1)
@@ -26,7 +26,7 @@
 (require 'window-numbering)
 (window-numbering-mode 1)
 ;; highlight-tail 相关设置
-(require 'highlight-tail-setting)
+;(require 'highlight-tail-setting)
 ;; auto-complete 相关设置
 (require 'auto-complete-setting)
 ;; for YAsnippet
@@ -37,7 +37,7 @@
 (require 'zencoding-mode)
 ;; fold.el
 (require 'fold)
-(fold-mode t)
+(fold-mode 1)
 ;;}}}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
