@@ -26,13 +26,13 @@
 ;书签解码设置
 ;(setq w3m-bookmark-file-coding-system 'chinese-iso-8bit)
 ;w3m的解码设置
-;(setq w3m-coding-system 'chinese-iso-8bit)
-;(setq w3m-default-coding-system 'chinese-iso-8bit)
-;(setq w3m-file-coding-system 'chinese-iso-8bit)
-;(setq w3m-file-name-coding-system 'chinese-iso-8bit)
-;(setq w3m-terminal-coding-system 'chinese-iso-8bit)
-;(setq w3m-input-coding-system 'chinese-iso-8bit)
-;(setq w3m-output-coding-system 'chinese-iso-8bit)
+(setq w3m-coding-system 'chinese-iso-8bit)
+(setq w3m-default-coding-system 'chinese-iso-8bit)
+(setq w3m-file-coding-system 'chinese-iso-8bit)
+(setq w3m-file-name-coding-system 'chinese-iso-8bit)
+(setq w3m-terminal-coding-system 'chinese-iso-8bit)
+(setq w3m-input-coding-system 'chinese-iso-8bit)
+(setq w3m-output-coding-system 'chinese-iso-8bit)
 ;w3m是使用tab的，设定Tab的宽度
 (setq w3m-tab-width 8)
 ;设定w3m的主页，同mozilla的默认主页一样

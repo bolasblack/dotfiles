@@ -10,8 +10,11 @@
 ;; ido-mode,强化 C+x C+f
 (ido-mode t)
 
+;;打开就启用 text 模式
+(setq default-major-mode 'text-mode)
+
 ;; 自动打开上次任务
-(desktop-save-mode 1)
+;(desktop-save-mode 1)
 
 ;; 行号 emacs23 支持
 (global-linum-mode t)
@@ -42,7 +45,7 @@
 ;(global-set-key (kbd "C-SPC")'nil)
 
 ;; 设置窗口的初始大小
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 75) (height . 38)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 75) (height . 44)))
 
 ;;关闭烦人的出错时的提示声。
 (setq visible-bell t)
@@ -91,6 +94,41 @@
 
 ;;set the default file path
 (setq default-directory "~/")
+
+;; 中文设置
+(setq gnus-default-charset 'cn-gb-2312
+      gnus-group-name-charset-group-alist '((".*" . gb2312))
+      gnus-summary-show-article-charset-alist '((1 . cn-gb-2312) (2 . big5) (3 . chinese-gbk) (4 . utf-8))
+      gnus-newsgroup-ignored-charsets '(unknown-8bit x-unknown iso-8859-1)
+      gnus-group-posting-charset-alist '((".*" gb2312 (gb2312))))
+(define-coding-system-alias 'gb18030 'gb2312)
+;; 设置中文语言环境
+(set-language-environment 'Chinese-GB)
+;;写文件的编码方式
+(set-buffer-file-coding-system 'gb2312)
+;(set-buffer-file-coding-system 'utf-8)
+;;新建文件的编码方式
+(setq default-buffer-file-coding-system 'gb2312)
+;(setq default-buffer-file-coding-system 'utf-8)
+;;读取或写入文件名的编码方式
+(setq file-name-coding-system 'utf-8)
+;;终端方式的编码方式
+(set-terminal-coding-system 'utf-8)
+;;键盘输入的编码方式
+(set-keyboard-coding-system 'gb2312) 
+;;------------设置(utf-8)模式------------
+;(set-language-environment 'Chinese-GB)
+;(set-keyboard-coding-system 'utf-8)
+;(set-clipboard-coding-system 'utf-8)
+;(set-terminal-coding-system 'utf-8)
+;(set-buffer-file-coding-system 'utf-8)
+;(set-default-coding-systems 'utf-8)
+;(set-selection-coding-system 'utf-8)
+;(modify-coding-system-alist 'process "*" 'utf-8)
+;(setq default-process-coding-system '(utf-8 . utf-8))
+;(setq-default pathname-coding-system 'utf-8)
+;(set-file-name-coding-system 'utf-8)
+;(setq ansi-color-for-comint-mode t) 
 
 ;;所有的备份文件都放置在~/backups目录下
 (setq backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))

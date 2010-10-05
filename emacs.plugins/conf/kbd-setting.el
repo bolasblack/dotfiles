@@ -24,8 +24,8 @@
 ;; set key 
 (global-set-key (kbd "C-c w") 'copy-lines)
 
-;;设置[f1]为goto-line
-(global-set-key [f1] 'goto-line)
+;;设置 C-x C-g 为goto-line
+(global-set-key (kbd "C-x C-g") 'goto-line)
 
 ;;习惯设置，打开／关闭菜单
 (global-set-key [f12] 'menu-bar-mode)

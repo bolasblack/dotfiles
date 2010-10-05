@@ -3,10 +3,10 @@
 (tabbar-mode t)
 
 ;; 快捷键设置
-;(global-set-key (kbd "") 'tabbar-backward-group)
-;(global-set-key (kbd "") 'tabbar-forward-group)
-;(global-set-key (kbd "") 'tabbar-backward)
-;(global-set-key (kbd "") 'tabbar-forward)
+(global-set-key (kbd "<M-down>") 'tabbar-backward-group)
+(global-set-key (kbd "<M-up>") 'tabbar-forward-group)
+(global-set-key (kbd "<M-left>") 'tabbar-backward)
+(global-set-key (kbd "<M-right>") 'tabbar-forward)
 
 ;;;; 设置tabbar外观
 ;; 设置默认主题: 字体, 背景和前景颜色，大小
