@@ -38,7 +38,7 @@ notify-sudo-command-line() {
     zle end-of-line                 #光标移动到行末
 }
 zle -N notify-sudo-command-line
-#定义快捷键为： [Esc] [Esc]
+#定义快捷键为： [Esc] [Esc] [Esc]
 bindkey "\e\e\e" notify-sudo-command-line
 
 ##在命令前插入 notify
@@ -49,7 +49,7 @@ notify-command-line() {
     zle end-of-line                 #光标移动到行末
 }
 zle -N notify-command-line
-#定义快捷键为： [Esc] [Esc] [Esc]
+#定义快捷键为： [Esc] [Esc]
 bindkey "\e\e" notify-command-line
 
 ##拼音补全
@@ -66,7 +66,7 @@ sshfuckgfw() {
 }
 
 #自定义的 $PATH
-export PATH="$PATH:/home/bolasblack/.personal-scripts/"
+export PATH="$PATH:/home/yicuan/.personal-scripts/"
 
 ####################################### E* 杂项
 
@@ -233,7 +233,8 @@ zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
 
 ####################################### E* 自动补全设置
 
-####################################### S* 超炫效果的提示符
+# S* 超炫效果的提示符
+#{{{  
 #效果超炫的提示符，如需要禁用，注释下面配置   
 function precmd {
     
@@ -379,3 +380,4 @@ $PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT$PR_NO_COLOUR '
 
 setprompt
 ####################################### E* 超炫效果的提示符
+#}}}
