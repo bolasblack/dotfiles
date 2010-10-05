@@ -25,16 +25,6 @@ soufile
 dir="/home/yicuan/.zshfiles/auto-complete.zsh"
 soufile
 
-# emacs files backup
-if [ -e "~/.emacs.d/plugins/*" ]; then
-    cp -R ~/.emacs.d/plugins/* ~/SparkleShare/dotfiles/emacs.plugins/;
-fi
-
-# zsh files backup
-if [ -e "~/.zshfiles/*" ]; then
-    cp -R ~/.zshfiles/* ~/SparkleShare/dotfiles/zshfiles/;
-fi
-
 # 超炫效果的提示符
 dir="/home/yicuan/.zshfiles/themes.zsh"
 soufile
