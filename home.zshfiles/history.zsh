@@ -1,19 +1,19 @@
 # -*- Shell-script -*-
-####################################### S* ¹ØÓÚÀúÊ·¼ÍÂ¼µÄÅäÖÃ
-#ÀúÊ·¼ÍÂ¼ÌõÄ¿ÊýÁ¿
+####################################### S* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#ï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½
 export HISTSIZE=10000
-#×¢Ïúºó±£´æµÄÀúÊ·¼ÍÂ¼ÌõÄ¿ÊýÁ¿
+#×¢ï¿½ï¿½ó±£´ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½
 export SAVEHIST=10000
-#ÀúÊ·¼ÍÂ¼ÎÄ¼þ
+#ï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½Ä¼ï¿½
 #export HISTFILE=~/.zhistory
-#ÒÔ¸½¼ÓµÄ·½Ê½Ð´ÈëÀúÊ·¼ÍÂ¼
+#ï¿½Ô¸ï¿½ï¿½ÓµÄ·ï¿½Ê½Ð´ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼
 setopt INC_APPEND_HISTORY
-#Èç¹ûÁ¬ÐøÊäÈëµÄÃüÁîÏàÍ¬£¬ÀúÊ·¼ÍÂ¼ÖÐÖ»±£ÁôÒ»¸ö
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 setopt HIST_IGNORE_DUPS
-#ÎªÀúÊ·¼ÍÂ¼ÖÐµÄÃüÁîÌí¼ÓÊ±¼ä´Á
+#Îªï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½
 setopt EXTENDED_HISTORY
 
-#Ã¿¸öÄ¿Â¼Ê¹ÓÃ¶ÀÁ¢µÄÀúÊ·¼ÍÂ¼
+#Ã¿ï¿½ï¿½Ä¿Â¼Ê¹ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼
 cd() {
     builtin cd "$@"                             # do actual cd
     fc -W                                       # write current history file
@@ -37,16 +37,17 @@ function convhistory {
             sed 's/^:\([ 0-9]*\):[0-9]*;\(.*\)/\1::::::\2/' |
             awk -F"::::::" '{ $1=strftime("%Y-%m-%d %T",$1) "|"; print }'  
 }
-#Ê¹ÓÃ histall ÃüÁî²é¿´È«²¿ÀúÊ·¼ÍÂ¼
+#Ê¹ï¿½ï¿½ histall ï¿½ï¿½ï¿½ï¿½é¿´È«ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼
 function histall { convhistory =(allhistory) |
             sed '/^.\{20\} *cd/i\\' }
-#Ê¹ÓÃ hist ²é¿´µ±Ç°Ä¿Â¼ÀúÊ·¼ÍÂ¼
+#Ê¹ï¿½ï¿½ hist ï¿½é¿´ï¿½ï¿½Ç°Ä¿Â¼ï¿½ï¿½Ê·ï¿½ï¿½Â¼
 function hist { convhistory $HISTFILE }
 
-#È«²¿ÀúÊ·¼ÍÂ¼ top44
+#È«ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼ top44
 function top44 { allhistory | awk -F':[ 0-9]*:[0-9]*;' '{ $1="" ; print }' | sed 's/ /\n/g' | sed '/^$/d' | sort | uniq -c | sort -nr | head -n 44 }
 
-#ÆôÓÃ cd ÃüÁîµÄÀúÊ·¼ÍÂ¼£¬cd -[TAB]½øÈëÀúÊ·Â·¾¶
+#ï¿½ï¿½ï¿½ï¿½ cd ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½ï¿½cd -[TAB]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·Â·ï¿½ï¿½
 setopt AUTO_PUSHD
 
-####################################### E* ¹ØÓÚÀúÊ·¼ÍÂ¼µÄÅäÖÃ
+####################################### E* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+

@@ -1,0 +1,59 @@
+[Program]
+# Fcitx真正启动前延迟的秒数
+DelayStart=0
+# 这是 Fcitx 首次启动
+FirstRun=False
+
+[Output]
+# 数字后跟半角符号
+HalfPuncAfterNumber=True
+# 回车键操作
+EnterAction=Commit
+# 联想模式禁用翻页
+RemindModeDisablePaging=True
+# 快速切换英文模式时上屏
+SendTextWhenSwitchEng=False
+# 候选词个数
+CandidateWordNumber=9
+# 提示词库中词组
+PhraseTips=True
+
+[Appearance]
+# 切换输入时显示输入条
+ShowInputWindowAfterTriggering=True
+# 序号后加点
+ShowPointAfterIndex=True
+# 显示输入速度
+ShowInputSpeed=True
+# 显示版本
+ShowVersion=True
+
+[Hotkey]
+# 快捷键: 切换输入法
+TriggerKey=CTRL_SPACE
+# 快捷键: 切换中英文输入
+SwitchKey=L_SHIFT
+#L_CTRL
+# 双击中英文切换键时切换
+DoubleSwitchKey=False
+# 输入间隔
+TimeInterval=250
+# 快捷键: 切换虚拟键盘
+VKSwitchKey=CTRL_ALT_K
+# 快捷键: 切换联想模式
+RemindSwitchKey=
+# 快捷键: 切换全角
+FullWidthSwitchKey=SHIFT_SPACE
+# 切换全角标点的快捷键
+PuncSwitchKey=ALT_SPACE
+# 快捷键: 前一页
+#PrevPageKey=-
+PrevPageKey=,
+# 快捷键: 后一页
+#NextPageKey==
+NextPageKey=.
+# 快捷键: 选择第二第三候选词
+SecondThirdCandWordKey=SHIFT
+# 快捷键: 保存配置及输入历史
+SaveAllKey=CTRL_ALT_S
+
