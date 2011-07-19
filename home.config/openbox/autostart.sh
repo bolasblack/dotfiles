@@ -59,9 +59,9 @@ if which volumeicon > /dev/null; then
 fi
 
 # nm-applet
-if which nm-applet > /dev/null; then
-  nm-applet &
-fi
+#if which nm-applet > /dev/null; then
+  #nm-applet &
+#fi
 
 # conpmgr
 if which cairo-compmgr > /dev/null; then
