@@ -23,9 +23,9 @@
 </menu>
 
 <menu id="player" label="Player">
-  <item label="Exaile">
+  <item label="DeaDBeeF">
     <action name="Execute">
-		<execute>exaile</execute>
+		<execute>deadbeef</execute>
 	</action>
   </item>
 </menu>

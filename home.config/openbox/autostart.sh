@@ -43,14 +43,19 @@ if which /usr/lib/openbox/xdg-autostart >/dev/null 2>&1; then
   /usr/lib/openbox/xdg-autostart $DESKTOP_ENV
 fi
 
-# fehbg
-if which feh > /dev/null; then
-  eval `cat ~/.fehbg` &
-fi
-
 # PyPanel
 if which pypanel > /dev/null; then
   pypanel &
+fi
+
+# Wicd-gtk
+if which wicd-gtk > /dev/null; then
+  wicd-gtk &
+fi
+
+# fehbg
+if which feh > /dev/null; then
+  eval `cat ~/.fehbg` &
 fi
 
 # volumeicon
@@ -58,14 +63,9 @@ if which volumeicon > /dev/null; then
   volumeicon &
 fi
 
-# nm-applet
-#if which nm-applet > /dev/null; then
-  #nm-applet &
-#fi
-
 # conpmgr
 if which cairo-compmgr > /dev/null; then
-  cairo-compmgr &
+  cairo-compmgr > ~/.log/cairo-compmgr.log &
 else
     if which xcompmgr > /dev/null; then
         xcompmgr -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &
@@ -76,3 +76,5 @@ fi
 if which fcitx > /dev/null; then
   (sleep 2 && fcitx) &
 fi
+
+
