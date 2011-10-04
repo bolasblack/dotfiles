@@ -43,38 +43,47 @@ if which /usr/lib/openbox/xdg-autostart >/dev/null 2>&1; then
   /usr/lib/openbox/xdg-autostart $DESKTOP_ENV
 fi
 
-# PyPanel
-if which pypanel > /dev/null; then
-  pypanel &
-fi
-
-# Wicd-gtk
-if which wicd-gtk > /dev/null; then
-  wicd-gtk &
-fi
-
 # fehbg
-if which feh > /dev/null; then
+if which feh > /dev/null 2>&1; then
   eval `cat ~/.fehbg` &
 fi
 
-# volumeicon
-if which volumeicon > /dev/null; then
-  volumeicon &
+# PyPanel
+if which pypanel > /dev/null 2>&1; then
+  pypanel &
+fi
+
+# conky
+if which conky > /dev/null 2>&1; then
+  conky -c ~/.conky/notifyOSD/conkyrc_sysInfo &
+  conky -c ~/.conky/notifyOSD/conkyrc_List &
 fi
 
 # conpmgr
-if which cairo-compmgr > /dev/null; then
-  cairo-compmgr > ~/.log/cairo-compmgr.log &
+if which xcompmgr > /dev/null 2>&1; then
+    xcompmgr -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &
 else
-    if which xcompmgr > /dev/null; then
-        xcompmgr -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &
+    if which cairo-compmgr > /dev/null 2>&1; then
+      cairo-compmgr > ~/.log/cairo-compmgr.log &
     fi
 fi
 
+# Wicd-gtk
+if which wicd-gtk > /dev/null 2>&1; then
+  wicd-gtk &
+fi
+
+# volumeicon
+if which volumeicon > /dev/null 2>&1; then
+  volumeicon &
+fi
+
 # fcitx
-if which fcitx > /dev/null; then
+if which fcitx > /dev/null 2>&1; then
   (sleep 2 && fcitx) &
 fi
 
-
+# pytyle2
+if which pytyle2 > /dev/null 2>&1; then
+  (sleep 2 && pytyle2) &
+fi

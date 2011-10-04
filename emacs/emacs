@@ -14,7 +14,7 @@
 ;; php mode 的相关设置
 (require 'php-mode-setting)
 ;; w3m 相关设置
-(require 'emacs-w3m-setting)
+;(require 'emacs-w3m-setting)
 ;; 使支持 txt2tags 语法
 (require 't2t-mode)
 ;; 模仿 Vim 中 (.) 的功能

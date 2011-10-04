@@ -19,7 +19,7 @@ TMPDIR="/tmp" #临时文件目录
 
 # AUR 
 #AURCOMMENT=5 #显示的评论数
-#AURDEVELONLY=0
+AURDEVELONLY=1 #设置为1，总是检查AUR包
 #AURSEARCH=1
 #AURUPGRADE=0 #如果设置为1，yaourt -Sy命令将总是检查升级AUR软件包
 #AURVOTE=1 #如果设置为0，不检查AUR软件包vote状态

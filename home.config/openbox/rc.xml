@@ -328,6 +328,18 @@
             <execute>scrot -s</execute>
         </action>
     </keybind>
+
+   <keybind key="C-F7">
+      <action name="Execute">
+        <execute>sleep 2;xset dpms force off</execute>
+      </action>
+   </keybind>
+
+   <keybind key="XF86LaunchA">
+      <action name="Execute">
+          <command>thunar</command>
+      </action>
+   </keybind>
     
    <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
@@ -417,11 +429,6 @@
      <keybind key="XF86AudioLowerVolume">
       <action name="Execute">
         <execute>/usr/bin/volume.sh down</execute>
-      </action>
-    </keybind>
-     <keybind key="C-F7">
-      <action name="Execute">
-        <execute>sleep 2;xset dpms force off</execute>
       </action>
     </keybind>
      <keybind key="C-F10">

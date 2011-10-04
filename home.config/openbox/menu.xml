@@ -4,6 +4,19 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://openbox.org/
                 file:///usr/share/openbox/menu.xsd">
+<menu id="Coder" label="Coder">
+  <item label="Gvim">
+    <action name="Execute">
+		<execute>gvim</execute>
+	</action>
+  </item>
+  <item label="F5">
+    <action name="Execute">
+		<execute>adobe-air ~/downloads/F5.air</execute>
+	</action>
+  </item>
+</menu>
+
 <menu id="netsoft" label="NetSoft">
   <item label="Firefox">
     <action name="Execute">
@@ -31,11 +44,6 @@
 </menu>
 
 <menu id="root-menu" label="Openbox 3">
-  <item label="Gvim">
-    <action name="Execute">
-		<execute>gvim</execute>
-	</action>
-  </item>
   <item label="Terminal">
     <action name="Execute">
 		<execute>urxvt</execute>
@@ -48,6 +56,8 @@
   </item>
   <!-- This requires the presence of the 'menu' package to work -->
   <menu id="Debian" />
+  <separator />
+  <menu id="Coder" />
   <separator />
   <menu id="netsoft" />
   <separator />
