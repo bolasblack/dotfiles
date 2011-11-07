@@ -5,33 +5,28 @@
         xsi:schemaLocation="http://openbox.org/
                 file:///usr/share/openbox/menu.xsd">
 <menu id="Coder" label="Coder">
-  <item label="Gvim">
-    <action name="Execute">
-		<execute>gvim</execute>
-	</action>
-  </item>
   <item label="F5">
     <action name="Execute">
-		<execute>adobe-air ~/downloads/F5.air</execute>
-	</action>
+     <execute>adobe-air ~/downloads/F5.air</execute>
+    </action>
   </item>
 </menu>
 
 <menu id="netsoft" label="NetSoft">
   <item label="Firefox">
     <action name="Execute">
-		<execute>firefox</execute>
-	</action>
+     <execute>firefox</execute>
+    </action>
   </item>
   <item label="Pidgin">
     <action name="Execute">
-		<execute>pidgin</execute>
-	</action>
+     <execute>pidgin</execute>
+    </action>
   </item>
   <item label="skype">
     <action name="Execute">
-		<execute>skype</execute>
-	</action>
+     <execute>skype</execute>
+    </action>
   </item>
 </menu>
 
@@ -41,18 +36,28 @@
 		<execute>deadbeef</execute>
 	</action>
   </item>
+  <item label="Zathura">
+    <action name="Execute">
+		<execute>zathura</execute>
+	</action>
+  </item>
 </menu>
 
 <menu id="root-menu" label="Openbox 3">
+  <item label="Gvim">
+    <action name="Execute">
+     <execute>gvim</execute>
+    </action>
+  </item>
   <item label="Terminal">
     <action name="Execute">
-		<execute>urxvt</execute>
-	</action>
+     <execute>urxvt</execute>
+    </action>
   </item>
   <item label="Chromium">
     <action name="Execute">
-		<execute>chromium</execute>
-	</action>
+     <execute>chromium</execute>
+    </action>
   </item>
   <!-- This requires the presence of the 'menu' package to work -->
   <menu id="Debian" />

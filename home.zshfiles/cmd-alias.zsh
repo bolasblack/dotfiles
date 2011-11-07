@@ -12,6 +12,7 @@ alias swapcaps='setxkbmap -option ctrl:swapcaps'
 alias startx='startx > ~/.log/x.log &'
 alias zhcon='zhcon --utf8'
 alias dellonly='xrandr --output VGA-1 --auto --output LVDS-1 --off'
+alias closeLCD='xset dpms force off'
 
 #alias aptitude='sudo aptitude'
 #(bin-exist vim) && 

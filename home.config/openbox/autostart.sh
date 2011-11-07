@@ -43,6 +43,13 @@ if which /usr/lib/openbox/xdg-autostart >/dev/null 2>&1; then
   /usr/lib/openbox/xdg-autostart $DESKTOP_ENV
 fi
 
+# pytyle2
+#if which pytyle2 > /dev/null 2>&1; then
+  #(sleep 2 && pytyle2) &
+#fi
+
+setxkbmap -option ctrl:swapcaps &
+
 # fehbg
 if which feh > /dev/null 2>&1; then
   eval `cat ~/.fehbg` &
@@ -83,7 +90,3 @@ if which fcitx > /dev/null 2>&1; then
   (sleep 2 && fcitx) &
 fi
 
-# pytyle2
-if which pytyle2 > /dev/null 2>&1; then
-  (sleep 2 && pytyle2) &
-fi
