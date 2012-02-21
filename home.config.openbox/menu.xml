@@ -17,7 +17,7 @@
   </item>
   <item label="Emacs">
     <action name="Execute">
-     <execute>emacs</execute>
+     <execute>emacs --debug-init</execute>
     </action>
   </item>
 </menu>
@@ -73,9 +73,7 @@
   <menu id="Debian" />
   <separator />
   <menu id="Coder" />
-  <separator />
   <menu id="netsoft" />
-  <separator />
   <menu id="player" />
   <separator />
   <item label="ObConf">

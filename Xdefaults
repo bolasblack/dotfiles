@@ -1,4 +1,4 @@
-! URxvt {{{
+! URxvt 
 ! IM
 URxvt.inputMethod:fcitx
 
@@ -9,11 +9,12 @@ xft:WenQuanYi Zen Hei:pixelsize=13:antialias=true
 
 ! color
 !URxvt.background:#303030
-!URxvt.background:[80]black
 !URxvt.transparent:true
 !URxvt.transparency:100
-URxvt.background: rgba:0000/0000/0000/dddd
-URxvt.depth: 32
+!URxvt.background: rgba:0000/0000/0000/dddd
+!URxvt.background:[80]black
+!URxvt.depth: 32
+URxvt.background: gray15
 URxvt.foreground:#eaeaea
 URxvt.colorBD:Gray95
 URxvt.colorUL:Green
@@ -44,6 +45,7 @@ URxvt.scrollBar:True
 URxvt.scrollBar_right:True
 URxvt.scrollBar_floating:False
 URxvt.scrollstyle:plain
-URxvt.saveLines:500
+URxvt.saveLines:10000
 
-! }}}
+! 开启标签功能
+URxvt.perl-ext-common: default,tabbed

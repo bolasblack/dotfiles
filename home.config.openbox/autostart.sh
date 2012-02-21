@@ -67,12 +67,8 @@ if which conky > /dev/null 2>&1; then
 fi
 
 # conpmgr
-if which xcompmgr > /dev/null 2>&1; then
-    xcompmgr -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &
-else
-    if which cairo-compmgr > /dev/null 2>&1; then
-      cairo-compmgr > ~/.log/cairo-compmgr.log &
-    fi
+if which compton > /dev/null 2>&1; then
+    compton -Ss -n -Cc -fF -I-10 -O-10 -D1 -t-3 -l-4 -r4 &
 fi
 
 # Wicd-gtk
@@ -85,8 +81,15 @@ if which volumeicon > /dev/null 2>&1; then
   volumeicon &
 fi
 
-# fcitx
-if which fcitx > /dev/null 2>&1; then
-  (sleep 2 && fcitx) &
+if which xfce4-power-manager > /dev/null 2>&1; then
+    xfce4-power-manager
 fi
 
+if which dropboxd > /dev/null 2>&1; then
+    (sleep 2 && dropboxd) &
+fi
+
+# fcitx
+if which fcitx > /dev/null 2>&1; then
+    (sleep 2 && fcitx) &
+fi

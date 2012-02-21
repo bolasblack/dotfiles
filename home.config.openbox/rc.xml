@@ -44,8 +44,8 @@
   <!--]]]-->
   <!--[[[ theme-->
   <theme>
-    <name>Night Running</name>
-    <titleLayout>NLIMC</titleLayout>
+    <name>Dhyana</name>
+    <titleLayout>LIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
       N: window icon
