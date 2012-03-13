@@ -30,4 +30,8 @@ plugins=(git git-flow github archlinux brew osx python pip npm vi-mode vundle)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+ZSHFILES=$HOME/.zshfiles
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+
+source $ZSHFILES/alias.zsh
+source $ZSHFILES/key-bindings.zsh
