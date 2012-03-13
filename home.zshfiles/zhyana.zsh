@@ -10,7 +10,7 @@ function check_git_prompt_info() {
         if [[ -z $(git_prompt_info) ]]; then
             echo " %{$fg[magenta]%}detached-head%{$reset_color%})"
         else
-            echo " %{$fg[white]%}[%{$fg[red]%}$(git_prompt_short_sha) %{$fg[white]%}@ $(git_prompt_info)"
+            echo " %{$fg[white]%}[%{$fg[red]%}$(git_prompt_short_sha)%{$fg[white]%}@$(git_prompt_info)"
         fi
     fi
 }
