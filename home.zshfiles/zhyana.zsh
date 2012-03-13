@@ -14,3 +14,5 @@ function check_git_prompt_info() {
         fi
     fi
 }
+
+# vim:filetype=zsh expandtab shiftwidth=4
