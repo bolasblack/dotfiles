@@ -28,11 +28,11 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*:*:default' force-list always
 
 #彩色补全菜单 
-#eval $(dircolors -b) 
-#export ZLSCOLORS="${LS_COLORS}"
-#zmodload zsh/complist
-#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-#zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+eval $(dircolors -b) 
+export ZLSCOLORS="${LS_COLORS}"
+zmodload zsh/complist
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
 #错误校正      
 zstyle ':completion:*' completer _complete _match _approximate
