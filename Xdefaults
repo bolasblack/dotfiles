@@ -15,13 +15,13 @@ xft:WenQuanYi Zen Hei:pixelsize=13:antialias=true
 !URxvt.background:[80]black
 !URxvt.depth: 32
 URxvt.background: gray15
-URxvt.foreground:#eaeaea
-URxvt.colorBD:Gray95
-URxvt.colorUL:Green
-URxvt.color0:#2e3436
-URxvt.color1:#cc0000
-URxvt.color2:#4e9a06
-URxvt.color3:#c4a000
+URxvt.foreground: #eaeaea
+URxvt.colorBD: Gray95
+URxvt.colorUL: Green
+URxvt.color0: Gray25
+URxvt.color1: Gray15
+URxvt.color2: Gray80
+URxvt.color3: #EAEAEA
 URxvt.color4:#3465a4
 URxvt.color5:#75507b
 URxvt.color6:#06989a
@@ -47,5 +47,15 @@ URxvt.scrollBar_floating:False
 URxvt.scrollstyle:plain
 URxvt.saveLines:10000
 
-! 开启标签功能
-URxvt.perl-ext-common: default,tabbed
+! tabbar
+URxvt.perl-ext-common:    default,tabbed
+URxvt.tabbed.tab-fg:      2
+URxvt.tabbed.tab-bg:      1
+URxvt.tabbed.tabbar-fg:   0
+URxvt.tabbed.tabbar-bg:   1
+
+! Yankable URLs (No Mouse)
+URxvt.perl-ext:      default,url-select
+URxvt.keysym.M-u:    perl:url-select:select_next
+URxvt.urlLauncher:   firefox
+URxvt.underlineURLs: true
