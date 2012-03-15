@@ -28,8 +28,8 @@ fi
 
 function timeconv { date -d @$1 +"%Y-%m-%d %T" }
 
-zstyle ':completion:*:ping:*' hosts 129.27.2.3 www.tugraz.at \
-       10.16.17.1{{7..9},}
+#zstyle ':completion:*:ping:*' hosts 129.27.2.3 www.tugraz.at \
+       #10.16.17.1{{7..9},}
 
 source $ZSHFILES/zhyana.zsh
 source $ZSHFILES/alias.zsh
