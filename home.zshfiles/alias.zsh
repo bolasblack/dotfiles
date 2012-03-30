@@ -21,6 +21,9 @@ alias gitflow='git flow'
 
 alias connSSH='ssh -qTfnN -D 7070'
 
+alias zh='export LANG=zh_CN.UTF-8'
+alias en='export LANG=en_US.UTF-8'
+
 #[Esc][h] man 当前命令时，显示简短说明 
 alias run-help >&/dev/null && unalias run-help
 autoload run-help
