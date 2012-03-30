@@ -18,6 +18,7 @@ alias zhcon='zhcon --utf8'
 alias dellonly='xrandr --output VGA-1 --auto --output LVDS-1 --off'
 alias closeLCD='xset dpms force off'
 alias gitflow='git flow'
+alias pyServer='python -m SimpleHTTPServer'
 
 alias connSSH='ssh -qTfnN -D 7070'
 
