@@ -3,6 +3,9 @@ ZSHFILES=$HOME/.zshfiles
 #设置默认编码
 export LANG=zh_CN.UTF-8
 
+#设置默认编辑器，打命令的时候试试 C-x C-e
+export EDITOR=vim
+
 #允许在交互模式中使用注释  例如：
 #cmd #这是注释
 setopt INTERACTIVE_COMMENTS      
@@ -28,8 +31,8 @@ fi
 
 function timeconv { date -d @$1 +"%Y-%m-%d %T" }
 
-#zstyle ':completion:*:ping:*' hosts 129.27.2.3 www.tugraz.at \
-       #10.16.17.1{{7..9},}
+zstyle ':completion:*:ping:*' hosts 129.27.2.3 www.tugraz.at \
+       10.16.17.1{{7..9},}
 
 source $ZSHFILES/zhyana.zsh
 source $ZSHFILES/alias.zsh

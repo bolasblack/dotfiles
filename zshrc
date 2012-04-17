@@ -30,11 +30,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git git-flow github 
-          archlinux brew osx
-          python pip 
-          npm node
-          vi-mode vundle
-          gem rails3 rake ruby rvm)
+         archlinux brew osx 
+         python pip 
+         npm node 
+         vi-mode vundle 
+         gem rails3 rake ruby rvm)
 
 source $ZSH/oh-my-zsh.sh
 

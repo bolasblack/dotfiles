@@ -1,7 +1,27 @@
 # -*- shell-script -*-
 function cl() {
-    cd $1
-    ls
+  cd $1
+  ls
+}
+
+# 查询维基百科
+function wiki() {
+  dig +short txt ${1}.wp.dg.cx
+}
+
+# 查询 Gmail 的未读邮件，记得在命令前加空格
+function gmail() {
+  curl -u ${1}@gmail.com:${2} --silent "https://mail.google.com/mail/feed/atom" | tr -d '\n' | awk -F '<entry>' '{for (i=2; i<=NF; i++) {print $i}}' | perl -pe 's/^<title>(.*)<\/title>.*<name>(.*)<\/name>.*$/$2 - $1/'
+}
+
+# 查询 commandlinefu.com
+function cmdfu() {
+  if [ "$1" = "byVote" ] ; then
+    local query="browse/sort-by-votes"
+  else
+    local query="matching/$@/$(echo -n $@ | openssl base64)"
+  fi
+  curl "http://www.commandlinefu.com/commands/$query/plaintext";
 }
 
 alias cp='cp -i'
@@ -18,7 +38,6 @@ alias zhcon='zhcon --utf8'
 alias dellonly='xrandr --output VGA-1 --auto --output LVDS-1 --off'
 alias closeLCD='xset dpms force off'
 alias gitflow='git flow'
-alias pyServer='python -m SimpleHTTPServer'
 
 alias connSSH='ssh -qTfnN -D 7070'
 

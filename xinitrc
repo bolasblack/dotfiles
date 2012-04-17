@@ -6,7 +6,7 @@ export QT_IN_MODULE=xim
 export GTK_IM_MODULE=xim
 
 numlockx &
-#openbox-session
+openbox-session
 #awesome
-i3
+#i3
 #wmii
