@@ -51,6 +51,9 @@ autoload run-help
 #历史命令 top10
 alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 
+#和 Brewerjs 的命令冲突了
+unalias brake
+
 #路径别名 
 #进入相应的路径时只要 cd ~xxx
 hash -d WWW="/home/lighttpd/html"
