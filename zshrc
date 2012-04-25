@@ -40,8 +40,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s $HOME"/.rvm/scripts/rvm" ]] && source $HOME"/.rvm/scripts/rvm"
 
-source ./.zshfiles/init.zsh
+source $HOME/.zhyana.zsh
 
+[ -s "/home/plafer/.scm_breeze/scm_breeze.sh" ] && source "/home/plafer/.scm_breeze/scm_breeze.sh"
