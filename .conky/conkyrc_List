@@ -1,0 +1,94 @@
+# -- Conky settings -- #
+background no
+update_interval 1
+ 
+cpu_avg_samples 2
+ 
+double_buffer yes
+no_buffers yes
+ 
+text_buffer_size 2048
+imlib_cache_size 0
+ 
+# -- Window specifications -- #
+ 
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorate,below,sticky,skip_taskbar,skip_pager
+ 
+
+use_spacer none
+minimum_size 520 00
+
+
+# -- Graphics settings -- #
+draw_shades no
+draw_outline no
+draw_borders no
+ 
+# -- Text settings -- #
+use_xft yes
+xftfont Monospace:pixelsize=12
+
+short_units yes
+
+
+
+# Style 1
+#alignment bl
+#gap_y 50
+ 
+#TEXT
+#${goto 60}Top Memory:${goto 310}Top CPU:
+#${goto 60} ${top_mem name 1}${goto 182}${top_mem mem_res 1}B${goto 310} ${top name 1}${goto 425}${top cpu 1}%
+#${goto 60} ${top_mem name 2}${goto 182}${top_mem mem_res 2}B${goto 310} ${top name 2}${goto 425}${top cpu 2}%
+#${goto 60} ${top_mem name 3}${goto 182}${top_mem mem_res 3}B${goto 310} ${top name 3}${goto 425}${top cpu 3}%
+#${goto 60} ${top_mem name 4}${goto 182}${top_mem mem_res 4}B${goto 310} ${top name 4}${goto 425}${top cpu 4}%
+#${goto 60} ${top_mem name 5}${goto 182}${top_mem mem_res 5}B${goto 310} ${top name 5}${goto 425}${top cpu 5}%
+#${goto 60} ${top_mem name 6}${goto 182}${top_mem mem_res 6}B${goto 310} ${top name 6}${goto 425}${top cpu 6}%
+#${goto 60} ${top_mem name 7}${goto 182}${top_mem mem_res 7}B${goto 310} ${top name 7}${goto 425}${top cpu 7}%
+#${goto 60} ${top_mem name 8}${goto 182}${top_mem mem_res 8}B${goto 310} ${top name 8}${goto 425}${top cpu 8}%
+#${goto 60} ${top_mem name 9}${goto 182}${top_mem mem_res 9}B${goto 310} ${top name 9}${goto 425}${top cpu 9}%
+#${goto 60} ${top_mem name 10}${goto 182}${top_mem mem_res 10}B${goto 310} ${top name 10}${goto 425}${top cpu 10}%
+
+
+#${goto 110}Host:${nodename} | Kernel:${kernel} | Uptime: ${uptime_short}
+
+
+# Style 2
+alignment bl
+gap_x -45
+gap_y 50
+ 
+TEXT
+#${color 000000}
+${color 777}
+${goto 60}Top Memory:
+${goto 60} ${top_mem name 1}${goto 182}${top_mem mem_res 1}B
+${goto 60} ${top_mem name 2}${goto 182}${top_mem mem_res 2}B
+${goto 60} ${top_mem name 3}${goto 182}${top_mem mem_res 3}B
+${goto 60} ${top_mem name 4}${goto 182}${top_mem mem_res 4}B
+${goto 60} ${top_mem name 5}${goto 182}${top_mem mem_res 5}B
+${goto 60} ${top_mem name 6}${goto 182}${top_mem mem_res 6}B
+${goto 60} ${top_mem name 7}${goto 182}${top_mem mem_res 7}B
+${goto 60} ${top_mem name 8}${goto 182}${top_mem mem_res 8}B
+${goto 60} ${top_mem name 9}${goto 182}${top_mem mem_res 9}B
+${goto 60} ${top_mem name 10}${goto 182}${top_mem mem_res 10}B
+
+${color 777}
+${goto 60}Top CPU:
+${goto 60} ${top name 1}${goto 182}${top cpu 1}%
+${goto 60} ${top name 2}${goto 182}${top cpu 2}%
+${goto 60} ${top name 3}${goto 182}${top cpu 3}%
+${goto 60} ${top name 4}${goto 182}${top cpu 4}%
+${goto 60} ${top name 5}${goto 182}${top cpu 5}%
+${goto 60} ${top name 6}${goto 182}${top cpu 6}%
+${goto 60} ${top name 7}${goto 182}${top cpu 7}%
+${goto 60} ${top name 8}${goto 182}${top cpu 8}%
+${goto 60} ${top name 9}${goto 182}${top cpu 9}%
+${goto 60} ${top name 10}${goto 182}${top cpu 10}%
+
+${goto 100}Host:${nodename} 
+${goto 100}Kernel:${kernel} 
+${goto 100}Uptime: ${uptime_short}

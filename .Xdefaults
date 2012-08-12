@@ -89,18 +89,18 @@ URxvt.color7:    #eaeaea
 URxvt.color15:   #F8F8F2
 
 ! scrollbar
-URxvt.scrollBar:          True
+URxvt.scrollBar:          False!True
 URxvt.scrollBar_right:    True
 URxvt.scrollBar_floating: False
 URxvt.scrollstyle:        plain
 URxvt.saveLines:          10000
 
 ! tabbar
-URxvt.perl-ext-common:    default,tabbed,matcher
-URxvt.tabbed.tab-fg:      7
-URxvt.tabbed.tab-bg:      0
-URxvt.tabbed.tabbar-fg:   8
-URxvt.tabbed.tabbar-bg:   0
+!URxvt.perl-ext-common:    default,tabbed,matcher
+!URxvt.tabbed.tab-fg:      7
+!URxvt.tabbed.tab-bg:      0
+!URxvt.tabbed.tabbar-fg:   8
+!URxvt.tabbed.tabbar-bg:   0
 
 ! Yankable URLs (No Mouse)
 URxvt.perl-ext:      default,url-select
