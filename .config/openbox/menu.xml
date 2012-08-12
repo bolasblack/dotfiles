@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://openbox.org/
                 file:///usr/share/openbox/menu.xsd">
-<menu id="Coder" label="Coder">
+<menu id="develop" label="Develop">
   <item label="F5">
     <action name="Execute">
      <execute>adobe-air ~/downloads/F5.air</execute>
@@ -13,11 +13,6 @@
   <item label="Gvim">
     <action name="Execute">
      <execute>gvim</execute>
-    </action>
-  </item>
-  <item label="Emacs">
-    <action name="Execute">
-     <execute>emacs --debug-init</execute>
     </action>
   </item>
 </menu>
@@ -35,7 +30,7 @@
   </item>
   <item label="Firefox">
     <action name="Execute">
-     <execute>firefox-aurora</execute>
+     <execute>firefox</execute>
     </action>
   </item>
   <item label="Chromium">
@@ -45,7 +40,12 @@
   </item>
 </menu>
 
-<menu id="player" label="Player">
+<menu id="other" label="Other">
+  <item label="Thunar">
+    <action name="Execute">
+     <execute>thunar</execute>
+    </action>
+  </item>
   <item label="Sonata">
     <action name="Execute">
 		<execute>sonata</execute>
@@ -59,9 +59,9 @@
 </menu>
 
 <menu id="root-menu" label="Openbox 3">
-  <item label="Thunar">
+  <item label="Emacs">
     <action name="Execute">
-     <execute>thunar</execute>
+     <execute>emacs --debug-init</execute>
     </action>
   </item>
   <item label="Terminal">
@@ -70,11 +70,10 @@
     </action>
   </item>
   <!-- This requires the presence of the 'menu' package to work -->
-  <menu id="Debian" />
   <separator />
-  <menu id="Coder" />
+  <menu id="develop" />
   <menu id="netsoft" />
-  <menu id="player" />
+  <menu id="other" />
   <separator />
   <item label="ObConf">
     <action name="Execute">

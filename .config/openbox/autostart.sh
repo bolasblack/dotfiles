@@ -62,8 +62,8 @@ fi
 
 # conky
 if which conky > /dev/null 2>&1; then
-  conky -c ~/.conky/notifyOSD/conkyrc_sysInfo &
-  conky -c ~/.conky/notifyOSD/conkyrc_List &
+  conky -c ~/.conky/conkyrc_sysInfo &
+  conky -c ~/.conky/conkyrc_List &
 fi
 
 # conpmgr
