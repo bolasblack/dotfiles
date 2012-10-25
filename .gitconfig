@@ -1,30 +1,33 @@
 [user]
-	name = bolasblack
-	email = bolasblack@gmail.com
+  name = bolasblack
+  email = bolasblack@gmail.com
 [core]
-	editor = vim
+  editor = vim
 [color]
-    status = auto
-    branch = auto
-    diff = auto
-    ui = true
-    pager = true
+  status = auto
+  branch = auto
+  diff = auto
+  ui = true
+  pager = true
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
 [color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
+  added = yellow
+  changed = green
+  untracked = cyan
 [alias]
-    co = checkout
-    cb = checkout -b
-    br = branch
-    cm = commit
-    st = status
+  co = checkout
+  cb = checkout -b
+  br = branch
+  cm = commit
+  st = status
+[push]
+  ;default = simple
+  default = upstream

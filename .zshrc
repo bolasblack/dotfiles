@@ -88,6 +88,11 @@ function cl() {
   ls
 }
 
+# 计算器
+function qbc() {
+  echo $1 | bc
+}
+
 # 查询维基百科
 function wiki() {
   dig +short txt ${1}.wp.dg.cx
