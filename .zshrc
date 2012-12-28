@@ -319,4 +319,7 @@ function check_git_prompt_info() {
     fi
 }
 #]]]
+# [[[ plugins
+source $HOME/.zshfiles/*
+# ]]]
 # vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=4
