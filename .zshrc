@@ -318,4 +318,9 @@ function check_git_prompt_info() {
     fi
 }
 #]]]
+# [[[ plugins
+if [ `ls $HOME/.zshfiles/ | grep -c "[^disabled]"` -gt 0 ]; then
+  source $HOME/.zshfiles/*[!disabled]
+fi
+# ]]]
 # vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=4
