@@ -1,3 +1,6 @@
 [submodule "tmux/tmux-MacOSX-pasteboard"]
 	path = tmux/tmux-MacOSX-pasteboard
 	url = https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard.git
+[submodule ".zshfiles/oh-my-zsh"]
+	path = .zshfiles/oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
