@@ -73,7 +73,7 @@ if [[ "$TERM" == "dumb" ]]; then
   PROMPT='%n@%M %/
   >>'
   alias ls='ls -F'
-fi 	
+fi   
 
 function timeconv { date -d @$1 +"%Y-%m-%d %T" }
 
@@ -90,7 +90,7 @@ function cl() {
 
 # 计算器
 function qbc() {
-  echo $1 | bc
+  echo "$@" | bc
 }
 
 # 查询维基百科
@@ -152,7 +152,6 @@ hash -d E="/etc/env.d"
 hash -d C="/etc/conf.d"
 hash -d I="/etc/rc.d"
 hash -d X="/etc/X11"
-hash -d BK="/home/r00t/config_bak"
 #]]]
 #[[[ key binding
 ##行编辑高亮模式
@@ -211,9 +210,9 @@ cd() {
             mkdir -p "$HISTDIR"
         fi
         export HISTFILE="$HISTDIR/zhistory"     #1 定义历史纪录文件  
-    touch $HISTFILE                        		# 先 touch 一下，如果不存在的话就会新建一个
+    touch $HISTFILE                             # 先 touch 一下，如果不存在的话就会新建一个
     # 清空原来的历史纪录
-    local ohistsize=$HISTSIZE               	# 设定一个变量临时存储原历史纪录大小
+    local ohistsize=$HISTSIZE                   # 设定一个变量临时存储原历史纪录大小
         HISTSIZE=0                              # 通过禁用历史纪录清空
         HISTSIZE=$ohistsize                     # 重新设定历史纪录大小
     fc -R                                       #读历史纪录文件，默认参数为 $HISTFILE  。也就是 #1 处的定义
@@ -230,8 +229,8 @@ export HISTFILE="$HOME/.zsh_history$PWD/zhistory"
 function allhistory { cat $(find $HOME/.zsh_history -name zhistory) }
 # 针对历史纪录的格式进行转换
 function convhistory {
-    sort $1 |  		#排序
-    uniq |      	#合并相同行。
+    sort $1 |      #排序
+    uniq |        #合并相同行。
                     #由于时间戳精确到秒，所以几乎不可能有相同的纪录
                     #出现相同的纪录是因为 zsh 的处理方式，每次 cd 会在两个纪录文件中产生相同的 cd 命令
     sed 's/^:\([ 0-9]*\):[0-9]*;\(.*\)/\1::::::\2/' |   #去掉历史纪录中不需要的字段。添加自定义的分隔符，方便下一步处理
