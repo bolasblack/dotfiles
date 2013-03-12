@@ -54,7 +54,7 @@ export EDITOR=vim
 
 #允许在交互模式中使用注释  例如：
 #cmd #这是注释
-setopt INTERACTIVE_COMMENTS      
+setopt INTERACTIVE_COMMENTS
 
 #启用自动 cd，输入目录名回车进入目录
 #稍微有点混乱，不如 cd 补全实用
@@ -321,6 +321,11 @@ function check_git_prompt_info() {
 # [[[ plugins
 if [ `ls $HOME/.zshfiles/ | grep -c "[^disabled]"` -gt 0 ]; then
   source $HOME/.zshfiles/*[!disabled]
+fi
+# ]]]
+# [[[ custom in env
+if [ -e $HOME/.zsh_custom ]; then
+  source $HOME/.zsh_custom
 fi
 # ]]]
 # vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=4
