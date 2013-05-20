@@ -1,4 +1,9 @@
 # -*- shell-script -*-
+#
+# optional:
+#   autojump <https://github.com/joelthelion/autojump>
+#   git-flow <https://github.com/nvie/gitflow>
+#
 #[[[ oh-my-zsh 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.zshfiles/oh-my-zsh
@@ -36,7 +41,8 @@ plugins=(git git-flow github
          python pip 
          npm node 
          vi-mode vundle 
-         gem rails3 rake ruby rvm)
+         gem rails3 rake ruby rvm
+         autojump)
 
 source $ZSH/oh-my-zsh.sh
 
