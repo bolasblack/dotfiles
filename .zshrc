@@ -36,13 +36,13 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow github 
-         archlinux brew osx 
-         python pip 
-         npm node 
-         vi-mode vundle 
-         gem rails3 rake ruby rvm
-         autojump)
+plugins=(git git-flow github
+         archlinux brew osx
+         python pip
+         npm node coffee cake bower
+         vi-mode vundle
+         gem rails3 rails4 rake ruby rvm
+         autojump tmux web-search)
 
 source $ZSH/oh-my-zsh.sh
 
