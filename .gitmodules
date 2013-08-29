@@ -1,3 +1,6 @@
 [submodule ".zshfiles/oh-my-zsh"]
 	path = .zshfiles/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "powerline"]
+	path = powerline
+	url = https://github.com/Lokaltog/powerline.git
