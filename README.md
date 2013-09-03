@@ -1,5 +1,12 @@
 # My Dotfiles
 
+## Zsh
+
+如果要使用 zsh 的 git-flow 插件，请不要安装 `git-completion.zsh` 或者 `git-
+completion.bash` 。
+
+具体参考：https://github.com/robbyrussell/oh-my-zsh/issues/1717#issuecomment-22540099
+
 ## Tmux
 
 ```bash
