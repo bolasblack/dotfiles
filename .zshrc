@@ -132,19 +132,10 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias grep='grep --color=auto'
-alias fehbg="feh --bg-scale"
-alias mkinstl="make && sudo make install"
 alias swapcaps='setxkbmap -option ctrl:swapcaps'
 alias startx='startx > ~/.log/x.log &'
 alias zhcon='zhcon --utf8'
-alias dellonly='xrandr --output VGA-1 --auto --output LVDS-1 --off'
 alias closeLCD='xset dpms force off'
-alias gitflow='git flow'
-
-alias connSSH='ssh -qTfnN -D 7070'
-
-alias zh='export LANG=zh_CN.UTF-8'
-alias en='export LANG=en_US.UTF-8'
 
 #[Esc][h] man 当前命令时，显示简短说明 
 alias run-help >&/dev/null && unalias run-help
@@ -152,9 +143,6 @@ autoload run-help
 
 #历史命令 top10
 alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
-
-#与 brewerjs 的命令起了冲突
-unalias brake
 
 #路径别名 
 #进入相应的路径时只要 cd ~xxx
@@ -342,3 +330,4 @@ if [ -e $HOME/.zsh_custom ]; then
 fi
 # ]]]
 # vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=4
+
