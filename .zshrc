@@ -2,7 +2,10 @@
 #
 # optional:
 #   autojump <https://github.com/joelthelion/autojump>
-#   git-flow <https://github.com/nvie/gitflow>
+#   git-flow-avh <https://github.com/petervanderdoes/gitflow>
+#
+# OS X:
+#   coreutils
 #
 #[[[ oh-my-zsh 
 # Path to your oh-my-zsh configuration.
@@ -45,11 +48,14 @@ plugins=(git git-flow github
          autojump tmux web-search)
 
 source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
 #]]]
 #[[[ base
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/core_perl
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+# coreutils setting [[[
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# ]]]
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 #设置默认编码
@@ -119,11 +125,12 @@ function cmdfu() {
   curl "http://www.commandlinefu.com/commands/$query/plaintext";
 }
 
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -A'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-alias ll='ls -l'
-alias la='ls -A'
 alias grep='grep --color=auto'
 alias fehbg="feh --bg-scale"
 alias mkinstl="make && sudo make install"
