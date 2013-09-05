@@ -4,9 +4,6 @@
 #   autojump <https://github.com/joelthelion/autojump>
 #   git-flow-avh <https://github.com/petervanderdoes/gitflow>
 #
-# OS X:
-#   coreutils
-#
 #[[[ oh-my-zsh 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/dotfiles/oh-my-zsh

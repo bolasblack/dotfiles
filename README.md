@@ -2,6 +2,8 @@
 
 ## Zsh
 
+**Mac 用户推荐安装 `coreutils` 使用 GNU 的命令替代自带的 `ls` 等命令**
+
 如果要使用 zsh 的 git-flow 插件，请不要安装 `git-completion.zsh` 或者 `git-
 completion.bash` 。
 
@@ -15,7 +17,7 @@ completion.bash` 。
 
 **请在使用 tmux 前先在 shell 的 rc 文件后面添加一句 `source ~/dotfiles/.tmux.sh`**
 
-**Mac 用户使用前需要先 `brew install reattach-to-user-namespace` 一下**
+**Mac 用户请先安装 `reattach-to-user-namespace`**
 
 推荐安装 tmuxinator : http://zuyunfei.com/2013/08/09/tmuxinator-best-mate-of-tmux/
 
