@@ -55,6 +55,7 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 # ]]]
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+
 #设置默认编码
 export LANG=zh_CN.UTF-8
 
@@ -64,6 +65,11 @@ export EDITOR=vim
 #允许在交互模式中使用注释  例如：
 #cmd #这是注释
 setopt INTERACTIVE_COMMENTS
+
+if [[ -s $HOME"/.rvm/scripts/rvm" ]]; then
+  export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+  source $HOME"/.rvm/scripts/rvm"
+fi
 
 #启用自动 cd，输入目录名回车进入目录
 #稍微有点混乱，不如 cd 补全实用
@@ -82,14 +88,9 @@ if [[ "$TERM" == "dumb" ]]; then
   PROMPT='%n@%M %/
   >>'
   alias ls='ls -F'
-fi   
+fi
 
 function timeconv { date -d @$1 +"%Y-%m-%d %T" }
-
-if [[ -s $HOME"/.rvm/scripts/rvm" ]]; then
-  export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-  source $HOME"/.rvm/scripts/rvm"
-fi
 #]]]
 #[[[ alias
 function cl() {
@@ -277,19 +278,19 @@ zmodload zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
-#错误校正      
+#错误校正
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
-#kill 命令补全      
+#kill 命令补全
 compdef pkill=kill
 compdef pkill=killall
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
 zstyle ':completion:*:processes' command 'ps -au$USER'
 
-#补全类型提示分组 
+#补全类型提示分组
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:options' description 'yes'
@@ -323,5 +324,5 @@ if [ -e $HOME/.zshfiles ]; then
   fi
 fi
 # ]]]
-# vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=4
+# vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=2
 
