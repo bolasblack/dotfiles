@@ -9,7 +9,7 @@
 #
 #[[[ oh-my-zsh 
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.zshfiles/oh-my-zsh
+ZSH=$HOME/dotfiles/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -320,13 +320,10 @@ function check_git_prompt_info() {
 }
 #]]]
 # [[[ plugins
-if [ `ls $HOME/.zshfiles/ | grep -c "[^disabled]"` -gt 0 ]; then
-  source $HOME/.zshfiles/*[!disabled]
-fi
-# ]]]
-# [[[ custom in env
-if [ -e $HOME/.zsh_custom ]; then
-  source $HOME/.zsh_custom
+if [ -e $HOME/.zshfiles ]; then
+  if [ `ls $HOME/.zshfiles/ | grep -c "[^disabled]"` -gt 0 ]; then
+    source $HOME/.zshfiles/*[!disabled]
+  fi
 fi
 # ]]]
 # vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=4
