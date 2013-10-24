@@ -29,5 +29,5 @@
   cm = commit
   st = status
 [push]
-  ;default = simple
   default = upstream
+

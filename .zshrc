@@ -41,7 +41,9 @@ plugins=(git git-flow github
          python pip
          npm node coffee cake bower
          gem rails3 rails4 rake ruby rvm
-         autojump tmux web-search)
+         autojump tmux tmuxinator web-search
+         battery colored-man vagrant
+         )
 
 source $ZSH/oh-my-zsh.sh
 #]]]
