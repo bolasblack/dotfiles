@@ -40,7 +40,7 @@ plugins=(git git-flow github
          archlinux brew osx
          python pip
          npm node coffee cake bower
-         gem rails3 rails4 rake ruby rvm
+         gem rails rake ruby rvm
          autojump tmux tmuxinator web-search
          battery colored-man vagrant
          )
