@@ -4,7 +4,7 @@
 #   autojump <https://github.com/joelthelion/autojump>
 #   git-flow-avh <https://github.com/petervanderdoes/gitflow>
 #
-#[[[ oh-my-zsh 
+#[[[ oh-my-zsh
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/dotfiles/oh-my-zsh
 
@@ -82,7 +82,7 @@ limit coredumpsize 0
 #以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
-##for Emacs 
+##for Emacs
 #在 Emacs终端 中使用 Zsh 的一些设置 不推荐在 Emacs 中使用它
 if [[ "$TERM" == "dumb" ]]; then
   setopt No_zle
@@ -136,14 +136,14 @@ alias startx='startx > ~/.log/x.log &'
 alias zhcon='zhcon --utf8'
 alias closeLCD='xset dpms force off'
 
-#[Esc][h] man 当前命令时，显示简短说明 
+#[Esc][h] man 当前命令时，显示简短说明
 alias run-help >&/dev/null && unalias run-help
 autoload run-help
 
 #历史命令 top10
 alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 
-#路径别名 
+#路径别名
 #进入相应的路径时只要 cd ~xxx
 hash -d WWW="/home/lighttpd/html"
 hash -d ARCH="/mnt/arch"
@@ -156,7 +156,7 @@ hash -d X="/etc/X11"
 #[[[ key binding
 ##行编辑高亮模式
 # Ctrl+@ 设置标记，标记和光标点之间为 region
-zle_highlight=(region:bg=magenta #选中区域 
+zle_highlight=(region:bg=magenta #选中区域
                special:bold      #特殊字符
                isearch:underline)#搜索时使用的关键字
 
@@ -173,7 +173,7 @@ zle -N user-complete
 bindkey "\t" user-complete
 
 ##在命令前插入 sudo
-#定义功能 
+#定义功能
 sudo-command-line() {
     [[ -z $BUFFER ]] && zle up-history
     [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
@@ -200,7 +200,7 @@ export HISTSIZE=10000
 #注销后保存的历史纪录条目数量
 export SAVEHIST=10000
 
-# 定义函数，替换原来的 cd 
+# 定义函数，替换原来的 cd
 cd() {
     builtin cd "$@"                             # 执行原来的 cd 命令
     fc -W                                       # 写历史纪录文件，默认参数为 $HISTFILE 。初始值为 #2 处的定义；执行了 cd 命令后为 #1 处的定义
@@ -209,7 +209,7 @@ cd() {
         if  [ ! -d "$HISTDIR" ] ; then          # 如果不存在这个目录，则建立一个
             mkdir -p "$HISTDIR"
         fi
-        export HISTFILE="$HISTDIR/zhistory"     #1 定义历史纪录文件  
+        export HISTFILE="$HISTDIR/zhistory"     #1 定义历史纪录文件
     touch $HISTFILE                             # 先 touch 一下，如果不存在的话就会新建一个
     # 清空原来的历史纪录
     local ohistsize=$HISTSIZE                   # 设定一个变量临时存储原历史纪录大小
@@ -222,8 +222,8 @@ mkdir -p $HOME/.zsh_history$PWD
 #2 同样，启动 zsh 的时候， 还没有定义 $HOME 目录对应的 $HISTFILE ，所以先定义它
 export HISTFILE="$HOME/.zsh_history$PWD/zhistory"
 
-# 使用 setopt EXTENDED_HISTORY 选项，为命令添加时间戳 
-# 这非常重要，汇总到一起的历史纪录比较混乱，时间戳是重新排序的依据 
+# 使用 setopt EXTENDED_HISTORY 选项，为命令添加时间戳
+# 这非常重要，汇总到一起的历史纪录比较混乱，时间戳是重新排序的依据
 
 # 定义 allhistory ，将所有的历史纪录汇总到一起
 function allhistory { cat $(find $HOME/.zsh_history -name zhistory) }
@@ -238,7 +238,7 @@ function convhistory {
 }
 
 #使用 histall 命令查看全部历史纪录
-function histall { convhistory =(allhistory) | sed '/^.\{20\} *cd/i\\' }  # 在每个 cd 命令前添加空行，判断工作目录比较容易 
+function histall { convhistory =(allhistory) | sed '/^.\{20\} *cd/i\\' }  # 在每个 cd 命令前添加空行，判断工作目录比较容易
 # 可能会有一点不准确。因为启动和退出时不执行 cd 命令，没有相应的纪录。尤其是同时运行多个 zsh  的时候
 #使用 hist 查看当前目录历史纪录
 function hist { convhistory $HISTFILE }
@@ -272,8 +272,8 @@ zstyle ':completion::complete:*' '\\'
 zstyle ':completion:*' menu select
 zstyle ':completion:*:*:default' force-list always
 
-#彩色补全菜单 
-eval $(dircolors -b) 
+#彩色补全菜单
+eval $(dircolors -b)
 export ZLSCOLORS="${LS_COLORS}"
 zmodload zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
