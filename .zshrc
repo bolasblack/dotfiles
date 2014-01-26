@@ -8,44 +8,50 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/dotfiles/oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load? (plugins can be found in $ZSH/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow github
-         archlinux brew osx
-         python pip
-         npm node coffee cake bower
-         gem rails rake ruby rvm
-         autojump tmux tmuxinator web-search
-         battery colored-man vagrant
-         )
+plugins=(git git-flow tmuxinator vagrant brew gem rails rake ruby rvm)
 
-source $ZSH/oh-my-zsh.sh
+is_plugin() {
+  local base_dir=$1
+  local name=$2
+  test -f $base_dir/plugins/$name/$name.plugin.zsh \
+    || test -f $base_dir/plugins/$name/_$name
+}
+
+# Add all defined plugins to fpath. This must be done
+# before running compinit.
+for plugin ($plugins); do
+  if is_plugin $ZSH_CUSTOM $plugin; then
+    fpath=($ZSH_CUSTOM/plugins/$plugin $fpath)
+  elif is_plugin $ZSH $plugin; then
+    fpath=($ZSH/plugins/$plugin $fpath)
+  fi
+done
+
+# Figure out the SHORT hostname
+if [ -n "$commands[scutil]" ]; then
+  # OS X
+  SHORT_HOST=$(scutil --get ComputerName)
+else
+  SHORT_HOST=${HOST/.*/}
+fi
+
+# Save the location of the current completion dump file.
+ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+
+# Load and run compinit
+autoload -U compinit
+compinit -i -d "${ZSH_COMPDUMP}"
+
+# Load all of the plugins that were defined in ~/.zshrc
+for plugin ($plugins); do
+  if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
+    source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
+  elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
+    source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+  fi
+done
 #]]]
 #[[[ base
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
@@ -94,11 +100,6 @@ fi
 function timeconv { date -d @$1 +"%Y-%m-%d %T" }
 #]]]
 #[[[ alias
-function cl() {
-  cd $1
-  ls
-}
-
 # 计算器
 function qbc() {
   echo "$@" | bc
@@ -124,9 +125,17 @@ function cmdfu() {
   curl "http://www.commandlinefu.com/commands/$query/plaintext";
 }
 
+function cl() {
+  cd $1
+  ls
+}
 alias ls='ls --color=auto'
+alias lsa='ls -lah'
+alias l='ls -la'
 alias ll='ls -l'
-alias la='ls -A'
+alias la='ls -lA'
+alias sl=ls # often screw this up
+
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -142,6 +151,9 @@ autoload run-help
 
 #历史命令 top10
 alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
+
+#Print all 256 colors for testing TERM or for a quick reference
+alias color256='( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )'
 
 #路径别名
 #进入相应的路径时只要 cd ~xxx
@@ -300,7 +312,10 @@ zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d --\e[0m'
 zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
 zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
 #]]]
-#[[[ theme (based oh-my-zsh)
+#[[[ theme (based oh-my-zsh lib)
+source $ZSH/lib/git.zsh
+source $ZSH/lib/theme-and-appearance.zsh
+
 PROMPT='%B>%(0?.. %{$fg[red]%}%?) %{$fg[blue]%}%~$(check_git_prompt_info) %{$fg[white]%}%(!.#.$) %b%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
@@ -318,7 +333,7 @@ function check_git_prompt_info() {
     fi
 }
 #]]]
-# [[[ plugins
+# [[[ custom files
 if [ -e $HOME/.zshfiles ]; then
   if [ `ls $HOME/.zshfiles/ | grep -c "[^disabled]"` -gt 0 ]; then
     source $HOME/.zshfiles/*[!disabled]
