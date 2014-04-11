@@ -49,6 +49,23 @@ fi
 export SHUNDLE_RC=~/.zshfiles/shundle.zsh
 source  ~/.shundle/bundle/shundle/shundle
 # ]]]
+# directories [[[
+setopt auto_name_dirs
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+
+alias d='dirs -v | head -10'
+alias 1='cd -'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
+# ]]]
 #[[[ alias
 # 计算器
 function qbc() {
@@ -98,18 +115,18 @@ alias startx='startx > ~/.log/x.log &'
 alias zhcon='zhcon --utf8'
 alias closeLCD='xset dpms force off'
 
-#[Esc][h] man 当前命令时，显示简短说明
+# [Esc][h] man 当前命令时，显示简短说明
 alias run-help >&/dev/null && unalias run-help
 autoload run-help
 
-#历史命令 top10
+# 历史命令 top10
 alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 
-#Print all 256 colors for testing TERM or for a quick reference
+# Print all 256 colors for testing TERM or for a quick reference
 alias color256='( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )'
 
-#路径别名
-#进入相应的路径时只要 cd ~xxx
+# 路径别名
+# 进入相应的路径时只要 cd ~xxx
 hash -d WWW="/home/lighttpd/html"
 hash -d ARCH="/mnt/arch"
 hash -d PKG="/var/cache/pacman/pkg"
