@@ -4,62 +4,12 @@
 #   autojump <https://github.com/joelthelion/autojump>
 #   git-flow-avh <https://github.com/petervanderdoes/gitflow>
 #
-#[[[ oh-my-zsh
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/dotfiles/oh-my-zsh
-
-# Which plugins would you like to load? (plugins can be found in $ZSH/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git git-flow tmuxinator vagrant brew gem rails rake ruby rvm)
-
-is_plugin() {
-  local base_dir=$1
-  local name=$2
-  test -f $base_dir/plugins/$name/$name.plugin.zsh \
-    || test -f $base_dir/plugins/$name/_$name
-}
-
-# Add all defined plugins to fpath. This must be done
-# before running compinit.
-for plugin ($plugins); do
-  if is_plugin $ZSH_CUSTOM $plugin; then
-    fpath=($ZSH_CUSTOM/plugins/$plugin $fpath)
-  elif is_plugin $ZSH $plugin; then
-    fpath=($ZSH/plugins/$plugin $fpath)
-  fi
-done
-
-# Figure out the SHORT hostname
-if [ -n "$commands[scutil]" ]; then
-  # OS X
-  SHORT_HOST=$(scutil --get ComputerName)
-else
-  SHORT_HOST=${HOST/.*/}
-fi
-
-# Save the location of the current completion dump file.
-ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
-
-# Load and run compinit
-autoload -U compinit
-compinit -i -d "${ZSH_COMPDUMP}"
-
-# Load all of the plugins that were defined in ~/.zshrc
-for plugin ($plugins); do
-  if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
-    source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
-  elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
-    source $ZSH/plugins/$plugin/$plugin.plugin.zsh
-  fi
-done
-#]]]
 #[[[ base
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
-# coreutils setting [[[
+# coreutils setting
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-# ]]]
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
 
@@ -99,6 +49,14 @@ fi
 
 function timeconv { date -d @$1 +"%Y-%m-%d %T" }
 #]]]
+# Shundle [[[
+if [ ! -d ~/.shundle/bundle/shundle ]; then
+  git clone --depth=1 https://github.com/chilicuil/shundle ~/.shundle/bundle/shundle
+fi
+
+export SHUNDLE_RC=~/.zshfiles/shundle.zsh
+source  ~/.shundle/bundle/shundle/shundle
+# ]]]
 #[[[ alias
 # 计算器
 function qbc() {
@@ -196,6 +154,10 @@ zle -N sudo-command-line
 
 #定义快捷键为： [Esc] [Esc]
 bindkey "\e\e" sudo-command-line
+
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
 
 #Emacs风格 键绑定
 bindkey -e
@@ -313,6 +275,8 @@ zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
 zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
 #]]]
 #[[[ theme (based oh-my-zsh lib)
+ZSH=$HOME/dotfiles/oh-my-zsh
+
 source $ZSH/lib/git.zsh
 source $ZSH/lib/theme-and-appearance.zsh
 
@@ -334,9 +298,9 @@ function check_git_prompt_info() {
 }
 #]]]
 # [[[ custom files
-if [ -e $HOME/.zshfiles ]; then
-  if [ `ls $HOME/.zshfiles/ | grep -c "[^disabled]"` -gt 0 ]; then
-    source $HOME/.zshfiles/*[!disabled]
+if [ -e $HOME/.zshcustoms ]; then
+  if [ `ls $HOME/.zshcustoms/ | grep -c "[^disabled]"` -gt 0 ]; then
+    source $HOME/.zshcustoms/*[!disabled]
   fi
 fi
 # ]]]
