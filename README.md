@@ -3,7 +3,7 @@
 ## Zsh
 
 ```sh
-(cd ~ && ln -s dotfiles/.zshfiles && echo 'source .zshfiles/.zshrc' >> ~/.zshrc)
+(cd ~ && ln -s dotfiles/.zshfiles && echo 'source .zshfiles/zshrc' >> ~/.zshrc)
 ```
 
 **Mac 用户推荐安装 `coreutils` 使用 GNU 的命令替代自带的 `ls` 等命令**
