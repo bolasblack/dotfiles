@@ -1,40 +1,35 @@
 [user]
-  name = bolasblack
-  email = bolasblack@gmail.com
+	name = bolasblack
+	email = bolasblack@gmail.com
 [core]
-  editor = vim
+	editor = vim
+	excludesfile = /Users/c4605/dotfiles/.gitignore_global
 [color]
-  status = auto
-  branch = auto
-  diff = auto
-  ui = true
-  pager = true
+	status = auto
+	branch = auto
+	diff = auto
+	ui = true
+	pager = true
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 [alias]
-  co = checkout
-  cb = checkout -b
-  br = branch
-  cm = commit
-  st = status
+	co = checkout
+	cb = checkout -b
+	br = branch
+	cm = commit
+	st = status
 [push]
-  default = upstream
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/1.6.3.1/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+	default = upstream
 [github]
 	user = bolasblack
