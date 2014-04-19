@@ -35,10 +35,10 @@ function timeconv { date -d @$1 +"%Y-%m-%d %T" }
 source ~/.zshfiles/theme.zsh
 
 # custom files
-if [ -e $HOME/.zshcustoms ]; then
-  if [ `ls $HOME/.zshcustoms/ | grep -c "[^disabled]"` -gt 0 ]; then
-    source $HOME/.zshcustoms/*[!disabled]
-  fi
+if [ -d $HOME/.zshcustoms ]; then
+  for file in `ls -1 $HOME/.zshcustoms`; do
+    source $HOME/.zshcustoms/$file
+  done
 fi
 #]]]
 # shundle [[[
