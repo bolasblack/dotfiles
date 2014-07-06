@@ -95,6 +95,13 @@ function cmdfu() {
   curl "http://www.commandlinefu.com/commands/$query/plaintext";
 }
 
+function _ssh-copy-id() {
+  cat ~/.ssh/id_rsa.pub | ssh $1 "[ -d ~/.ssh ] || mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
+}
+# http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
+hash ssh-copy-id 2>/dev/null || { alias ssh-copy-id='_ssh-copy-id' }
+
+
 function cl() {
   cd $1
   ls
