@@ -143,6 +143,9 @@ hash -d I="/etc/rc.d"
 hash -d X="/etc/X11"
 #]]]
 #[[[ key binding
+# Emacs 风格 键绑定
+bindkey -e
+
 
 # 行编辑高亮模式
 # Ctrl+@ 设置标记，标记和光标点之间为 region
@@ -180,14 +183,8 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
-# Emacs 风格 键绑定
-bindkey -e
 # 设置 [DEL]键 为向后删除
 bindkey "\e[3~" delete-char
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^F" forward-char
-bindkey "^B" backward-char
 #]]]
 #[[[ history
 
