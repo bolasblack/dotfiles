@@ -19,7 +19,7 @@ setopt INTERACTIVE_COMMENTS
 
 # 启用自动 cd，输入目录名回车进入目录
 # 稍微有点混乱，不如 cd 补全实用
-setopt AUTO_CD
+# setopt AUTO_CD
 
 # 不要蜂鸣警报 beep
 setopt NO_BEEP
@@ -30,7 +30,11 @@ limit coredumpsize 0
 # 以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
-function timeconv { date -d @$1 +"%Y-%m-%d %T" }
+# 行编辑高亮模式
+# Ctrl+@ 设置标记，标记和光标点之间为 region
+zle_highlight=(region:bg=magenta # 选中区域
+               special:bold      # 特殊字符
+               isearch:underline)#搜索时使用的关键字
 
 source ~/.zshfiles/theme.zsh
 
@@ -101,6 +105,7 @@ function _ssh-copy-id() {
 # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
 hash ssh-copy-id 2>/dev/null || { alias ssh-copy-id='_ssh-copy-id' }
 
+function timeconv { date -d @$1 +"%Y-%m-%d %T" }
 
 function cl() {
   cd $1
@@ -146,28 +151,18 @@ hash -d X="/etc/X11"
 # Emacs 风格 键绑定
 bindkey -e
 
-
-# 行编辑高亮模式
-# Ctrl+@ 设置标记，标记和光标点之间为 region
-zle_highlight=(region:bg=magenta # 选中区域
-               special:bold      # 特殊字符
-               isearch:underline)#搜索时使用的关键字
-
 # 空行（光标在行首）补全 cd
-user-complete() {
-  if [[ -n $BUFFER ]] ; then
-    zle expand-or-complete
-  else
+cd-complete() {
+  if [[ ! -n $BUFFER ]] ; then
     BUFFER="cd "
     zle end-of-line
-    zle expand-or-complete
   fi
+  zle expand-or-complete
 }
-zle -N user-complete
-bindkey "\t" user-complete
+zle -N cd-complete
+bindkey "\t" cd-complete
 
 # 在命令前插入 sudo
-# 定义功能
 sudo-command-line() {
   [[ -z $BUFFER ]] && zle up-history
   [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
@@ -175,7 +170,6 @@ sudo-command-line() {
   zle end-of-line
 }
 zle -N sudo-command-line
-
 # 定义快捷键为： [Esc] [Esc]
 bindkey "\e\e" sudo-command-line
 
