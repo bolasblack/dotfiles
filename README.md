@@ -23,3 +23,11 @@ completion.bash` 。
 
 推荐安装 tmuxinator : http://zuyunfei.com/2013/08/09/tmuxinator-best-mate-of-tmux/
 
+## [Hydra](https://github.com/sdegutis/hydra) (OS X)
+
+```bash
+(cd ~ && ln -s dotfiles/hydra .hydra)
+```
+
+一个窗口管理工具，支持使用 lua 扩展，我在里面加了一个 Alfred Workflow 来便于管理。
+
