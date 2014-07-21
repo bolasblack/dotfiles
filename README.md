@@ -31,3 +31,14 @@ completion.bash` 。
 
 一个窗口管理工具，支持使用 lua 扩展，我在里面加了一个 Alfred Workflow 来便于管理。
 
+## [Karabiner](https://pqrs.org/osx/karabiner/) (OS X)
+
+```bash
+(cd ~ && \
+mv ~/Library/Application\ Support/Karabiner/private.xml{,.bk} && \
+cp ~/dotfiles/karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml && \
+ln -s dotfiles/karabiner .karabiner)
+```
+
+一个非常优秀的键映射工具，几乎能满足任何相关需求。
+
