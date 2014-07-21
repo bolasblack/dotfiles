@@ -36,7 +36,7 @@ zle_highlight=(region:bg=magenta # 选中区域
                special:bold      # 特殊字符
                isearch:underline)#搜索时使用的关键字
 
-source ~/.zshfiles/theme.zsh
+source ~/dotfiles/zshfiles/theme.zsh
 
 # custom files
 if [ -d $HOME/.zshcustoms ]; then
@@ -50,7 +50,7 @@ if [ ! -d ~/.shundle/bundle/shundle ]; then
   git clone --depth=1 https://github.com/chilicuil/shundle ~/.shundle/bundle/shundle
 fi
 
-export SHUNDLE_RC=~/.zshfiles/shundle.zsh
+export SHUNDLE_RC=~/dotfiles/zshfiles/shundle.zsh
 source  ~/.shundle/bundle/shundle/shundle
 # ]]]
 # directories [[[
