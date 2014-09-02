@@ -50,7 +50,7 @@ _git_prompt_info() {
 }
 
 
-function check_git_prompt_info() {
+_check_git_prompt_info() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
     if [[ -z $(_git_prompt_info) ]]; then
       echo " %{$fg[magenta]%}detached-head%{$reset_color%})"
@@ -60,8 +60,15 @@ function check_git_prompt_info() {
   fi
 }
 
+_render_hostname() {
+  # for OS X
+  [[ `hostname` =~ \.local$ ]] && return
+  [[ `hostname` = 'localhost' ]] && return
+  echo "($(hostname)) "
+}
+
 # 这里必须是单引号，双引号的话 prompt_subst 配置项就失效了
-PROMPT='%B>%(0?.. %{$fg[red]%}%?) %{$fg[blue]%}%~$(check_git_prompt_info) %{$fg[white]%}%(!.#.$) %b%{$reset_color%}'
+PROMPT='$(_render_hostname)%B>%(0?.. %{$fg[red]%}%?) %{$fg[blue]%}%~$(_check_git_prompt_info) %{$fg[white]%}%(!.#.$) %b%{$reset_color%}'
 
 # 在 Emacs终端 中使用 Zsh 的一些设置 不推荐在 Emacs 中使用它
 if [[ "$TERM" == "dumb" ]]; then
@@ -70,4 +77,3 @@ if [[ "$TERM" == "dumb" ]]; then
   >>'
   alias ls='ls -F'
 fi
-
