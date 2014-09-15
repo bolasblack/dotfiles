@@ -23,13 +23,13 @@ completion.bash` 。
 
 推荐安装 tmuxinator : http://zuyunfei.com/2013/08/09/tmuxinator-best-mate-of-tmux/
 
-## [Hydra](https://github.com/sdegutis/hydra) (OS X)
+## [Mjolnir](https://github.com/sdegutis/mjolnir) (OS X)
 
 ```bash
-(cd ~ && ln -s dotfiles/hydra .hydra)
+(cd ~ && ln -s dotfiles/mjolnir .mjolnir)
 ```
 
-一个窗口管理工具，支持使用 lua 扩展，我在里面加了一个 Alfred Workflow 来便于管理。
+一个窗口管理工具，支持使用 lua 扩展，里面的 Alfred Workflow 暂时已经失效了。
 
 ## [Karabiner](https://pqrs.org/osx/karabiner/) (OS X)
 
@@ -41,4 +41,3 @@ ln -s dotfiles/karabiner .karabiner)
 ```
 
 一个非常优秀的键映射工具，几乎能满足任何相关需求。
-

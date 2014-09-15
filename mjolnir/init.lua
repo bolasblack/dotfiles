@@ -1,38 +1,36 @@
 
 -- Lua Doc:    http://www.lua.org/manual/5.2/#functions
--- Hydra Doc:  http://sdegutis.github.io/hydra/
--- Hydra Repo: https://github.com/sdegutis/hydra
--- Hydra Wiki: https://github.com/sdegutis/hydra/wiki
+-- Mjolnir Repo: https://github.com/sdegutis/mjolnir
 
-require 'utils'
-require 'menu'
-require 'other'
+local alert = require 'mjolnir.alert'
+local hotkey = require 'mjolnir.hotkey'
+local window = require 'mjolnir.window'
 
-local CONFIG_PATH = os.getenv("HOME") .. "/.hydra/"
-pathwatcher.stopall()
-
-hydra.alert("Hydra sample config loaded", 1.5)
-
--- Comment this if you don't want Hydra launches at login
-autolaunch.set(true)
-
+mjolnir.configdir = os.getenv("HOME") .. "/.mjolnir/"
 mod1 = {"cmd", "alt"}
+
+function getCurrFrame()
+  local win = window.focusedwindow()
+  if not win then
+     win = window.orderedwindows()[0]
+  end
+  local frame = win:frame()
+  return win, frame
+end
 
 -- Toggle window full/halfscreen [[[
 function movewindow_fullscreen()
   local win, frame = getCurrFrame()
-  local newframe = win:screen():frame_without_dock_or_menu()
-  win:setframe(newframe)
+  win:maximize()
 end
 
 function movewindow_halfscreen()
   local win, frame = getCurrFrame()
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.x = newframe.w / 4
-  newframe.y = newframe.h / 4
-  newframe.w = newframe.w / 2
-  newframe.h = newframe.h / 2
-  win:setframe(newframe)
+  frame.x = frame.w / 4
+  frame.y = frame.h / 4
+  frame.w = frame.w / 2
+  frame.h = frame.h / 2
+  win:setframe(frame)
 end
 
 function movewindow_toggle_fullscreen()
@@ -50,18 +48,20 @@ hotkey.bind(mod1, "1", movewindow_toggle_fullscreen)
 -- Toggle window left/right half [[[
 function movewindow_righthalf()
   local win, frame = getCurrFrame()
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.x = newframe.w
-  win:setframe(newframe)
+  win:maximize()
+  frame = win:frame()
+  frame.w = frame.w / 2
+  frame.x = frame.w
+  win:setframe(frame)
 end
 
 function movewindow_lefthalf()
   local win, frame = getCurrFrame()
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.x = 0
-  win:setframe(newframe)
+  win:maximize()
+  frame = win:frame()
+  frame.w = frame.w / 2
+  frame.x = 0
+  win:setframe(frame)
 end
 
 function movewindow_toggle_half()
@@ -81,3 +81,4 @@ if package.searchpath('customize', package.path) then
   package.loaded['customize'] = nil
 end
 
+alert.show("Hydra sample config loaded", 1.5)

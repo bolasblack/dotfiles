@@ -7,11 +7,13 @@ git
 git-flow-avh
 tig
 vim
-irssi
+weechat
 ntfs-3g
 tree
 htop
 wget
 autojump
 ack
-
+coreutils
+ack
+rbenv
