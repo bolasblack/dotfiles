@@ -99,6 +99,20 @@ function cmdfu() {
   curl "http://www.commandlinefu.com/commands/$query/plaintext";
 }
 
+# 列出 Git 管理的目录下所有发生过改动的文件，使用方法：
+#   chdfiles 2 # 文件下标（从 1 开始，默认为 1）
+#   chdfiles a # 列出所有文件
+function chdfiles() {
+    files=$(git status -s | cut -c 4-)
+    [ "$1" = "" ] && 1="1"
+
+    if [ "$1" = "a" ] ; then
+        echo $files
+    else
+        echo $files | xargs | cut -d ' ' -f $1
+    fi
+}
+
 function _ssh-copy-id() {
   cat ~/.ssh/id_rsa.pub | ssh $1 "[ -d ~/.ssh ] || mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 }
@@ -289,4 +303,3 @@ zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
 zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
 #]]]
 # vim:fileencoding=utf-8 filetype=zsh expandtab shiftwidth=2
-
