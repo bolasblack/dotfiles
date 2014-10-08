@@ -39,7 +39,7 @@ end
 function getCurrFrame()
   local win = window.focusedwindow()
   if not win then
-     win = window.orderedwindows()[0]
+     win = window.orderedwindows()[1]
   end
   local frame = win:frame()
   return win, frame
