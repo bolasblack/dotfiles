@@ -8,6 +8,7 @@ Required modules:
 mjolnir.alert
 mjolnir.hotkey
 
+mjolnir._asm.ipc.cli
 mjolnir._asm.pathwatcher
 mjolnir._asm.hydra
 --]]
@@ -19,6 +20,7 @@ local window = require 'mjolnir.window'
 local fnutils = require 'mjolnir.fnutils'
 local hydra = require 'mjolnir._asm.hydra'
 local pathwatcher = require 'mjolnir._asm.pathwatcher'
+local ipc = require 'mjolnir._asm.ipc'
 
 mjolnir.configdir = os.getenv("HOME") .. "/.mjolnir/"
 mod1 = {"cmd", "alt"}

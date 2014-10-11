@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-cd alfred_workflow && zip -r /tmp/hydra.alfredworkflow ./* && open /tmp/hydra.alfredworkflow
-
+workflow_filename=mjolnir.alfredworkflow
+cd alfred_workflow && zip -r /tmp/$workflow_filename ./* && open /tmp/$workflow_filename

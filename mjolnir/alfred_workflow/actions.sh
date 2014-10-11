@@ -1,37 +1,32 @@
 
 . workflowHandler.sh
 
-APP=/Applications/Hydra.app/Contents/Resources/hydra
+bin=/usr/local/bin/mjolnir
+
+binFileAvaliable() {
+    [ -x $bin ] && tmp=$($bin -c 'print(1)' 2>&1)
+}
 
 showOptions() {
-  addResult 'reload' 'reload' 'Reload hydra config' '' '' 'yes' 'autocomplete'
-  addResult 'repl'   'repl'   'Open hydra repl'     '' '' 'yes' 'autocomplete'
-  addResult 'log'    'log'    'Show hydra log'      '' '' 'yes' 'autocomplete'
-  addResult 'update' 'update' 'Check hydra update'  '' '' 'yes' 'autocomplete'
-  addResult 'donate' 'donate' 'Donate hydra'        '' '' 'yes' 'autocomplete'
-
-  getXMLResults
+    if binFileAvaliable; then
+        addResult 'reload'  'reload'  'Reload mjolnir config' '' '' 'yes' ''
+        addResult 'console' 'console' 'Open mjolnir console'  '' '' 'yes' ''
+        addResult 'luacode' 'luacode' 'Execute lua code'      '' '' 'no'  ''
+    else
+        addResult 'unavaliable' 'unavaliable' 'Mjolnir cli is not avaliable' 'Is it installed? or Is Mjolnir running?' '' 'no' ''
+    fi
+    getXMLResults
 }
 
 doActions() {
-  case "$1" in
-    reload)
-      $APP 'hydra.reload()'
-      ;;
-    repl)
-      $APP 'repl.open()'
-      ;;
-    update)
-      $APP 'checkforupdates()'
-      ;;
-    log)
-      $APP 'logger.show()'
-      ;;
-    donate)
-      $APP 'donate()'
-      ;;
-    *)
-      $APP "hydra.alert('$1 Didn\'t match anything')"
-  esac
+    case "$1" in
+        reload)
+            $bin -c 'mjolnir.reload()'
+            ;;
+        console)
+            $bin -c 'mjolnir.openconsole()'
+            ;;
+        *)
+            $bin -c "$1"
+    esac
 }
-
