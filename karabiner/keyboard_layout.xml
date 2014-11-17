@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<root>
+  <!-- See Also https://github.com/tekezo/Karabiner/blob/version_10.0.0/src/core/server/Resources/include/checkbox/for_dvorak_users.xml -->
+  <item>
+    <name>Dvorak keyboard layout</name>
+    <item>
+      <name>Emacs Mode</name>
+      <appendix>Alt-f to forword a word</appendix>
+      <appendix>Alt-b to back a word</appendix>
+      <appendix>Ctrl-w to delete back a word</appendix>
+      <appendix>(except Emacs, Vim, Terminal, Virtual, RDC, X11, Eclipse)</appendix>
+      <not>EMACS, VI, TERMINAL, VIRTUALMACHINE, REMOTEDESKTOPCONNECTION, X11, ECLIPSE</not>
+      <identifier>user.dvorak.emacsmode</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::N,            ModifierFlag::OPTION_L,
+        KeyCode::CURSOR_LEFT,  ModifierFlag::OPTION_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::U,            ModifierFlag::OPTION_L,
+        KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::COMMA,        ModifierFlag::CONTROL_L,
+        KeyCode::DELETE,       ModifierFlag::OPTION_L
+      </autogen>
+    </item>
+    <item>
+      <name>Use Dvorak Keyboard Layout</name>
+      <appendix>Qwerty to Dvorak</appendix>
+      <identifier>user.dvorak.normal</identifier>
+      <include path="snippets/dvorak.xml" />
+    </item>
+    <item>
+      <name>Use Dvorak-Qwerty⌘</name>
+      <appendix>Qwerty to Dvorak</appendix>
+      <appendix>Command+Keys to Qwerty</appendix>
+      <identifier>user.dvorak.qwertycommand</identifier>
+      <modifier_not>
+        ModifierFlag::COMMAND_L,
+        ModifierFlag::COMMAND_R
+      </modifier_not>
+      <include path="snippets/dvorak.xml" />
+    </item>
+    <item>
+      <name>Use Programmer's Dvorak</name>
+      <appendix>Qwerty to Dvorak-Qwerty⌘</appendix>
+      <appendix>Retention the [ and ] keys</appendix>
+      <identifier>user.dvorak.programmer</identifier>
+      <modifier_not>
+        ModifierFlag::COMMAND_L,
+        ModifierFlag::COMMAND_R
+      </modifier_not>
+      <include path="snippets/dvorak_for_programmer.xml" />
+    </item>
+  </item>
+  <item>
+    <name>Qwerty keyboard layout</name>
+    <item>
+      <name>Emacs Mode</name>
+      <appendix>Alt-f to forword a word</appendix>
+      <appendix>Alt-b to back a word</appendix>
+      <appendix>Ctrl-w to delete back a word</appendix>
+      <appendix>(except Emacs, Vim, Terminal, Virtual, RDC, X11, Eclipse)</appendix>
+      <not>EMACS, VI, TERMINAL, VIRTUALMACHINE, REMOTEDESKTOPCONNECTION, X11, ECLIPSE</not>
+      <identifier>user.qwerty.emacsmode</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::B,            ModifierFlag::OPTION_L,
+        KeyCode::CURSOR_LEFT,  ModifierFlag::OPTION_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::F,            ModifierFlag::OPTION_L,
+        KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::W,            ModifierFlag::CONTROL_L,
+        KeyCode::DELETE,       ModifierFlag::OPTION_L
+      </autogen>
+    </item>
+  </item>
+</root>
