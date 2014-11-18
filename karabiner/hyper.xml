@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<root>
+  <item>
+    <name>Hyper</name>
+
+    <item>
+      <name>Hyper+J To Down</name>
+      <identifier>user.hyper.j2down</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::J, {{USER_HYPER}},
+        KeyCode::CURSOR_DOWN
+      </autogen>
+    </item>
+    <item>
+      <name>Hyper+K To Up</name>
+      <identifier>user.hyper.k2up</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::K, {{USER_HYPER}},
+        KeyCode::CURSOR_UP
+      </autogen>
+    </item>
+    <item>
+      <name>Hyper+H To Left</name>
+      <identifier>user.hyper.h2left</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::H, {{USER_HYPER}},
+        KeyCode::CURSOR_LEFT
+      </autogen>
+    </item>
+    <item>
+      <name>Hyper+L To Right</name>
+      <identifier>user.hyper.l2right</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::L, {{USER_HYPER}},
+        KeyCode::CURSOR_RIGHT
+      </autogen>
+    </item>
+  </item>
+</root>

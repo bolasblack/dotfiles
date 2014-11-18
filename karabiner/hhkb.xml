@@ -43,4 +43,16 @@
       </autogen>
     </item>
   </item>
+
+  <item>
+    <name>HHKB adopt Hyper</name>
+    <identifier>user.hhkb.hyper</identifier>
+    <device_only>DeviceVendor::TOPRE, DeviceProduct::HHKB_PRO2_TYPES</device_only>
+    <autogen>
+      __KeyOverlaidModifier__
+      KeyCode::TAB,
+      KeyCode::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
+      KeyCode::TAB
+    </autogen>
+  </item>
 </root>

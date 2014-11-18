@@ -5,6 +5,12 @@
 <!-- https://gist.github.com/zhigang1992/7886221 -->
 
 <root>
+  <replacementdef>
+    <replacementname>USER_HYPER</replacementname>
+    <replacementvalue>ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L</replacementvalue>
+  </replacementdef>
+
   <include path="keyboard_layout.xml" />
   <include path="hhkb.xml" />
+  <include path="hyper.xml" />
 </root>
