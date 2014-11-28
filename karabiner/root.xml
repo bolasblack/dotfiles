@@ -12,5 +12,6 @@
 
   <include path="keyboard_layout.xml" />
   <include path="hhkb.xml" />
+  <include path="macbook_keyboard.xml" />
   <include path="hyper.xml" />
 </root>

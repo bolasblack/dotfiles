@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<root>
+  <item>
+    <name>Macbook Buildin Keyboard adopt Hyper</name>
+    <identifier>user.macbook_keyboard.hyper</identifier>
+    <device_only>DeviceVendor::APPLE_COMPUTER, DeviceProduct::APPLE_INTERNAL_KEYBOARD_TRACKPAD_0x0252</device_only>
+    <autogen>
+      __KeyOverlaidModifier__
+      KeyCode::TAB,
+      KeyCode::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
+      KeyCode::TAB
+    </autogen>
+  </item>
+</root>
