@@ -1,0 +1,6 @@
+# Default settings
+# encoding: utf-8
+
+patch:
+  menu:
+    page_size: 9

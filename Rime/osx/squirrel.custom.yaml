@@ -1,0 +1,24 @@
+# Squirrel settings
+# encoding: utf-8
+
+patch:
+  show_notifications_via_notification_center: true
+  "style/color_scheme": zen
+  "preset_color_schemes/zen":
+    author: "c4605 <bolasblack at gmail>, based on Aben(<tntaben@gmail.com>)'s Solarized Rock"
+    name: "zen"
+    horizontal: true
+    inline_preedit: true
+    font_face: 'Hiragino Sans GB'
+    font_point: 16
+    text_color: 0x009985
+    back_color: 0x362b00
+    border_width: 5
+    border_height: 5
+    border_color: 0x362b00
+    candidate_format: "%c %@ "
+    candidate_text_color: 0x969483
+    hilited_candidate_back_color: 0x8236d3
+    hilited_candidate_text_color: 0xffffff
+    hilited_comment_text_color: 0x362b00
+    hilited_text_color: 0x98a12a

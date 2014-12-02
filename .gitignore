@@ -24,3 +24,7 @@ node_modules/
 
 # Some temp files
 tmp/
+
+# RIME
+Rime/*/*.userdb.txt
+Rime/*/installation.yaml
