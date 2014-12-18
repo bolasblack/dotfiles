@@ -153,13 +153,10 @@ alias color256='( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};d
 
 # 路径别名
 # 进入相应的路径时只要 cd ~xxx
-hash -d WWW="/home/lighttpd/html"
-hash -d ARCH="/mnt/arch"
-hash -d PKG="/var/cache/pacman/pkg"
 hash -d E="/etc/env.d"
 hash -d C="/etc/conf.d"
-hash -d I="/etc/rc.d"
-hash -d X="/etc/X11"
+hash -d R="/etc/rc.d"
+hash -d EM="$HOME/.emacsrc"
 #]]]
 #[[[ key binding
 # Emacs 风格 键绑定
