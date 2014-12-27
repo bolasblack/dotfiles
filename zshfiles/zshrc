@@ -1,3 +1,5 @@
+export ZSH=$HOME/dotfiles/zshfiles
+
 # 设置默认编码
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
@@ -35,6 +37,6 @@ hash -d C="/etc/conf.d"
 hash -d R="/etc/rc.d"
 hash -d EM="$HOME/.emacsrc"
 
-for file in theme history command directories auto_complete key_binding; do
-  source ~/dotfiles/zshfiles/$file.zsh
+for file in theme history command directories auto_complete key_binding antigen; do
+  source $ZSH/$file.zsh
 done
