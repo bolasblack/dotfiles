@@ -45,6 +45,10 @@ function cl() {
   ls
 }
 
+function gi() {
+  curl -L -s https://www.gitignore.io/api/$@
+}
+
 # 历史命令 top10
 alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 
