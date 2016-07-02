@@ -1,5 +1,5 @@
 [user]
-	name = bolasblack
+	name = c4605
 	email = bolasblack@gmail.com
 [core]
 	editor = vim
@@ -33,7 +33,3 @@
 	default = upstream
 [github]
 	user = bolasblack
-[difftool "ks"]
-	cmd = ksdiff --partial-changeset --relative-path "$MERGED" -- "$LOCAL" "$REMOTE"
-[mergetool "ks"]
-	cmd = ksdiff --merge --output "$MERGED" --base "$BASE" -- "$LOCAL" "$REMOTE"

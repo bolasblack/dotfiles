@@ -3,6 +3,8 @@ setopt AUTO_MENU
 # 开启此选项，补全时会直接选中菜单项
 setopt MENU_COMPLETE
 
+fpath=($HOME/.zsh-functions/ $fpath)
+
 autoload -U compinit && compinit
 
 # 自动补全缓存
