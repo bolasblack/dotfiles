@@ -1,5 +1,3 @@
-export ZSH=$HOME/dotfiles/zshfiles
-
 # 设置默认编码
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
@@ -22,7 +20,9 @@ setopt NO_BEEP
 limit coredumpsize 0
 
 # 以下字符视为单词的一部分
-WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
+# http://zsh.sourceforge.net/Guide/zshguide04.html#4.3.4
+# 默认值：*?_-.[]~=/&;!#$%^(){}<>
+WORDCHARS=${WORDCHARS//[\/_&.;]}
 
 # 行编辑高亮模式
 # Ctrl+@ 设置标记，标记和光标点之间为 region
@@ -37,6 +37,11 @@ hash -d C="/etc/conf.d"
 hash -d R="/etc/rc.d"
 hash -d EM="$HOME/.emacsrc"
 
-for file in theme history command directories auto_complete key_binding antigen; do
+export ZSH=$HOME/dotfiles/zshfiles
+
+for file in theme history command directories auto_complete key_binding zplug; do
+  ZSH=$HOME/dotfiles/zshfiles
   source $ZSH/$file.zsh
 done
+
+export ZSH=$HOME/dotfiles/zshfiles
