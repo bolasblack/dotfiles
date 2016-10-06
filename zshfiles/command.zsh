@@ -65,6 +65,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias grep='grep --color=auto'
+alias mux='tmuxinator'
 
 if [ `uname` = 'Linux' ]; then
   alias swapcaps='setxkbmap -option ctrl:swapcaps'
