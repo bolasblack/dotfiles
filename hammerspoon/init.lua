@@ -27,10 +27,10 @@ end
 local f18 = hs.hotkey.modal.new({}, 'F18')
 
 local movements = {
-  { 'h', 'LEFT'},
-  { 'j', 'DOWN'},
-  { 'k', 'UP'},
-  { 'l', 'RIGHT'},
+  { 'h', 'LEFT'  },
+  { 'j', 'DOWN'  },
+  { 'k', 'UP'    },
+  { 'l', 'RIGHT' },
 }
 bindWithFlagKeys(function(flagKeys)
     for i, bnd in ipairs(movements) do
@@ -49,21 +49,19 @@ end)
 local pressedF19 = function()
   f18.triggered = false
   f18:enter()
-  if debug then
-    hs.alert.show('Entered f18 mode')
-  end
+  print('Entered f18 mode')
 end
-local releasedF19 = function()
-  f18:exit()
-  if not f18.triggered then
-    hs.eventtap.keyStroke({}, 'TAB')
-  end
-  if debug then
-    hs.alert.show('Leaved f18 mode')
+local releasedF19 = function(flagKeys)
+  return function()
+    f18:exit()
+    print('Leaved f18 mode')
+    if not f18.triggered then
+      hs.eventtap.keyStroke(flagKeys, 'TAB')
+    end
   end
 end
 bindWithFlagKeys(function(flagKeys)
-    hs.hotkey.bind(flagKeys, 'F19', pressedF19, releasedF19)
+    hs.hotkey.bind(flagKeys, 'F19', pressedF19, releasedF19(flagKeys))
 end)
 
 hs.pathwatcher.new(
