@@ -66,6 +66,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias grep='grep --color=auto'
 alias mux='tmuxinator'
+alias unverified-ssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
 
 if [ `uname` = 'Linux' ]; then
   alias swapcaps='setxkbmap -option ctrl:swapcaps'
