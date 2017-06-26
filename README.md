@@ -35,9 +35,9 @@ completion.bash` 。
 * Karabiner-Elements
 
     ```bash
-    mkdir -p ~/.karabiner.d/ && \
-    cd ~/.karabiner.d/ && \
-    ln -s ~/dotfiles/Karabiner-Elements/configuration
+    mkdir -p ~/.config/karabiner/ && \
+    cd ~/.config/karabiner/ && \
+    ln -s ~/dotfiles/Karabiner-Elements/karabiner.json
     ```
 
 Karabiner 是一个非常优秀的键映射工具，几乎能满足任何和键盘相关的需求，但在 macOS 10.12 后就无法正常使用了，取而代之的是 Karabiner-Elements 。
