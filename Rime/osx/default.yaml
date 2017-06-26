@@ -1,14 +1,17 @@
 # Rime default settings
 # encoding: utf-8
 
-config_version: "0.36"
+config_version: "0.37"
 
 schema_list:
   - schema: luna_pinyin
-  - schema: cangjie5
-  - schema: luna_pinyin_fluency
   - schema: luna_pinyin_simp
-  - schema: luna_pinyin_tw
+  - schema: luna_pinyin_fluency
+  - schema: bopomofo
+  - schema: bopomofo_tw
+  - schema: cangjie5
+  - schema: stroke
+  - schema: terra_pinyin
 
 switcher:
   caption: 〔方案選單〕
@@ -113,10 +116,11 @@ key_binder:
     - { when: composing, accept: Control+bracketleft, send: Escape }
     - { when: composing, accept: Alt+v, send: Page_Up }
     - { when: composing, accept: Control+v, send: Page_Down }
-    # paging keys
-    - { when: composing, accept: ISO_Left_Tab, send: Page_Up }
-    - { when: composing, accept: Shift+Tab, send: Page_Up }
-    - { when: composing, accept: Tab, send: Page_Down }
+    # move by word
+    - { when: composing, accept: ISO_Left_Tab, send: Shift+Left }
+    - { when: composing, accept: Shift+Tab, send: Shift+Left }
+    - { when: composing, accept: Tab, send: Shift+Right }
+    # flip page
     - { when: has_menu, accept: minus, send: Page_Up }
     - { when: has_menu, accept: equal, send: Page_Down }
     - { when: paging, accept: comma, send: Page_Up }

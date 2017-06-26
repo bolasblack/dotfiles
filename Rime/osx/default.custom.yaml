@@ -2,5 +2,19 @@
 # encoding: utf-8
 
 patch:
+  switcher:
+    caption: 〔方案選單〕
+    hotkeys:
+      - Control+grave
+    save_options:
+      - full_shape
+      - ascii_punct
+      - simplification
+      - extended_charset
+    fold_options: true
+    abbreviate_options: true
+    option_list_separator: '／'
+  schema_list:
+    - schema: luna_pinyin
   menu:
     page_size: 9
