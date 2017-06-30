@@ -1,9 +1,0 @@
-var:
-  option:
-    ascii_punct: false
-    full_shape: false
-  previously_selected_schema: luna_pinyin_simp
-  schema_access_time:
-    luna_pinyin: 1498457929
-    luna_pinyin_simp: 1498457931
-    luna_pinyin_tw: 1494661682
