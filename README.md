@@ -42,3 +42,11 @@ ln -s ~/dotfiles/Karabiner-Elements/karabiner.json
 ```bash
 open "karabiner://karabiner/assets/complex_modifications/import?url=$(python -c "import urllib; print urllib.quote(u'file://$HOME/dotfiles/Karabiner-Elements/tab_rule.json', safe='~()*\!.\'')")"
 ```
+
+## [Rime](http://rime.im/)
+
+```bash
+cd ~/Library/Rime && \
+ln -s ~/dotfiles/Rime/default.custom.yaml && \
+ln -s ~/dotfiles/Rime/squirrel.custom.yaml
+```
