@@ -43,6 +43,19 @@ local map = function(iteratee, table)
   )
 end
 
+local filter = function(predicate, table)
+  return reduce(
+    function(initValue, v, i, table)
+      if predicate(v, i, table) then
+        table.insert(initValue, v)
+      end
+      return initValue
+    end,
+    {},
+    table
+  )
+end
+
 local forEach = function(iteratee, table)
   return reduce(
     function(initValue, v, i, table)
@@ -120,15 +133,66 @@ local equal = function(obj1, obj2, shallow)
   )
 end
 
+local keys = function(obj)
+  local keys = {}
+  local index = 1
+  for key, val in pairs(obj) do
+    keys[index] = key
+    index = index + 1
+  end
+  return keys
+end
+
+local values = function(obj)
+  local values = {}
+  local index = 1
+  for key, val in pairs(obj) do
+    values[index] = val
+    index = index + 1
+  end
+  return values
+end
+
+local isEmpty = function(obj)
+  if obj == nil then
+    return true
+  elseif type(obj) == 'string' then
+    return string.len(obj) == 0
+  elseif type(obj) == 'table' then
+    return #values(obj) == 0
+  else
+    return false
+  end
+end
+
+local slice = function(startIndex, endIndex, table)
+  local sliced = {}
+
+  if endIndex == infinity then
+    endIndex = #table
+  end
+
+  for i = startIndex, endIndex, 1 do
+    sliced[#sliced + 1] = table[i]
+  end
+
+  return sliced
+end
+
 local utils = {
   reduce = reduce,
   reduced = reduced,
   infinity = infinity,
   find = find,
   map = map,
+  filter = filter,
   forEach = forEach,
   some = some,
   every = every,
   shallowCopy = shallowCopy,
+  keys = keys,
+  values = values,
+  isEmpty = isEmpty,
+  slice = slice,
 }
 return utils

@@ -50,3 +50,12 @@ cd ~/Library/Rime && \
 ln -s ~/dotfiles/Rime/default.custom.yaml && \
 ln -s ~/dotfiles/Rime/squirrel.custom.yaml
 ```
+
+## [Hammerspoon](http://www.hammerspoon.org/)
+
+一个比较好用的自动化脚本工具
+
+```bash
+cd ~ && \
+ln -s ~/dotfiles/hammerspoon .hammerspoon
+```

@@ -5,24 +5,18 @@ function requireModule(moduleName)
   print('-- Requiring module: ' .. modulePath)
   return dofile(modulePath)
 end
+
+function loadstring(str)
+  local fileName = os.tmpname()
+  local file = io.open(fileName, 'w+')
+  file:write(str)
+  file:close()
+  local fn = loadfile(fileName)
+  os.remove(fileName)
+  return fn
+end
+
+libraryDir = os.getenv('HOME') .. '/Library/'
 configDir = os.getenv('HOME') .. '/.hammerspoon/'
 requireModule('auto_reload_config')()
-
-local movements = {
-  { 'h', 'LEFT'  },
-  { 'j', 'DOWN'  },
-  { 'k', 'UP'    },
-  { 'l', 'RIGHT' },
-}
-requireModule('bind_long_press_hyper_key')('TAB', function(bind)
-  for i, bnd in ipairs(movements) do
-    bind(nil, bnd[1], nil, function(flagKeys)
-      hs.eventtap.keyStroke(flagKeys, bnd[2])
-    end)
-  end
-end)
---[[ TODO:
-bind(nil, {'f19', 'j'}, nil, function(event)
-    hs.eventtap.keyStroke(event.mods, 'left')
-end)
---]]
+requireModule('http_server')()
