@@ -17,7 +17,11 @@ completion.bash` 。
 ## Tmux
 
 ```bash
+# 正常版本
 (cd ~ && echo 'source-file ~/dotfiles/tmuxfiles/tmux.conf' >> ~/.tmux.conf)
+
+# 最小版本
+curl https://raw.githubusercontent.com/bolasblack/dotfiles/master/tmuxfiles/tmux.minimum.conf > ~/.tmux.conf
 ```
 
 **Mac 用户请先安装 `reattach-to-user-namespace`**
