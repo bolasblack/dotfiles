@@ -1,0 +1,38 @@
+#!/usr/bin/env lumo
+
+(require '[cljs.nodejs :as nodejs]
+         '[clojure.string :as str]
+         '["child_process" :as cp]
+         '["url" :as url])
+
+(defn- clean-std [exec-result type]
+  (-> exec-result
+      type
+      (#(if %
+          (str/trim (.toString %))
+          %))))
+
+(defn- exec [cmd & args]
+  (-> (cp/spawnSync cmd (clj->js args))
+      (js->clj :keywordize-keys true)
+      (#(if (not= 0 (:status %))
+          (throw (js/Error. (clean-std % :stderr)))
+          %))
+      (dissoc :options :envPairs)))
+
+(defn- purify [js-obj]
+  (js/JSON.parse (js/JSON.stringify js-obj)))
+
+(nodejs/enable-util-print!)
+
+(let [url-info (-> (exec "git" "remote" "get-url" "origin")
+                   (clean-std :stdout)
+                   (#(url/parse (str "ssh://" %) true))
+                   purify
+                   (js->clj :keywordize-keys true))
+      git-rev (-> (exec "git" "rev-parse" "HEAD")
+                  (clean-std :stdout))
+      host (:host url-info)
+      path (-> (:path url-info)
+               (str/replace #"^\/:|\.git$" ""))]
+  (println (str "https://" host "/" path "/commit/" git-rev)))

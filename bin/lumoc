@@ -1,0 +1,66 @@
+#!/usr/bin/env lumo
+
+(require '[lumo.build.api :as b]
+         '[clojure.string :as str]
+         '["fs" :as fs]
+         '["path" :as path]
+         '["child_process" :as cp]
+         '["readline" :as rl])
+
+(defn- clean-std [exec-result type]
+  (-> exec-result
+      type
+      (#(if %
+          (str/trim (.toString %))
+          %))))
+
+(defn- exec [cmd & args]
+  (apply println "Executing" cmd args)
+  (-> (cp/spawnSync cmd (clj->js args) #js {:stdio "inherit"})
+      (js->clj :keywordize-keys true)
+      (#(if (not= 0 (:status %)) (js/process.exit 1) %))
+      (dissoc :options :envPairs)))
+
+(defn- invalid-opt [& opts]
+  (some #(or (not %) (str/starts-with? % "-"))
+        opts))
+
+(defn- getopt [flag argv]
+  (-> (drop-while #(not= flag %) argv)
+      (#(if (< (count %) 2)
+          (throw (js/Error. (str "Invalid opt for flag " flag)))
+          %))
+      (nth 1)
+      (#(if (invalid-opt %)
+          (throw (js/Error. (str "Invalid opt " flag " " %)))
+          %))))
+
+(let [argv (js->clj js/process.argv)
+      input (getopt "-i" argv)
+      basename (path/basename input ".cljs")
+      mainfile (str basename ".js")]
+
+  (println "")
+  (println "    Start compile")
+  (println "")
+  (b/build input {:optimizations :simple
+                  :target :nodejs
+                  :hashbang false
+                  :main basename
+                  :output-to mainfile})
+
+  (println "")
+  (println "    Start build")
+  (println "")
+  (exec "nexe" "-o" basename "-i" mainfile)
+
+  (println "")
+  (let [rl (rl/createInterface #js {:input js/process.stdin
+                                    :output js/process.stdout})]
+    (.question rl "    Clean generated js files? [Y/n] "
+               (fn [answer]
+                 (when (not= answer "n")
+                   (println "")
+                   (exec "rm" "-r" "out" mainfile)
+                   (println ""))
+                 (.close rl)))))
