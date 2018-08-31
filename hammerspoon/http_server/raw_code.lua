@@ -2,6 +2,14 @@ local utils = requireModule('utils')
 
 local rawCode = function(server)
   server:route(
+    'post', '/raw_shell',
+    function(req, res)
+      if not utils.isEmpty(req.body) then
+      end
+    end
+  )
+
+  server:route(
     'post', '/raw_code',
     function(req, res)
       if utils.isEmpty(req.body) then

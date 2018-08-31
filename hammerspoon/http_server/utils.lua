@@ -49,9 +49,14 @@ local function decodeURIComponent(str)
 	return (str:gsub("%%(%x%x)", pchar_to_char))
 end
 
+local escapeEncodedURIComponent = function(str)
+  return string.gsub(str, '%%', '%%%%')
+end
+
 return {
   encodeURI = encodeURI,
 	encodeURIComponent = encodeURIComponent,
 	decodeURI = decodeURI,
 	decodeURIComponent = decodeURIComponent,
+  escapeEncodedURIComponent = escapeEncodedURIComponent,
 }

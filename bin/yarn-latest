@@ -1,0 +1,3 @@
+VERSION=$(curl https://yarnpkg.com/latest-version)
+curl -L -o ~/.bin/yarn https://github.com/yarnpkg/yarn/releases/download/v$VERSION/yarn-legacy-$VERSION.js
+chmod u+x ~/.bin/yarn

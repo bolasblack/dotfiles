@@ -1,0 +1,31 @@
+#newtab {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 16px;
+}
+#newtab-label {
+  display: none !important;
+}
+
+#searchbox {
+  box-shadow: none !important;
+}
+#searchbox:hover {
+  box-shadow: none !important;
+}
+
+#settings {
+  padding: 0 !important;
+  min-width: 16px !important;
+}
+
+#tablist .tab {
+  height: 28px !important;
+}
+#tablist .tab-close {
+  width: 20px !important;
+  height: 20px !important;
+}
+#tablist .tab-context {
+  margin-right: 3px;
+}

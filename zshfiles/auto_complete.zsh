@@ -42,8 +42,8 @@ zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 # kill 命令补全
-compdef pkill=kill
-compdef pkill=killall
+#compdef pkill=kill
+#compdef pkill=killall
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
 zstyle ':completion:*:processes' command 'ps -au$USER'

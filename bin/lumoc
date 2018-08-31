@@ -10,9 +10,7 @@
 (defn- clean-std [exec-result type]
   (-> exec-result
       type
-      (#(if %
-          (str/trim (.toString %))
-          %))))
+      (#(and % (str/trim (.toString %))))))
 
 (defn- exec [cmd & args]
   (apply println "Executing" cmd args)
@@ -21,17 +19,13 @@
       (#(if (not= 0 (:status %)) (js/process.exit 1) %))
       (dissoc :options :envPairs)))
 
-(defn- invalid-opt [& opts]
-  (some #(or (not %) (str/starts-with? % "-"))
-        opts))
-
 (defn- getopt [flag argv]
   (-> (drop-while #(not= flag %) argv)
       (#(if (< (count %) 2)
           (throw (js/Error. (str "Invalid opt for flag " flag)))
           %))
       (nth 1)
-      (#(if (invalid-opt %)
+      (#(if (or (not %) (str/starts-with? % "-"))
           (throw (js/Error. (str "Invalid opt " flag " " %)))
           %))))
 

@@ -1,10 +1,6 @@
 local utils = requireModule('utils')
 local httpUtils = requireModule('http_server/utils')
 
-local escapeEncodedURIComponent = function(str)
-  return string.gsub(str, '%%', '%%%%')
-end
-
 local pathwatcher = function(server)
   local pathwatcherDB = {}
 
@@ -50,13 +46,13 @@ local pathwatcher = function(server)
           elseif config.type == 'command' then
             local files, id, data
             if config.urlencode then
-              id = escapeEncodedURIComponent(httpUtils.encodeURIComponent(config.id))
-              files = escapeEncodedURIComponent(httpUtils.encodeURIComponent(hs.json.encode(_files)))
+              id = utils.escapeEncodedURIComponent(httpUtils.encodeURIComponent(config.id))
+              files = utils.escapeEncodedURIComponent(httpUtils.encodeURIComponent(hs.json.encode(_files)))
               if config.data then
                 if type(config.data) == 'table' then
-                  data = escapeEncodedURIComponent(httpUtils.encodeURIComponent(hs.json.encode(config.data)))
+                  data = utils.escapeEncodedURIComponent(httpUtils.encodeURIComponent(hs.json.encode(config.data)))
                 else
-                  data = escapeEncodedURIComponent(httpUtils.encodeURIComponent(tostring(config.data)))
+                  data = utils.escapeEncodedURIComponent(httpUtils.encodeURIComponent(tostring(config.data)))
                 end
               else
                 data = "null"
