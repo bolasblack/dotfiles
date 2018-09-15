@@ -1,10 +1,9 @@
-# 历史纪录条目数量
-export HISTSIZE=10000
-# 注销后保存的历史纪录条目数量
-export SAVEHIST=10000
+setopt auto_name_dirs
+setopt pushd_ignore_dups
+setopt pushdminus
 
 # 定义函数，替换原来的 cd
-cd() {
+function cd {
   builtin cd "$@"                             # 执行原来的 cd 命令
   fc -W                                       # 写历史纪录文件，默认参数为 $HISTFILE 。初始值为 #2 处的定义；执行了 cd 命令后为 #1 处的定义
   # 实际上，你不可能在每个目录下都执行个把命令，很多目录你没有去过，只要为你去过的目录建立历史纪录就可以了

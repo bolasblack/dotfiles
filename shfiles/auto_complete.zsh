@@ -8,9 +8,9 @@ fpath=($HOME/.zsh-functions/ $fpath)
 autoload -U compinit && compinit
 
 # 自动补全缓存
-#zstyle ':completion::complete:*' use-cache on
-#zstyle ':completion::complete:*' cache-path .zcache
-#zstyle ':completion:*:cd:*' ignore-parents parent pwd
+# zstyle ':completion::complete:*' use-cache on
+# zstyle ':completion::complete:*' cache-path .zcache
+# zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 # 自动补全选项
 zstyle ':completion:*:match:*' original only
@@ -42,8 +42,8 @@ zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 # kill 命令补全
-#compdef pkill=kill
-#compdef pkill=killall
+compdef pkill=kill
+compdef pkill=killall
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
 zstyle ':completion:*:processes' command 'ps -au$USER'

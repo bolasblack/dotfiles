@@ -36,9 +36,11 @@ function _ssh-copy-id() {
   cat ~/.ssh/id_rsa.pub | ssh $1 "[ -d ~/.ssh ] || mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 }
 # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
-hash ssh-copy-id 2>/dev/null || { alias ssh-copy-id='_ssh-copy-id' }
+hash ssh-copy-id 2>/dev/null || alias ssh-copy-id='_ssh-copy-id'
 
-function timeconv { date -d @$1 +"%Y-%m-%d %T" }
+function timeconv() {
+  date -d @$1 +"%Y-%m-%d %T"
+}
 
 function cl() {
   cd $1
@@ -67,6 +69,19 @@ alias rm='rm -i'
 alias grep='grep --color=auto'
 alias mux='tmuxinator'
 alias unverified-ssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
+alias e='emacsclient -t'
+alias .dir='basename `pwd`'
+
+alias d='dirs -v | head -10'
+alias 1='cd -'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
 
 if [ `uname` = 'Linux' ]; then
   alias swapcaps='setxkbmap -option ctrl:swapcaps'

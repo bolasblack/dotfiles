@@ -5,9 +5,12 @@ source $ZPLUG_HOME/init.zsh
 
 zplug "plugins/git", from:oh-my-zsh, if:"(( $+commands[git] ))"
 zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "k4rthik/git-cal", as:command, frozen:1
-zplug "b4b4r07/enhancd", use:init.sh
+# zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-completions"
+zplug "zdharma/fast-syntax-highlighting"
+# zplug "zsh-users/zsh-history-substring-search"
+# zplug "k4rthik/git-cal", as:command, frozen:1
+# zplug "b4b4r07/enhancd", use:init.sh
 zplug "bric3/nice-exit-code"
 
 export ENHANCD_FILTER="/usr/local/bin/fzf"
@@ -21,4 +24,4 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load

@@ -1,0 +1,15 @@
+# 设置默认编码
+export LANG=en_US.UTF-8
+export LC_ALL=$LANG
+
+# 设置默认编辑器，打命令的时候试试 C-x C-e
+export EDITOR=vim
+
+# 历史纪录条目数量
+export HISTSIZE=10000
+# 注销后保存的历史纪录条目数量
+export SAVEHIST=10000
+
+for file in commands; do
+  source $SHF_ROOT/$file.sh
+done

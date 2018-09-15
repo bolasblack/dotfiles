@@ -24,12 +24,13 @@ sudo-command-line() {
   zle end-of-line
 }
 zle -N sudo-command-line
-# 定义快捷键为： [Esc] [Esc]
+# 定义快捷键为: [Esc] [Esc]
 bindkey "\e\e" sudo-command-line
 
+# 使用默认编辑器编辑当前命令
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
-# 设置 [DEL]键 为向后删除
+# 设置 [DEL] 键 为向后删除
 bindkey "\e[3~" delete-char

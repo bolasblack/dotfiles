@@ -1,18 +1,26 @@
 # My Dotfiles
 
-## Zsh
+## shell
+
+**macOS 推荐安装 `coreutils` 使用 GNU 的命令替代自带的 `ls` 等命令**
+
+### Zsh
 
 ```sh
 brew install zplug
-(cd ~ && echo 'source ~/dotfiles/zshfiles/zshrc' >> ~/.zshrc)
+(cd ~ && echo '\nexport SHF_ROOT=~/dotfiles/shfiles/\nsource $SHF_ROOT/zshrc' >> ~/.zshrc)
 ```
-
-**Mac 用户推荐安装 `coreutils` 使用 GNU 的命令替代自带的 `ls` 等命令**
 
 如果要使用 zsh 的 git-flow 插件，请不要安装 `git-completion.zsh` 或者 `git-
 completion.bash` 。
 
 具体参考：https://github.com/robbyrussell/oh-my-zsh/issues/1717#issuecomment-22540099
+
+### Bash
+
+```sh
+(cd ~ && echo '\nexport SHF_ROOT=~/dotfiles/shfiles/\nsource $SHF_ROOT/rc' >> ~/.bashrc)
+```
 
 ## Tmux
 
