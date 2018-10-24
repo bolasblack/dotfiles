@@ -1,0 +1,74 @@
+#sidebar-header {
+    padding: 2px !important;
+}
+
+toolbar#nav-bar {
+    padding-left: 74px;
+    height: 28px;
+}
+
+hbox#nav-bar-customization-target {
+    margin-top: 0.6px !important;
+}
+
+toolbar:has-moz-any(toolbarbutton#sidebar-button:not([checked])) {
+    display: none;
+}
+
+toolbar#nav-bar:-moz-lwtheme-darktext {
+    -moz-appearance: -moz-mac-vibrancy-light !important;
+    -moz-font-smoothing-background-color: -moz-mac-vibrancy-light !important;
+}
+
+hbox#titlebar-buttonbox-container {
+    -padding-top: 7px;
+}
+
+hbox.titlebar-placeholder[type="pre-tabs"] {
+    width: 8px !important;
+    border-inline-end: none !important;
+}
+
+toolbar#TabsToolbar {
+    min-height: 0 !important;
+    min-width: 0 !important;
+}
+
+toolbarbutton#sidebar-button[checked] {
+    display: none;
+}
+toolbarbutton#sidebar-button[checked] ~ *:not(tabs) {
+    display: none;
+}
+toolbarbutton#sidebar-button[checked] ~ tabs {
+    min-height: 0 !important;
+    height: 0 !important;
+    min-width:  0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: -100px;
+    top: -100px;
+}
+
+toolbarbutton#sidebar-switcher-target {
+    font-size: 12px !important;
+    margin: 0 !important;
+}
+image#sidebar-icon {
+    width: 12px !important;
+    height: 12px !important;
+}
+label#sidebar-title {
+    padding-inline-start: 4px !important;
+    padding-inline-end: 2px !important;
+}
+toolbarbutton#sidebar-close {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+:root[uidensity="compact"] #urlbar {
+    min-height: 20px !important;
+}

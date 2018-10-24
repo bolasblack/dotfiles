@@ -1,0 +1,25 @@
+#newtab {
+  display: none;
+}
+
+#searchbox {
+  box-shadow: none !important;
+}
+#searchbox:hover {
+  box-shadow: none !important;
+}
+
+#settings {
+  display: none;
+}
+
+#tablist .tab {
+  height: 28px !important;
+}
+#tablist .tab-close {
+  width: 20px !important;
+  height: 20px !important;
+}
+#tablist .tab-context {
+  margin-right: 3px;
+}
