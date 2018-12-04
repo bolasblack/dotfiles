@@ -1,8 +1,19 @@
+#topmenu {
+  height: 30px;
+  padding: 2px 6px;
+}
+
 #newtab {
-  display: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 16px;
+}
+#newtab-label {
+  display: none !important;
 }
 
 #searchbox {
+  border-radius: 0;
   box-shadow: none !important;
 }
 #searchbox:hover {
@@ -10,15 +21,23 @@
 }
 
 #settings {
-  display: none;
+  padding: 0 !important;
+  min-width: 16px !important;
 }
 
 #tablist .tab {
   height: 28px !important;
 }
 #tablist .tab-close {
-  width: 20px !important;
-  height: 20px !important;
+  right: 0;
+  width: 40px !important;
+  height: 28px !important;
+  border-radius: 0;
+}
+#tablist .tab-close:hover {
+  background-color: #3ff !important;
+  filter: invert(100%);
+  cursor: pointer;
 }
 #tablist .tab-context {
   margin-right: 3px;

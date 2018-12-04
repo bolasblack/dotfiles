@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source $HOME/.bashrc
+
 FirefoxPath="$HOME/Library/Application Support/Firefox"
 operateId=`mktemp -u XXXXXXXXXX`
 tempFile="`date -Idate`.$operateId.tbz2"
@@ -20,7 +22,7 @@ echo "========================================="
 echo "Start encrypt file"
 echo "========================================="
 
-gpg --batch --encrypt -r 'bolasblack@gmail.com' -o ~/Dropbox/AppSettings/Firefox/$tempFile.gpg /tmp/backup-firefox-profiles-$tempFile
+gpg --batch --encrypt -r 'bolasblack@gmail.com' -o ~/Dropbox/AppSettings/Firefox/$tempFile.gpg /tmp/backup-firefox-profiles-$tempFile 2>&1
 
 if [ $? -eq 0 ]; then
   osascript -e 'display notification "Succeed" with title "Firefox profiles backup"'
