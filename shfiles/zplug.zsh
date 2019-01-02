@@ -12,6 +12,7 @@ zplug "zdharma/fast-syntax-highlighting"
 # zplug "k4rthik/git-cal", as:command, frozen:1
 # zplug "b4b4r07/enhancd", use:init.sh
 zplug "bric3/nice-exit-code"
+zplug "chisui/zsh-nix-shell", use:nix-shell.plugin.zsh
 
 export ENHANCD_FILTER="/usr/local/bin/fzf"
 

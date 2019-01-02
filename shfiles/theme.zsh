@@ -67,8 +67,27 @@ _render_hostname() {
   echo "($(hostname)) "
 }
 
+# from https://gist.github.com/chisui/0d12bd51a5fd8e6bb52e6e6a43d31d5e#file-agnoster-nix-zsh-theme-L202
+_render_nixshell() {
+  [[ ! -n "$IN_NIX_SHELL" ]] && return
+  if [[ -n "$NIX_SHELL_PACKAGES" ]]; then
+    local package_names=""
+    local packages=($NIX_SHELL_PACKAGES)
+    for package in $packages; do
+      package_names+=" ${package##*.}"
+    done
+    echo "{$package_names } "
+  elif [[ -n $name ]]; then
+    local cleanName=${name#interactive-}
+    cleanName=${cleanName%-environment}
+    echo "{ $cleanName } "
+  else # This case is only reached if the nix-shell plugin isn't installed or failed in some way
+    echo "nix-shell {} "
+  fi
+}
+
 # 这里必须是单引号，双引号的话 prompt_subst 配置项就失效了
-PROMPT='$(_render_hostname)%B>%(0?.. %{$fg[red]%}%?) %{$fg[blue]%}%~$(_check_git_prompt_info) %{$fg[white]%}%(!.#.$) %b%{$reset_color%}'
+PROMPT='%{$fg[yellow]%}$(_render_nixshell)%{$fg[white]%}$(_render_hostname)%B>%(0?.. %{$fg[red]%}%?) %{$fg[blue]%}%~$(_check_git_prompt_info) %{$fg[white]%}%(!.#.$) %b%{$reset_color%}'
 
 # 在 Emacs终端 中使用 Zsh 的一些设置 不推荐在 Emacs 中使用它
 if [[ "$TERM" == "dumb" ]]; then
