@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source $HOME/.bashrc
 
@@ -22,7 +22,7 @@ echo "========================================="
 echo "Start encrypt file"
 echo "========================================="
 
-gpg --batch --encrypt -r 'bolasblack@gmail.com' -o ~/Dropbox/AppSettings/Firefox/$tempFile.gpg /tmp/backup-firefox-profiles-$tempFile 2>&1
+gpg --batch --encrypt -r 'bolasblack@gmail.com' -o ~/OneDrive/Backups/Firefox/$tempFile.gpg /tmp/backup-firefox-profiles-$tempFile 2>&1
 
 if [ $? -eq 0 ]; then
   osascript -e 'display notification "Succeed" with title "Firefox profiles backup"'
