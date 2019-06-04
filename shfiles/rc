@@ -10,6 +10,6 @@ export HISTSIZE=10000
 # 注销后保存的历史纪录条目数量
 export SAVEHIST=10000
 
-for file in commands; do
-  source $SHF_ROOT/$file.sh
+for file in $SHF_ROOT/[^_]*.sh; do
+  source $file
 done

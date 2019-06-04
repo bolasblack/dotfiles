@@ -12,7 +12,6 @@ https://www.topbug.net/blog/2013/04/14/install-and-use-gnu-command-line-tools-in
 ## Zsh
 
 ```sh
-brew install zplug
 (cd ~ && echo '\nexport SHF_ROOT=~/dotfiles/shfiles/\nsource $SHF_ROOT/zshrc' >> ~/.zshrc)
 ```
 

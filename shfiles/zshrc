@@ -31,6 +31,7 @@ hash -d EM="$HOME/.emacsrc"
 hash -d SHF_ROOT="$SHF_ROOT"
 
 source $SHF_ROOT/rc
-for file in theme history auto_complete key_binding zplug; do
-  source $SHF_ROOT/$file.zsh
+source $SHF_ROOT/_zplugin.zsh
+for file in $SHF_ROOT/[^_]*.zsh* $SHF_ROOT/plugins/[^_]*.zsh*; do
+  source $file
 done
