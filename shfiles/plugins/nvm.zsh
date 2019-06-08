@@ -17,8 +17,9 @@ znvm_nvm_loaded() {
 znvm_load_nvm() {
 	# if nvm command is present nvm is ready no need to load
 	if ! znvm_nvm_loaded; then
-		# unalias nvm if alias exists
-		[ `alias | grep nvm | wc -l` != 0 ] && unalias nvm
+		# unalias nvm, node if alias exists
+		alias | grep -q nvm && unalias nvm
+		alias | grep -q node && unalias node
 
 		echo "loading nvm..."
 		[ -z $NVM_DIR ] && export NVM_DIR="$HOME/.nvm"
@@ -32,6 +33,12 @@ znvm_run_nvm() {
   nvm $@
 }
 alias nvm='znvm_run_nvm'
+
+znvm_run_node() {
+  znvm_load_nvm
+  node $@
+}
+alias node='znvm_run_node'
 
 
 
