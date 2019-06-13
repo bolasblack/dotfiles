@@ -32,6 +32,3 @@ hash -d SHF_ROOT="$SHF_ROOT"
 
 source $SHF_ROOT/rc
 source $SHF_ROOT/_zplugin.zsh
-for file in $SHF_ROOT/[^_]*.zsh* $SHF_ROOT/plugins/[^_]*.zsh*; do
-  source $file
-done

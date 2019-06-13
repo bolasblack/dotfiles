@@ -1,4 +1,3 @@
-
 # 载入 colors 模块，允许在命令提示符中使用类似 $fg[white] 的标记
 autoload -U colors && colors
 

@@ -11,5 +11,5 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 
 for file in $SHF_ROOT/[^_]*.sh; do
-  source $file
+  source "$file"
 done
