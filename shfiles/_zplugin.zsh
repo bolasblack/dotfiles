@@ -45,7 +45,6 @@ zpl light chisui/zsh-nix-shell
 # zplug "zsh-users/zsh-syntax-highlighting"
 # zplug "zsh-users/zsh-history-substring-search"
 # zplug "k4rthik/git-cal", as:command, frozen:1
-# zplug "b4b4r07/enhancd", use:init.sh
 
 # =================== local files =====================
 
@@ -74,5 +73,15 @@ done
 for file in "$SHF_ROOT"/plugins/[^_]*.zsh*; do
   __zplex_loadFile "$file" 1
 done
+
+if [ -d ~/.nix-profile/share/fzf ]; then
+  for file in ~/.nix-profile/share/fzf/*.zsh; do
+    __zplex_loadFile "$file" 1
+  done
+fi
+
+if [ -d ~/.nix-profile/share/zsh/site-functions/ ]; then
+  zpl creinstall ~/.nix-profile/share/zsh/site-functions/
+fi
 
 unset -f __zplex_loadFile
