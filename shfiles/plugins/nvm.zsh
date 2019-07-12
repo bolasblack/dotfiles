@@ -31,7 +31,11 @@ __nvmex_find_nvmrc() {
 
 autoload -U add-zsh-hook
 __nvmex_load_by_nvmrc() {
-  if [ -n "$(__nvmex_find_nvmrc)" ]; then
+  local nvmrcPath="$(__nvmex_find_nvmrc)"
+  if \
+    [ -n $nvmrcPath ] && \
+    ! (node --version | grep -E "^v?$(cat $nvmrcPath)" >/dev/null) && \
+    ; then
     nvm use
   fi
 }
