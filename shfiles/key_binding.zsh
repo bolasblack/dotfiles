@@ -1,6 +1,3 @@
-# Emacs 风格 键绑定
-bindkey -e
-
 # [Esc][h] man 当前命令时，显示简短说明
 alias run-help >&/dev/null && unalias run-help
 autoload run-help
@@ -35,6 +32,11 @@ bindkey '^x^e' edit-command-line
 # 设置 [DEL] 键 为向后删除
 bindkey "\e[3~" delete-char
 
+############ 后续都是 Emacs 风格键绑定相关的配置 #############
+
+# Emacs 风格 键绑定
+bindkey -e
+
 # M-w 复制选中内容并取消选区，行为向 emacs 靠拢
 c4-emacs-kill-ring-save() {
   zle copy-region-as-kill
@@ -42,3 +44,14 @@ c4-emacs-kill-ring-save() {
 }
 zle -N c4-emacs-kill-ring-save
 bindkey -e "^[w" c4-emacs-kill-ring-save
+
+# 有选区时执行 kill-region ，否则执行 backward-kill-word
+c4-emacs-smart-kill-region() {
+  if [ "$REGION_ACTIVE" = "0" ]; then
+    zle backward-kill-word
+  else
+    zle kill-region
+  fi
+}
+zle -N c4-emacs-smart-kill-region
+bindkey -e "^w" c4-emacs-smart-kill-region
