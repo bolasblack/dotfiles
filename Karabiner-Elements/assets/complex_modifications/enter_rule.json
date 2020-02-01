@@ -1,0 +1,30 @@
+{
+  "title": "C-M-j as Enter",
+  "rules": [
+    {
+      "description": "C-M-j to be Enter",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_alt"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

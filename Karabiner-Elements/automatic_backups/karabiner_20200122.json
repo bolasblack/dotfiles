@@ -16,37 +16,6 @@
                 },
                 "rules": [
                     {
-                        "description": "Change tab key to right_shift/command/control/option. (Post tab key when pressed alone)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "tab",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_shift",
-                                        "modifiers": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "tab"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Change right_shift/command/control/option+h/j/k/l to arrow key.",
                         "manipulators": [
                             {
@@ -140,16 +109,12 @@
                         ]
                     },
                     {
-                        "description": "C-M-j to be Enter",
+                        "description": "Change tab key to right_shift/command/control/option. (Post tab key when pressed alone)",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "j",
+                                    "key_code": "tab",
                                     "modifiers": {
-                                        "mandatory": [
-                                            "left_control",
-                                            "left_alt"
-                                        ],
                                         "optional": [
                                             "any"
                                         ]
@@ -157,7 +122,17 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "return_or_enter"
+                                        "key_code": "right_shift",
+                                        "modifiers": [
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ]
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "tab"
                                     }
                                 ],
                                 "type": "basic"
