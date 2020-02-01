@@ -30,7 +30,15 @@ bindkey "\e\e" sudo-command-line
 # 使用默认编辑器编辑当前命令
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^X^E' edit-command-line
+bindkey '^x^e' edit-command-line
 
 # 设置 [DEL] 键 为向后删除
 bindkey "\e[3~" delete-char
+
+# M-w 复制选中内容并取消选区，行为向 emacs 靠拢
+c4-emacs-kill-ring-save() {
+  zle copy-region-as-kill
+  zle deactivate-region
+}
+zle -N c4-emacs-kill-ring-save
+bindkey -e "^[w" c4-emacs-kill-ring-save
