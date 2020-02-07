@@ -16,27 +16,21 @@ __nvmex_find_up() {
   local path
   path="${PWD}"
   while [ "${path}" != "" ] && [ ! -f "${path}/${1-}" ]; do
-    path=${path%/*}
+    path="${path%/*}"
   done
   __nvmex_echo "${path}"
 }
 
-__nvmex_find_nvmrc() {
-  local dir
-  dir="$(__nvmex_find_up '.nvmrc')"
-  if [ -e "${dir}/.nvmrc" ]; then
-    __nvmex_echo "${dir}/.nvmrc"
-  fi
-}
-
 autoload -U add-zsh-hook
 __nvmex_load_by_nvmrc() {
-  local nvmrcPath="$(__nvmex_find_nvmrc)"
+  local nvmrcPath="$(__nvmex_find_up '.nvmrc')"
   if \
-    [ -n $nvmrcPath ] && \
-    ! (node --version | grep -E "^v?$(cat $nvmrcPath)" >/dev/null) && \
+    [ -n "$nvmrcPath" ] && \
+    ! (node --version | grep -E "^v?$(cat "$nvmrcPath"/.nvmrc)" >/dev/null) && \
     ; then
+    echo nvm use
     nvm use
   fi
 }
 add-zsh-hook chpwd __nvmex_load_by_nvmrc
+__nvmex_load_by_nvmrc
