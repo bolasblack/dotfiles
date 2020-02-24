@@ -1,3 +1,6 @@
+# Emacs 风格 键绑定
+bindkey -e
+
 # [Esc][h] man 当前命令时，显示简短说明
 alias run-help >&/dev/null && unalias run-help
 autoload run-help
@@ -33,9 +36,6 @@ bindkey '^x^e' edit-command-line
 bindkey "\e[3~" delete-char
 
 ############ 后续都是 Emacs 风格键绑定相关的配置 #############
-
-# Emacs 风格 键绑定
-bindkey -e
 
 # M-w 复制选中内容并取消选区，行为向 emacs 靠拢
 c4-emacs-kill-ring-save() {
