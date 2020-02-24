@@ -28,3 +28,7 @@ tmp/
 # RIME
 Rime/*/*.userdb.txt
 Rime/*/installation.yaml
+
+# Private
+private/*
+!private/.gitkeep
