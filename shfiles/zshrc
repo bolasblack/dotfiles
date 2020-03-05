@@ -31,4 +31,4 @@ hash -d EM="$HOME/.emacsrc"
 hash -d SHF_ROOT="$SHF_ROOT"
 
 source $SHF_ROOT/rc
-source $SHF_ROOT/_zplugin.zsh
+source $SHF_ROOT/_zinit.zsh

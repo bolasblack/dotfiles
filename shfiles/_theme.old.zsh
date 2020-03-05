@@ -70,12 +70,12 @@ _render_hostname() {
 _render_nixshell() {
   [[ ! -n "$IN_NIX_SHELL" ]] && return
   if [[ -n "$NIX_SHELL_PACKAGES" ]]; then
-    local package_names=""
     local packages=($NIX_SHELL_PACKAGES)
+    local packageNames=""
     for package in $packages; do
-      package_names+=" ${package##*.}"
+      packageNames+=" ${package##*.}"
     done
-    echo "{$package_names } "
+    echo "{$packageNames } "
   elif [[ -n $name ]]; then
     local cleanName=${name#interactive-}
     cleanName=${cleanName%-environment}
@@ -87,11 +87,3 @@ _render_nixshell() {
 
 # 这里必须是单引号，双引号的话 prompt_subst 配置项就失效了
 PROMPT='%{$fg[yellow]%}$(_render_nixshell)%{$fg[white]%}$(_render_hostname)%B>%(0?.. %{$fg[red]%}%?) %{$fg[blue]%}%~$(_check_git_prompt_info) %{$fg[white]%}%(!.#.$) %b%{$reset_color%}'
-
-# 在 Emacs终端 中使用 Zsh 的一些设置 不推荐在 Emacs 中使用它
-if [[ "$TERM" == "dumb" ]]; then
-  setopt No_zle
-  PROMPT='%n@%M %/
-  >>'
-  alias ls='ls -F'
-fi

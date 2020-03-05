@@ -1,3 +1,8 @@
+function cmd_exist {
+  # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
+  hash "$1" 2>/dev/null
+}
+
 # 计算器
 qbc() {
   echo "$@" | bc
@@ -38,13 +43,13 @@ fzf-git-checkout() {
   branch=$(echo "$branches" | fzf-tmux -d $(( 2 + $(wc -l <<< "$branches"))) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
-hash fzf-tmux 2>/dev/null && alias gco='fzf-git-checkout'
+cmd_exist fzf-tmux && alias gco='fzf-git-checkout'
 
 _ssh-copy-id() {
   cat ~/.ssh/id_rsa.pub | ssh $1 "[ -d ~/.ssh ] || mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 }
 # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
-hash ssh-copy-id 2>/dev/null || alias ssh-copy-id='_ssh-copy-id'
+cmd_exist ssh-copy-id || alias ssh-copy-id='_ssh-copy-id'
 
 timeconv() {
   date -d @$1 +"%Y-%m-%d %T"
@@ -80,4 +85,8 @@ if [ `uname` = 'Linux' ]; then
   alias startx='startx > ~/.log/x.log &'
   alias zhcon='zhcon --utf8'
   alias closeLCD='xset dpms force off'
+fi
+
+if cmd_exist bat; then
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
