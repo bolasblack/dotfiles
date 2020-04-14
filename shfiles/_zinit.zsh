@@ -39,14 +39,14 @@ zi wait=1 lucid for \
   pick=init.sh \
     b4b4r07/enhancd \
   atload='zicompinit; zicdreplay' blockf \
-  zsh-users/zsh-completions \
+    zsh-users/zsh-completions \
 # zdharma/history-search-multi-word  # 已经用了 fzf 了，就暂时不用了
 
 # https://github.com/zdharma/fast-syntax-highlighting/issues/135
 zi wait=1 lucid for \
   atload='FAST_HIGHLIGHT[chroma-man]=' \
   atinit='ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay' \
-   zdharma/fast-syntax-highlighting
+    zdharma/fast-syntax-highlighting
 
 for file in "$SHF_ROOT"/[^_]*.zsh*; do
   zi ice

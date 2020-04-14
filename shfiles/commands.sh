@@ -76,7 +76,6 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias grep='grep --color=auto'
 alias unverified-ssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
-alias e='emacsclient -t'
 alias .cd='dirs -pl | fzf | cd'
 alias .dir='basename `pwd`'
 
