@@ -3,7 +3,20 @@
 	email = bolasblack@gmail.com
 [core]
 	editor = vim
-	excludesfile = ~/dotfiles/.gitignore_global
+	excludesfile = ~/.gitignore_global
+[alias]
+	co = checkout
+	cb = checkout -b
+	br = branch
+	cm = commit
+	st = status
+[diff]
+	noprefix = true
+[push]
+	default = upstream
+[github]
+	user = bolasblack
+
 [color]
 	status = auto
 	branch = auto
@@ -23,20 +36,18 @@
 	added = yellow
 	changed = green
 	untracked = cyan
-[alias]
-	co = checkout
-	cb = checkout -b
-	br = branch
-	cm = commit
-	st = status
-[push]
-	default = upstream
-[github]
-	user = bolasblack
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[diff]
-	noprefix = true
+
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+  fetch = +refs/pull/*/head:refs/remotes/origin/pr/* # GitHub PR
+  fetch = +refs/pull-requests/*/from:refs/remotes/origin/pr/* # Bitbucket PR
+[remote "upstream"]
+	fetch = +refs/heads/*:refs/remotes/upstream/*
+  fetch = +refs/pull/*/head:refs/remotes/upstream/pr/* # GitHub PR
+  fetch = +refs/pull-requests/*/from:refs/remotes/upstream/pr/* # Bitbucket PR
