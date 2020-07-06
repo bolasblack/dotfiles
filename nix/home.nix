@@ -1,72 +1,104 @@
-{ config, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  environment.systemPackages = with pkgs; [
+    zsh
+    tmux
+    # emacs
+    emacsUnstable-nox
+    vim
+    git
+    git-lfs
+  ];
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "20.03";
-
-  home.packages = [
+  home.packages = with pkgs; [
     # 系统级的工具
-    pkgs.coreutils
-    pkgs.findutils
-    pkgs.diffutils
-    pkgs.moreutils
-    pkgs.gnugrep
-    pkgs.gnused
-    pkgs.gawk
-    pkgs.gnutar
-    pkgs.less
-    pkgs.gnupg
-    pkgs.curl
-    pkgs.wget
-    pkgs.which
-    pkgs.tree
-    pkgs.gzip
-    pkgs.unzip
+    coreutils
+    findutils
+    diffutils
+    moreutils
+    gnugrep
+    gnused
+    gawk
+    gnutar
+    less
+    gnupg
+    curl
+    wget
+    which
+    tree
+    gzip
+    unzip
 
     # nix 工具
-    pkgs.nix-bundle
+    nix-bundle # https://github.com/matthewbauer/nix-bundle
+    nix-index  # https://github.com/bennofs/nix-index
+    cachix
 
     # 编程语言
-    pkgs.ant
-    pkgs.cargo
-    pkgs.rustc
-    pkgs.ruby
-    pkgs.clojure
-
-    # 完全离不开
-    pkgs.zsh
-    pkgs.tmux
-    pkgs.emacs
-    pkgs.vim
-    pkgs.git
-    pkgs.git-lfs
-    pkgs.fd
-    pkgs.bat
-    pkgs.ripgrep
-    pkgs.fzf
-    pkgs.direnv
+    ant
+    cargo
+    rustc
+    ruby
+    clojure
 
     # 其他
-    pkgs.jq
-    pkgs.htop
-    pkgs.aria2
-    pkgs.ffmpeg
-    pkgs.cloc
-    pkgs.entr
-    pkgs.eternal-terminal
-    pkgs.iperf
-    pkgs.awscli
-    pkgs.ledger
-    pkgs.wireguard-tools
+    fd
+    bat
+    ripgrep
+    fzf
+    direnv
+    jq
+    htop
+    aria2
+    ffmpeg-full
+    cloc
+    entr
+    # eternal-terminal
+    iperf
+    awscli
+    ledger
+    wireguard-tools
+    watchman
+    pre-commit
   ];
+
+  home.file = {
+    ".tmux.conf".text = ''source-file ~/dotfiles/tmuxfiles/tmux.conf'';
+    ".emacs".text = ''(load "~/.emacsrc/init.el")'';
+  };
+
+  home.stateVersion = "20.03";
+
+  home.activation.cloneEmacsrc = ''
+if [ ! -d "$HOME/.emacsrc" ]; then
+  (cd "$HOME" && git clone --depth=1 git@github.com:bolasblack/.emacsrc.git)
+fi
+  '';
+
+  home.activation.cloneVimrc = ''
+if [ ! -d "$HOME/.vim" ]; then
+  curl -L https://raw.github.com/bolasblack/.vim/master/scripts/bootstrap.sh | bash
+fi
+  '';
+
+  programs.home-manager = {
+    enable = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    initExtra = ''
+[ -e "$HOME/.zshrc.custom" ] && source $HOME/.zshrc.custom
+    '';
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    defaultCommand = "fd --type file --color=always";
+    defaultOptions = ["--ansi"];
+  };
 }
