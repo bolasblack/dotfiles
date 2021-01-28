@@ -1,7 +1,8 @@
 # My Dotfiles
 
-* [tmuxfiles](./tmuxfiles/README.md)
-* [shfiles](./shfiles/README.md)
+* [tmuxfiles](./tmuxfiles) tmux 的相关配置
+* [shfiles](./shfiles) sh/bash/zsh 的相关配置
+* [gitfiles](./gitfiles) git 的相关配置
 
 ## [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements) (OS X)
 

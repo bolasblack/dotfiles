@@ -3,7 +3,7 @@
 	email = bolasblack@gmail.com
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/dotfiles/gitfiles/gitignore
 [alias]
 	co = checkout
 	cb = checkout -b
@@ -43,11 +43,6 @@
 	process = git-lfs filter-process
 	required = true
 
-[remote "origin"]
-	fetch = +refs/heads/*:refs/remotes/origin/*
-  fetch = +refs/pull/*/head:refs/remotes/origin/pr/* # GitHub PR
-  fetch = +refs/pull-requests/*/from:refs/remotes/origin/pr/* # Bitbucket PR
-[remote "upstream"]
-	fetch = +refs/heads/*:refs/remotes/upstream/*
-  fetch = +refs/pull/*/head:refs/remotes/upstream/pr/* # GitHub PR
-  fetch = +refs/pull-requests/*/from:refs/remotes/upstream/pr/* # Bitbucket PR
+# [remote "origin"]
+# 	fetch = +refs/pull/*/head:refs/remotes/origin/pr/* # GitHub PR
+# 	fetch = +refs/pull-requests/*/from:refs/remotes/origin/pr/* # Bitbucket PR
