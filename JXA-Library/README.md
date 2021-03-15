@@ -24,3 +24,4 @@ require('~/workSpace/somemodule')
 * JavaScript for Automation Release Notes: https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/Introduction.html
 * AppleScript Language Guide: https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html
 * Mac Automation Scripting Guide: https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/index.html
+* Keyboard Maestro Wiki - JavaScript for Automation (JXA) Discussion https://wiki.keyboardmaestro.com/JavaScript_for_Automation

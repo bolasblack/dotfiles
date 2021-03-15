@@ -1,3 +1,7 @@
+/**
+ * https://www.tyme-app.com/en/scripting/
+ */
+
 const app = Application("Tyme")
 
 // getApp :: () -> Application
