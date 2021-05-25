@@ -1,22 +1,84 @@
 { pkgs, lib, ... }:
 
-{
-  environment.systemPackages = with pkgs; [
-    zsh
+let
+
+  vimWithLuaSupport = lib.overrideDerivation pkgs.vim_configurable (o: {
+    gui = false;
+    luaSupport = true;
+  });
+
+in {
+  # Packages with configuration --------------------------------------------------------------- {{{
+  programs.home-manager = {
+    enable = true;
+  };
+
+  # Bat, a substitute for cat.
+  # https://github.com/sharkdp/bat
+  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.bat.enable
+  programs.bat = {
+    enable = true;
+    config = { style = "plain"; };
+  };
+
+  # https://direnv.net
+  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.direnv.enable
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.htop.enable
+  programs.htop = {
+    enable = true;
+    settings.show_program_path = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    initExtra = ''
+[ -e "$HOME/.zshrc.custom" ] && source $HOME/.zshrc.custom
+    '';
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    defaultCommand = "fd --type file --color=always";
+    defaultOptions = ["--ansi"];
+  };
+
+  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.neovim.enable
+  programs.neovim = {
+    enable = true;
+    # Use Neovim nightly (0.5.0) package provided by Nix Flake in Neovim repo, and made available via
+    # an overlay, see `./flake.nix`.
+    package = pkgs.neovim-nightly;
+    extraConfig = ''
+if filereadable($HOME . "/.vim/vimrc")
+  source $HOME/.vim/vimrc
+endif
+    '';
+  };
+  # }}}
+
+  # Other packages ----------------------------------------------------------------------------- {{{
+  home.packages = with pkgs; [
     tmux
-    # emacs
-    emacsUnstable-nox
-    vim
+    emacs
+    vimWithLuaSupport
     git
     git-lfs
-  ];
+    subversion
 
-  home.packages = with pkgs; [
     # 系统级的工具
     coreutils
     findutils
     diffutils
     moreutils
+    gnumake
     gnugrep
     gnused
     gawk
@@ -36,20 +98,18 @@
     cachix
 
     # 编程语言
+    gcc
     ant
     cargo
     rustc
     ruby
     clojure
+    asdf-vm
 
     # 其他
     fd
-    bat
     ripgrep
-    fzf
-    direnv
     jq
-    htop
     aria2
     ffmpeg-full
     cloc
@@ -61,14 +121,14 @@
     wireguard-tools
     watchman
     pre-commit
+    mercurial
   ];
+  # }}}
 
   home.file = {
     ".tmux.conf".text = ''source-file ~/dotfiles/tmuxfiles/tmux.conf'';
     ".emacs".text = ''(load "~/.emacsrc/init.el")'';
   };
-
-  home.stateVersion = "20.03";
 
   home.activation.cloneEmacsrc = ''
 if [ ! -d "$HOME/.emacsrc" ]; then
@@ -77,28 +137,8 @@ fi
   '';
 
   home.activation.cloneVimrc = ''
-if [ ! -d "$HOME/.vim" ]; then
-  curl -L https://raw.github.com/bolasblack/.vim/master/scripts/bootstrap.sh | bash
-fi
+#if [ ! -d "$HOME/.vim" ]; then
+  #curl -L https://raw.github.com/bolasblack/.vim/master/scripts/bootstrap.sh | bash
+#fi
   '';
-
-  programs.home-manager = {
-    enable = true;
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    initExtra = ''
-[ -e "$HOME/.zshrc.custom" ] && source $HOME/.zshrc.custom
-    '';
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    defaultCommand = "fd --type file --color=always";
-    defaultOptions = ["--ansi"];
-  };
 }
