@@ -1,74 +1,66 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+:root {
+  /** 去掉工具栏按钮的圆角 */
+  --toolbarbutton-border-radius: 0 !important;
+}
+
+/** 让顶栏的底部没有一像素的黑线 */
+#navigator-toolbox {
+  border: none !important;
+}
+
+/** 让地址栏不被工具栏操作按钮（关闭窗口，最小化窗口等等）盖住 */
+#nav-bar {
+  padding-left: 74px;
+}
+
+/*
+#nav-bar-customization-target {
+  margin-top: 0.6px !important;
+}
+*/
+
+/** 让 tabbar 的容器在没有内容的时候不占高度 */
+#TabsToolbar {
+  min-height: 0 !important;
+  min-width: 0 !important;
+}
+#TabsToolbar .titlebar-buttonbox-container {
+  margin-bottom: -28px;
+}
+
+/** tabbar 的侧栏按钮按下时不显示 tabbar */
+#sidebar-button[checked],
+#sidebar-button[checked] ~ * {
+  display: none;
+}
+/*
+#sidebar-button[checked] ~ :not(#tabbrowser-tabs) {
+  display: none;
+}
+#sidebar-button[checked] ~ #tabbrowser-tabs {
+  position: absolute !important;
+  top:  -100px;
+  left: -100px;
+}
+*/
+
+/** 不显示侧栏的头 */
 #sidebar-header {
-    padding: 2px !important;
+  display: none;
 }
 
-toolbar#nav-bar {
-    padding-left: 74px;
-    height: 28px;
+/** 让工具栏变窄 */
+#nav-bar toolbarbutton {
+  max-height: 27px !important;
 }
 
-hbox#nav-bar-customization-target {
-    margin-top: 0.6px !important;
+/** 地址框的样式 */
+#urlbar {
+  min-height: calc(var(--urlbar-container-height) - 3px) !important;
+  top: 2px !important;
 }
-
-toolbar:has-moz-any(toolbarbutton#sidebar-button:not([checked])) {
-    display: none;
-}
-
-toolbar#nav-bar:-moz-lwtheme-darktext {
-    -moz-appearance: -moz-mac-vibrancy-light !important;
-    -moz-font-smoothing-background-color: -moz-mac-vibrancy-light !important;
-}
-
-hbox#titlebar-buttonbox-container {
-    -padding-top: 7px;
-}
-
-hbox.titlebar-placeholder[type="pre-tabs"] {
-    width: 8px !important;
-    border-inline-end: none !important;
-}
-
-toolbar#TabsToolbar {
-    min-height: 0 !important;
-    min-width: 0 !important;
-}
-
-toolbarbutton#sidebar-button[checked] {
-    display: none;
-}
-toolbarbutton#sidebar-button[checked] ~ *:not(tabs) {
-    display: none;
-}
-toolbarbutton#sidebar-button[checked] ~ tabs {
-    min-height: 0 !important;
-    height: 0 !important;
-    min-width:  0 !important;
-    width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: absolute !important;
-    left: -100px;
-    top: -100px;
-}
-
-toolbarbutton#sidebar-switcher-target {
-    font-size: 12px !important;
-    margin: 0 !important;
-}
-image#sidebar-icon {
-    width: 12px !important;
-    height: 12px !important;
-}
-label#sidebar-title {
-    padding-inline-start: 4px !important;
-    padding-inline-end: 2px !important;
-}
-toolbarbutton#sidebar-close {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-:root[uidensity="compact"] #urlbar {
-    min-height: 20px !important;
+#urlbar-background {
+  border-radius: 0 !important;
 }
