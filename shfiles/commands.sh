@@ -1,4 +1,4 @@
-function cmd_exist {
+cmd_exist() {
   # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
   hash "$1" 2>/dev/null
 }

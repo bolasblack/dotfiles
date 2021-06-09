@@ -71,7 +71,7 @@ _render_nixshell() {
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-zi for depth=1 romkatv/powerlevel10k
+zinit for depth=1 romkatv/powerlevel10k
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
