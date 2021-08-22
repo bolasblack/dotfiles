@@ -72,6 +72,7 @@ endif
     git
     git-lfs
     subversion
+    mercurial
 
     # 系统级的工具
     coreutils
@@ -93,6 +94,7 @@ endif
     unzip
 
     # nix 工具
+    nix-prefetch # https://github.com/msteen/nix-prefetch
     nix-bundle # https://github.com/matthewbauer/nix-bundle
     nix-index  # https://github.com/bennofs/nix-index
     cachix
@@ -116,12 +118,20 @@ endif
     entr
     # eternal-terminal
     iperf
-    awscli
     ledger
     wireguard-tools
     watchman
     pre-commit
-    mercurial
+    gitAndTools.git-subrepo
+    editorconfig-core-c
+    syncthing
+    babashka
+    netcat-gnu
+    sshuttle
+
+    fn
+    #awscli
+    #azure-cli
   ];
   # }}}
 
