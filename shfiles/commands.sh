@@ -1,4 +1,4 @@
-function cmd_exist {
+cmd_exist() {
   # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
   hash "$1" 2>/dev/null
 }
@@ -29,7 +29,7 @@ cmdfu() {
 chdfiles() {
   files=$(git status -s | cut -c 4-)
   [ "$1" = "" ] && 1="1"
-  
+
   if [ "$1" = "a" ] ; then
     echo $files
   else
@@ -37,19 +37,20 @@ chdfiles() {
   fi
 }
 
-fzf-git-checkout() {
+_fzf_git_checkout() {
   local branches branch
   branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
   branch=$(echo "$branches" | fzf-tmux -d $(( 2 + $(wc -l <<< "$branches"))) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
-cmd_exist fzf-tmux && alias gco='fzf-git-checkout'
+cmd_exist fzf-tmux && alias gco='_fzf_git_checkout'
+cmd_exist fzf-tmux && alias fzf-git-checkout='_fzf_git_checkout'
 
-_ssh-copy-id() {
+_ssh_copy_id() {
   cat ~/.ssh/id_rsa.pub | ssh $1 "[ -d ~/.ssh ] || mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 }
 # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
-cmd_exist ssh-copy-id || alias ssh-copy-id='_ssh-copy-id'
+cmd_exist ssh-copy-id || alias ssh-copy-id='_ssh_copy_id'
 
 timeconv() {
   date -d @$1 +"%Y-%m-%d %T"

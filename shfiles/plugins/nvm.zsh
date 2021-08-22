@@ -1,7 +1,3 @@
-[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
 __nvmex_echo() {
   command printf %s\\n "$*" 2>/dev/null || {
     __nvmex_echo() {
