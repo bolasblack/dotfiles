@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "bbenoist.nix",
+        "brettm12345.nixfmt-vscode",
+        "arrterian.nix-env-selector",
+        "asvetliakov.vscode-neovim"
+    ]
+}
