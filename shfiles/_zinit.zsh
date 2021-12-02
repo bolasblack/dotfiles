@@ -1,4 +1,4 @@
-# https://github.com/zdharma/zinit
+# https://github.com/zdharma-continuum/zinit
 
 # =================== install zinit =====================
 
@@ -12,7 +12,7 @@ fi
 
 if [ ! -d "$ZINIT_HOME/$ZINIT_BIN_DIR_NAME/.git" ]; then
   echo ">>> Downloading zinit to $ZINIT_HOME/$ZINIT_BIN_DIR_NAME"
-  git clone --depth 1 https://github.com/zdharma/zinit.git "$ZINIT_HOME/$ZINIT_BIN_DIR_NAME"
+  git clone --depth 1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME/$ZINIT_BIN_DIR_NAME"
   echo ">>> Done"
 fi
 
@@ -23,17 +23,16 @@ autoload -Uz _zinit
 # =================== load files =====================
 
 # zinit recommended
-zi for \
-  zinit-zsh/z-a-patch-dl \
-  zinit-zsh/z-a-as-monitor \
-  zinit-zsh/z-a-bin-gem-node \
+zi light-mode for \
+  zdharma-continuum/zinit-annex-patch-dl \
+  zdharma-continuum/zinit-annex-bin-gem-node \
 
 # load at init
-zi for \
+zi light-mode for \
   depth=1 has=git svn OMZ::plugins/git \
 
 # load later
-zi wait=1 lucid for \
+zi wait=1 lucid light-mode for \
   bric3/nice-exit-code \
   chisui/zsh-nix-shell \
   pick=init.sh \
@@ -43,22 +42,22 @@ zi wait=1 lucid for \
 # zdharma/history-search-multi-word  # 已经用了 fzf 了，就暂时不用了
 
 # https://github.com/zdharma/fast-syntax-highlighting/issues/135
-zi wait=1 lucid for \
+zi wait=1 lucid light-mode for \
   atload='FAST_HIGHLIGHT[chroma-man]=' \
   atinit='ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay' \
-    zdharma/fast-syntax-highlighting
+    zdharma-continuum/fast-syntax-highlighting
 
 for file in "$SHF_ROOT"/[^_]*.zsh*; do
-  zi ice
+  zi ice light-mode
   zi snippet "$file"
 done
 
 for file in "$SHF_ROOT"/plugins/[^_]*.zsh*; do
-  zi ice wait=1 lucid
+  zi ice wait=1 lucid light-mode
   zi snippet "$file"
 done
 
-zi ice is-snippet lucid for \
+zi ice is-snippet lucid light-mode for \
   wait=1 as=completion blockf \
     ~/.nix-profile/share/zsh/site-functions/ \
   wait='![[ -n ${ZLAST_COMMANDS[(r)fzf*]} ]]' \
