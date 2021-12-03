@@ -15,7 +15,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
-    neovim.url = "github:neovim/neovim/4be0e92db01a502863ac4bb26dd0fee16d833145?dir=contrib";
+    neovim.url = "github:neovim/neovim/e65b724451ba5f65dfcaf8f8c16afdd508db7359?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
 
     c4overlay.url = "github:bolasblack/nix-overlay";
@@ -29,10 +29,13 @@
       overlays = self.overlays;
     };
 
-    homeManagerCommonConfig = {
-      imports = [
-        ./home.nix
-      ];
+    username = "c4605";
+
+    baseConfigurations = {
+      configuration = {
+        imports = [ ./home.nix ];
+        nixpkgs = nixpkgsConfig;
+      };
     };
   in {
     overlays = [
@@ -43,27 +46,28 @@
     ];
 
     homeConfigurations = {
-      bootstrap = home-manager.lib.homeManagerConfiguration rec {
+      bootstrap = home-manager.lib.homeManagerConfiguration (rec {
+        inherit username;
         system = "x86_64-linux";
-        username = "c4605";
         homeDirectory = "/home/${username}";
-        configuration = {
-          imports = [ homeManagerCommonConfig ];
-          nixpkgs = nixpkgsConfig;
-        };
-      };
+      } // baseConfigurations);
 
-      darwin = home-manager.lib.homeManagerConfiguration rec {
+      x86darwin = home-manager.lib.homeManagerConfiguration (rec {
+        inherit username;
         system = "x86_64-darwin";
-        username = "c4605";
         homeDirectory = "/Users/${username}";
-        configuration = {
-          imports = [ homeManagerCommonConfig ];
-          nixpkgs = nixpkgsConfig;
-        };
-      };
+      } // baseConfigurations);
+
+      darwin = home-manager.lib.homeManagerConfiguration (rec {
+        inherit username;
+        system = "aarch64-darwin";
+        homeDirectory = "/Users/${username}";
+      } // baseConfigurations);
     };
   } // flake-utils.lib.eachDefaultSystem (system: {
-      legacyPackages = import nixpkgs { inherit system; inherit (nixpkgsConfig) config overlays; };
+    legacyPackages = import nixpkgs {
+      inherit system;
+      inherit (nixpkgsConfig) config overlays;
+    };
   });
 }

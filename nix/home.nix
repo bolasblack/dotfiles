@@ -96,7 +96,7 @@ endif
     # nix 工具
     nix-prefetch # https://github.com/msteen/nix-prefetch
     nix-bundle # https://github.com/matthewbauer/nix-bundle
-    nix-index  # https://github.com/bennofs/nix-index
+    # nix-index  # https://github.com/bennofs/nix-index
     cachix
 
     # 编程语言
@@ -113,10 +113,10 @@ endif
     ripgrep
     jq
     aria2
-    ffmpeg-full
+    ffmpeg
     cloc
     entr
-    # eternal-terminal
+    #eternal-terminal
     iperf
     ledger
     wireguard-tools
@@ -125,7 +125,7 @@ endif
     gitAndTools.git-subrepo
     editorconfig-core-c
     syncthing
-    babashka
+    #babashka
     netcat-gnu
     sshuttle
 

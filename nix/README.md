@@ -1,10 +1,9 @@
 # Nix
 
-1. Install nix 2.4
+1. Install nix 2.4, follow the document: https://nixos.org/manual/nix/unstable/installation/installing-binary.html
 
     ```bash
-    sh <(curl https://nixos.org/nix/install)
-    nix-env -iA nixpkgs.nixUnstable
+    sh <(curl -L https://nixos.org/nix/install) --daemon
     ```
 
 1. Edit `~/.config/nix/nix.conf`
@@ -20,7 +19,8 @@
 1. Install [home-manager](https://nix-community.github.io/home-manager/)
 
     ```bash
-    nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+    nix-channel --add https://nixos.org/channels/nixpkgs-21.11-darwin nixpkgs
     nix-channel --update
 
     nix-shell '<home-manager>' -A install
@@ -41,8 +41,26 @@
 
     ```bash
     cd <path>
-    git clone --branch chore/nix-flake git@github.com:bolasblack/dotfiles.git
+    git clone git@github.com:bolasblack/dotfiles.git
     home-manager switch --flake "<path>/dotfiles/nix#darwin"
+    ```
+    
+1. Bonus, some useful shell functions
+
+    ```bash
+    nix-switch() {
+      home-manager switch --flake "$HOME/dotfiles/nix#darwin" $@
+    }
+    nix-switch-build() {
+      home-manager build --flake "$HOME/dotfiles/nix#darwin" $@
+    }
+    
+    cachix-push() {
+      cd "$HOME/dotfiles"
+      nix flake archive --json \
+        | jq -r '.path,(.inputs|to_entries[].value.path)' \
+        | cachix push bolasblack
+    }
     ```
 
 ## Resources
