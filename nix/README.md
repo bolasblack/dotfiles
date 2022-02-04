@@ -25,6 +25,12 @@
 
     nix-shell '<home-manager>' -A install
     ```
+    
+    If encountered `NIX_PATH: unbound variable` error, try command:
+    
+    ```bash
+    NIX_PATH=home-manager=${HOME}/.nix-defexpr/channels/home-manager:nixpkgs=${HOME}/.nix-defexpr/channels/nixpkgs nix-shell '<home-manager>' -A install
+    ```
 
 1. Edit shell profile file
 
@@ -74,3 +80,4 @@
 ## Thanks
 
 * [malob/nixpkgs](https://github.com/malob/nixpkgs)
+* [Luca's nix configuration](https://www.lucacambiaghi.com/nixpkgs/readme.html)

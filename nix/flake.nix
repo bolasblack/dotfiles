@@ -31,35 +31,29 @@
 
     username = "c4605";
 
-    baseConfigurations = {
-      configuration = {
-        imports = [
-          ./common.nix
-        ];
-        nixpkgs = nixpkgsConfig;
-      };
+    homeManagerCommonImports = [
+      ./home.nix
+    ];
+
+    homeManagerCommonConf = {
+      imports = homeManagerCommonImports;
+      nixpkgs = nixpkgsConfig;
     };
 
-    evalWrapper = wrapper:
-      baseConfigurations // (wrapper baseConfigurations);
-
-    mkLinuxConfigurations = wrapper:
-      let
-        wrapped = evalWrapper wrapper;
-      in
-        home-manager.lib.homeManagerConfiguration wrapped;
-
-    mkDarwinConfigurations = wrapper:
-      let
-        wrapped = evalWrapper wrapper;
-      in
-        home-manager.lib.homeManagerConfiguration(
-          nixpkgs.lib.attrsets.recursiveUpdate wrapped rec {
-            configuration.imports = wrapped.configuration.imports ++ [
-              ./darwin.nix
-            ];
-          }
-        );
+    nixDarwinCommonModules = { user }: [
+      {
+        nixpkgs = nixpkgsConfig;
+        users.users.${user}.home = "/Users/${user}";
+      }
+      ./nix-darwin.nix
+      home-manager.darwinModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.users.${user} = {
+          imports = homeManagerCommonImports;
+        };
+      }
+    ];
   in {
     overlays = [
       c4overlay.overlay
@@ -69,23 +63,44 @@
     ];
 
     homeConfigurations = {
-      bootstrap = mkLinuxConfigurations (base: rec {
+      linux = home-manager.lib.homeManagerConfiguration {
         inherit username;
-        system = "x86_64-linux";
         homeDirectory = "/home/${username}";
-      });
+        system = "x86_64-linux";
+        configuration = {
+          imports = [ homeManagerCommonConf ];
+        };
+      };
 
-      x86darwin = mkDarwinConfigurations (base: rec {
+      x86darwin = home-manager.lib.homeManagerConfiguration {
         inherit username;
+        homeDirectory = "/Users/${username}";
         system = "x86_64-darwin";
-        homeDirectory = "/Users/${username}";
-      });
+        configuration = {
+          imports = [ homeManagerCommonConf ];
+        };
+      };
 
-      darwin = mkDarwinConfigurations (base: rec {
+      darwin = home-manager.lib.homeManagerConfiguration {
         inherit username;
-        system = "aarch64-darwin";
         homeDirectory = "/Users/${username}";
-      });
+        system = "aarch64-darwin";
+        configuration = {
+          imports = [ homeManagerCommonConf ];
+        };
+      };
+    };
+
+    darwinConfigurations = {
+      x86darwin = darwin.lib.darwinSystem {
+        system = "x86_64-darwin";
+        modules = nixDarwinCommonModules { user = username; };
+      };
+
+      darwin = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = nixDarwinCommonModules { user = username; };
+      };
     };
   } // flake-utils.lib.eachDefaultSystem (system: {
     legacyPackages = import nixpkgs {
