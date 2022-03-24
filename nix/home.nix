@@ -128,6 +128,7 @@ endif
     #babashka
     netcat-gnu
     sshuttle
+    rclone
 
     fn-cli
     #awscli
