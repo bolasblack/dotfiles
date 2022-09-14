@@ -26,6 +26,9 @@ in {
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    config = {
+      load_dotenv = true;
+    };
   };
 
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.htop.enable
