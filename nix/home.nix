@@ -53,12 +53,8 @@ in {
     defaultOptions = ["--ansi"];
   };
 
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.neovim.enable
   programs.neovim = {
     enable = true;
-    # Use Neovim nightly package provided by Nix Flake in Neovim repo, and made available via
-    # an overlay, see `./flake.nix`.
-    package = pkgs.neovim-nightly;
     extraConfig = ''
 if filereadable($HOME . "/.vim/vimrc")
   source $HOME/.vim/vimrc
@@ -99,7 +95,7 @@ endif
     # nix 工具
     nix-prefetch # https://github.com/msteen/nix-prefetch
     nix-bundle # https://github.com/matthewbauer/nix-bundle
-    # nix-index  # https://github.com/bennofs/nix-index
+    nix-index  # https://github.com/bennofs/nix-index
     cachix
 
     # 编程语言
@@ -126,14 +122,15 @@ endif
     watchman
     pre-commit
     gitAndTools.git-subrepo
+    gitAndTools.git-secret
     editorconfig-core-c
     syncthing
-    #babashka
+    babashka
     netcat-gnu
     sshuttle
     rclone
 
-    fn-cli
+    fn-cli-c4
     #awscli
     #azure-cli
   ];

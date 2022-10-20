@@ -2,28 +2,29 @@
   inputs = {
     # Package sets
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-22.05";
 
     # Environment/system management
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    c4overlay.url = "github:bolasblack/nix-overlay";
+    c4overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
-    neovim.url = "github:neovim/neovim/e65b724451ba5f65dfcaf8f8c16afdd508db7359?dir=contrib";
-    neovim.inputs.nixpkgs.follows = "nixpkgs";
-
-    c4overlay.url = "github:bolasblack/nix-overlay";
-    c4overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, flake-utils, c4overlay, ... }@inputs:
   let
+    nixConfig = {
+      registry = {
+        nixpkgs.flake = nixpkgs;
+      };
+    };
+
     nixpkgsConfig = with inputs; {
       config = { allowUnfree = true; };
       overlays = self.overlays;
@@ -31,17 +32,23 @@
 
     username = "c4605";
 
+    pkgs = system: nixpkgs.legacyPackages.${system};
+
     homeManagerCommonImports = [
       ./home.nix
     ];
 
-    homeManagerCommonConf = {
-      imports = homeManagerCommonImports;
-      nixpkgs = nixpkgsConfig;
-    };
+    homeManagerCommonModules = extraModules: [
+      {
+        nix = nixConfig;
+        nixpkgs = nixpkgsConfig;
+        imports = homeManagerCommonImports;
+      }
+    ] ++ extraModules;
 
     nixDarwinCommonModules = { user }: [
       {
+        nix = nixConfig;
         nixpkgs = nixpkgsConfig;
         users.users.${user}.home = "/Users/${user}";
       }
@@ -64,30 +71,36 @@
 
     homeConfigurations = {
       linux = home-manager.lib.homeManagerConfiguration {
-        inherit username;
-        homeDirectory = "/home/${username}";
-        system = "x86_64-linux";
-        configuration = {
-          imports = [ homeManagerCommonConf ];
-        };
+        pkgs = pkgs "x86_64-linux";
+        modules = homeManagerCommonModules [{
+          home = {
+            inherit username;
+            homeDirectory = "/home/${username}";
+            stateVersion = "22.05";
+          };
+        }];
       };
 
       x86darwin = home-manager.lib.homeManagerConfiguration {
-        inherit username;
-        homeDirectory = "/Users/${username}";
-        system = "x86_64-darwin";
-        configuration = {
-          imports = [ homeManagerCommonConf ];
-        };
+        pkgs = pkgs "x86_64-darwin";
+        modules = homeManagerCommonModules [{
+          home = {
+            inherit username;
+            homeDirectory = "/Users/${username}";
+            stateVersion = "22.05";
+          };
+        }];
       };
 
       darwin = home-manager.lib.homeManagerConfiguration {
-        inherit username;
-        homeDirectory = "/Users/${username}";
-        system = "aarch64-darwin";
-        configuration = {
-          imports = [ homeManagerCommonConf ];
-        };
+        pkgs = pkgs "x86_64-darwin";
+        modules = homeManagerCommonModules [{
+          home = {
+            inherit username;
+            homeDirectory = "/Users/${username}";
+            stateVersion = "22.05";
+          };
+        }];
       };
     };
 
