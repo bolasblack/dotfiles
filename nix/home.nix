@@ -102,6 +102,7 @@ endif
     gcc
     ant
     cargo
+    libiconv # needed by cargo
     rustc
     ruby
     clojure
@@ -135,6 +136,10 @@ endif
     #azure-cli
   ];
   # }}}
+
+  home.sessionVariables = {
+    LIBRARY_PATH = "$LIBRARY_PATH:$HOME/.nix-profile/lib/";
+  };
 
   home.file = {
     ".tmux.conf".text = ''source-file ~/dotfiles/tmuxfiles/tmux.conf'';
