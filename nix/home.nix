@@ -102,6 +102,7 @@ endif
     gcc
     ant
     cargo
+    cargo-binstall
     libiconv # needed by cargo
     rustc
     ruby
