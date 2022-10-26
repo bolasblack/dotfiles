@@ -147,6 +147,18 @@ endif
     ".emacs".text = ''(load "~/.emacsrc/init.el")'';
   };
 
+  home.activation.cleanupOldProfile = lib.hm.dag.entryAfter ["writeBoundary"] (
+    ''
+      if [[ -e "$HOME/.nix-profile"/manifest.json ]] ; then
+        nix profile list \
+          | { grep 'home-manager-path$' || test $? = 1; } \
+          | awk -F ' ' '{ print $4 }' \
+          | cut -d ' ' -f 4 \
+          | xargs -t nix profile remove
+      fi
+    ''
+  );
+
   home.activation.cloneEmacsrc = ''
 if [ ! -d "$HOME/.emacsrc" ]; then
   (cd "$HOME" && git clone --depth=1 git@github.com:bolasblack/.emacsrc.git)
