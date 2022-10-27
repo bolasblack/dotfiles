@@ -96,20 +96,26 @@ endif
     nix-prefetch # https://github.com/msteen/nix-prefetch
     nix-bundle # https://github.com/matthewbauer/nix-bundle
     nix-index  # https://github.com/bennofs/nix-index
+    nix-du
     cachix
 
     # 编程语言
     gcc
     ant
-    cargo
-    cargo-binstall
-    libiconv # needed by cargo
-    rustc
     ruby
     clojure
-    asdf-vm
+
+    # Rust
+    # cargo
+    cargo-binstall
+    libiconv # needed by cargo
+    rustup
+    # rustc
+    evcxr
 
     # 其他
+    jupyter
+    asdf-vm
     fd
     ripgrep
     jq
@@ -131,15 +137,21 @@ endif
     netcat-gnu
     sshuttle
     rclone
+    graphviz
 
     fn-cli-c4
     #awscli
     #azure-cli
+
+    # Python
+    (python310.withPackages (ps: with ps; [
+    ]))
   ];
   # }}}
 
   home.sessionVariables = {
     LIBRARY_PATH = "$LIBRARY_PATH:$HOME/.nix-profile/lib/";
+    PYTHONPATH = "$HOME/.nix-profile/lib/python3.10/site-packages/:$PYTHONPATH";
   };
 
   home.file = {
