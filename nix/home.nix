@@ -96,7 +96,7 @@ endif
     nix-prefetch # https://github.com/msteen/nix-prefetch
     nix-bundle # https://github.com/matthewbauer/nix-bundle
     nix-index  # https://github.com/bennofs/nix-index
-    nix-du
+    # nix-du
     cachix
 
     # 编程语言
@@ -138,6 +138,7 @@ endif
     sshuttle
     rclone
     graphviz
+    mozwire
 
     fn-cli-c4
     #awscli
