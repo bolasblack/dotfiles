@@ -91,6 +91,7 @@ endif
     tree
     gzip
     unzip
+    mosh
 
     # nix 工具
     nix-prefetch # https://github.com/msteen/nix-prefetch
@@ -141,6 +142,7 @@ endif
     mozwire
 
     fn-cli-c4
+    youtube-dl
     #awscli
     #azure-cli
 
