@@ -12,8 +12,8 @@ export SAVEHIST=10000
 
 for file in "$SHF_ROOT"/[^_]*.sh; do
   source "$file"
-done
+done 2>/dev/null
 
 for file in "$SHF_ROOT"/plugins/[^_]*.sh; do
   source "$file"
-done
+done 2>/dev/null

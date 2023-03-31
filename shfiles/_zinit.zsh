@@ -23,41 +23,42 @@ autoload -Uz _zinit
 # =================== load files =====================
 
 # zinit recommended
-zi light-mode for \
+zi for \
   zdharma-continuum/zinit-annex-patch-dl \
   zdharma-continuum/zinit-annex-bin-gem-node \
 
 # load at init
-zi light-mode for \
+zi for \
   depth=1 has=git svn OMZ::plugins/git \
 
 # load later
-zi wait=1 lucid light-mode for \
+zi wait=1 lucid for \
   bric3/nice-exit-code \
   chisui/zsh-nix-shell \
-  pick=init.sh \
-    b4b4r07/enhancd \
-  atload='zicompinit; zicdreplay' blockf \
-    zsh-users/zsh-completions \
-# zdharma/history-search-multi-word  # 已经用了 fzf 了，就暂时不用了
+  pick=init.sh b4b4r07/enhancd
 
 # https://github.com/zdharma/fast-syntax-highlighting/issues/135
-zi wait=1 lucid light-mode for \
+zi wait=1 lucid for \
   atload='FAST_HIGHLIGHT[chroma-man]=' \
   atinit='ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay' \
     zdharma-continuum/fast-syntax-highlighting
+# zdharma/history-search-multi-word  # 已经用了 fzf 了，就暂时不用了
+
+zi wait=1 lucid for \
+  atload='zpcompinit; zpcompdef; zpcdreplay;' blockf \
+    zsh-users/zsh-completions
 
 for file in "$SHF_ROOT"/[^_]*.zsh*; do
-  zi ice light-mode
+  zi ice atload='zpcompinit; zpcompdef'
   zi snippet "$file"
-done
+done 2>/dev/null
 
 for file in "$SHF_ROOT"/plugins/[^_]*.zsh*; do
-  zi ice wait=1 lucid light-mode
+  zi ice atload='zpcompinit; zpcompdef'
   zi snippet "$file"
-done
+done 2>/dev/null
 
-zi ice is-snippet lucid light-mode for \
+zi ice is-snippet lucid for \
   wait=1 as=completion blockf \
     ~/.nix-profile/share/zsh/site-functions/ \
   wait='![[ -n ${ZLAST_COMMANDS[(r)fzf*]} ]]' \
