@@ -128,7 +128,6 @@ endif
     iperf
     ledger
     wireguard-tools
-    watchman
     pre-commit
     gitAndTools.git-subrepo
     gitAndTools.git-secret
