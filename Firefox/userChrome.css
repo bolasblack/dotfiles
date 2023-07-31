@@ -5,6 +5,11 @@
   --toolbarbutton-border-radius: 0 !important;
 }
 
+/** 去掉顶栏的 firefox view 按钮 */
+#firefox-view-button {
+  display: none;
+}
+
 /** 让顶栏的底部没有一像素的黑线 */
 #navigator-toolbox {
   border: none !important;
