@@ -66,7 +66,7 @@ endif
   # Other packages ----------------------------------------------------------------------------- {{{
   home.packages = (with pkgs; [
     tmux
-    emacs
+    emacs29
     vimWithLuaSupport
     git
     git-lfs
@@ -115,8 +115,9 @@ endif
     evcxr
 
     # 其他
-    jupyter
-    asdf-vm
+    #jupyter
+    #asdf-vm
+    mise
     fd
     ripgrep
     jq
