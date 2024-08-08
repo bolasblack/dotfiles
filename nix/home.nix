@@ -64,7 +64,7 @@ endif
   # }}}
 
   # Other packages ----------------------------------------------------------------------------- {{{
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     tmux
     emacs
     vimWithLuaSupport
@@ -140,14 +140,14 @@ endif
     graphviz
 
     fn-cli-c4
-    youtube-dl
+    yt-dlp
     #awscli
     #azure-cli
 
     # Python
     (python310.withPackages (ps: with ps; [
     ]))
-  ];
+  ]);
   # }}}
 
   home.sessionVariables = {

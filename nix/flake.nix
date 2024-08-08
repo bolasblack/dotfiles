@@ -1,13 +1,13 @@
 {
   inputs = {
     # Package sets
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     # Environment/system management
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     c4overlay.url = "github:bolasblack/nix-overlay";
     c4overlay.inputs.nixpkgs.follows = "nixpkgs";
@@ -76,7 +76,7 @@
           home = {
             inherit username;
             homeDirectory = "/home/${username}";
-            stateVersion = "23.05";
+            stateVersion = "24.05";
           };
         }];
       };
@@ -87,7 +87,7 @@
           home = {
             inherit username;
             homeDirectory = "/Users/${username}";
-            stateVersion = "23.05";
+            stateVersion = "24.05";
           };
         }];
       };
@@ -98,7 +98,7 @@
           home = {
             inherit username;
             homeDirectory = "/Users/${username}";
-            stateVersion = "23.05";
+            stateVersion = "24.05";
           };
         }];
       };
