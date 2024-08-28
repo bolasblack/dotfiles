@@ -118,6 +118,7 @@ endif
     #jupyter
     #asdf-vm
     mise
+    age
     fd
     ripgrep
     jq
