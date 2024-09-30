@@ -138,7 +138,7 @@ endif
     babashka
     netcat-gnu
     sshuttle
-    rclone
+    rclone-c4
     graphviz
 
     fn-cli-c4
