@@ -2,123 +2,152 @@
   inputs = {
     # Package sets
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    # Environment/system management
-    darwin.url = "github:LnL7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    c4overlay.url = "github:bolasblack/nix-overlay";
-    c4overlay.inputs.nixpkgs.follows = "nixpkgs";
-
     flake-utils.url = "github:numtide/flake-utils";
-    flake-compat.url = "github:edolstra/flake-compat";
-    flake-compat.flake = false;
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+
+    # Environment/system management
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    c4overlay = {
+      url = "github:bolasblack/nix-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # brew-nix = {
+    #   url = "github:BatteredBunny/brew-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils";
+    #   inputs.nix-darwin.follows = "darwin";
+    #   inputs.brew-api.follows = "brew-api";
+    # };
+    brew-api = {
+      url = "github:BatteredBunny/brew-api";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, flake-utils, c4overlay, ... }@inputs:
-  let
-    nixConfig = {
-      registry = {
-        nixpkgs.flake = nixpkgs;
+  outputs = { self, nixpkgs, darwin, home-manager, flake-utils, ... }@inputs:
+    let
+      nixConfig = {
+        registry = {
+          nixpkgs.flake = nixpkgs;
+        };
       };
-    };
 
-    nixpkgsConfig = with inputs; {
-      config = { allowUnfree = true; };
-      overlays = self.overlays;
-    };
+      nixpkgsConfig = with inputs; {
+        config = { allowUnfree = true; };
+        overlays = self.overlays;
+      };
 
-    username = "c4605";
+      username = "c4605";
 
-    pkgs = system: nixpkgs.legacyPackages.${system};
+      pkgs = system: nixpkgs.legacyPackages.${system};
 
-    homeManagerCommonImports = [
-      ./home.nix
-    ];
+      homeManagerCommonImports = [
+        ./home.nix
+      ];
 
-    homeManagerCommonModules = extraModules: [
-      {
+      homeManagerDarwinImports = [
+        ./darwin-home.nix
+      ];
+
+      homeManagerCommonModules = [{
         nix = nixConfig;
         nixpkgs = nixpkgsConfig;
         imports = homeManagerCommonImports;
-      }
-    ] ++ extraModules;
+      }];
+    in
+    {
+      overlays = [
+        inputs.c4overlay.overlay
 
-    nixDarwinCommonModules = { user }: [
-      {
-        nix = nixConfig;
-        nixpkgs = nixpkgsConfig;
-        users.users.${user}.home = "/Users/${user}";
-      }
-      ./nix-darwin.nix
-      home-manager.darwinModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.users.${user} = {
-          imports = homeManagerCommonImports;
+        # inputs.brew-nix.overlays.default
+        (final: prev:
+          let
+            pkgs = nixpkgs.legacyPackages.${final.system};
+          in
+          {
+            brewCasks = import ./brew-casks.nix {
+              inherit pkgs;
+              brew-api = inputs.brew-api;
+              lib = pkgs.lib;
+              stdenv = pkgs.stdenv;
+            };
+          }
+        )
+
+        # (final: prev: {
+        #   neovim-nightly = inputs.neovim.packages.${prev.stdenv.system}.neovim;
+        # })
+      ];
+
+      homeConfigurations = {
+        linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs builtins.currentSystem;
+          modules = homeManagerCommonModules ++ [{
+            home = {
+              inherit username;
+              homeDirectory = "/home/${username}";
+              stateVersion = "24.05";
+            };
+          }];
         };
-      }
-    ];
-  in {
-    overlays = [
-      c4overlay.overlay
-      (final: prev: {
-        neovim-nightly = inputs.neovim.packages.${prev.stdenv.system}.neovim;
-      })
-    ];
 
-    homeConfigurations = {
-      linux = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs "x86_64-linux";
-        modules = homeManagerCommonModules [{
-          home = {
-            inherit username;
-            homeDirectory = "/home/${username}";
-            stateVersion = "24.05";
-          };
-        }];
+        darwin = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs builtins.currentSystem;
+          modules =
+            homeManagerCommonModules ++
+            [{
+              nix.package = inputs.nixpkgs-unstable.legacyPackages.${builtins.currentSystem}.nix;
+              imports = homeManagerDarwinImports;
+              home = {
+                inherit username;
+                homeDirectory = "/Users/${username}";
+                stateVersion = "24.05";
+              };
+            }];
+        };
       };
 
-      x86darwin = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs "x86_64-darwin";
-        modules = homeManagerCommonModules [{
-          home = {
-            inherit username;
-            homeDirectory = "/Users/${username}";
-            stateVersion = "24.05";
-          };
-        }];
+      darwinConfigurations = {
+        darwin = darwin.lib.darwinSystem {
+          system = builtins.currentSystem;
+          modules = [
+            {
+              nix = nixConfig // {
+                package = inputs.nixpkgs-unstable.legacyPackages.${builtins.currentSystem}.nix;
+              };
+              nixpkgs = nixpkgsConfig;
+              users.users.${username}.home = "/Users/${username}";
+            }
+            ./nix-darwin.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.users.${username} = {
+                imports =
+                  homeManagerCommonImports ++
+                  homeManagerDarwinImports;
+              };
+            }
+          ];
+        };
       };
-
-      darwin = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs "x86_64-darwin";
-        modules = homeManagerCommonModules [{
-          home = {
-            inherit username;
-            homeDirectory = "/Users/${username}";
-            stateVersion = "24.05";
-          };
-        }];
+    } // flake-utils.lib.eachDefaultSystem (system: {
+      legacyPackages = import nixpkgs {
+        inherit system;
+        inherit (nixpkgsConfig) config overlays;
       };
-    };
-
-    darwinConfigurations = {
-      x86darwin = darwin.lib.darwinSystem {
-        system = "x86_64-darwin";
-        modules = nixDarwinCommonModules { user = username; };
-      };
-
-      darwin = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = nixDarwinCommonModules { user = username; };
-      };
-    };
-  } // flake-utils.lib.eachDefaultSystem (system: {
-    legacyPackages = import nixpkgs {
-      inherit system;
-      inherit (nixpkgsConfig) config overlays;
-    };
-  });
+    });
 }
