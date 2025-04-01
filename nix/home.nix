@@ -93,6 +93,7 @@ in
     gzip
     unzip
     mosh
+    rsync
 
     # nix 工具
     nix-prefetch # https://github.com/msteen/nix-prefetch
