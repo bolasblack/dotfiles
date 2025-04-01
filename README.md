@@ -21,6 +21,11 @@ open "karabiner://karabiner/assets/complex_modifications/import?url=$(python -c 
 ## [Rime](http://rime.im/)
 
 ```bash
+# download language model
+mkdir -p ~/Library/Rime && cd ~/Library/Rime
+wget https://github.com/amzxyz/RIME-LMDG/releases/download/v2n3/amz-v2n3m1-zh-hans.gram
+
+# create configuration file links
 cd ~/Library/Rime && \
 ln -s ~/dotfiles/Rime/default.custom.yaml && \
 ln -s ~/dotfiles/Rime/squirrel.custom.yaml
