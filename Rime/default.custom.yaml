@@ -13,8 +13,12 @@ patch:
       - extended_charset
     fold_options: true
     abbreviate_options: true
-    option_list_separator: '／'
+
   schema_list:
     - schema: luna_pinyin
-  menu:
-    page_size: 9
+
+  menu/page_size: 9
+
+  key_binder/bindings/+:
+    - { when: has_menu, accept: bracketleft, send: Page_Up }
+    - { when: has_menu, accept: bracketright, send: Page_Down }

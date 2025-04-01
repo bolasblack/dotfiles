@@ -2,38 +2,77 @@
 # encoding: utf-8
 
 patch:
-  show_notifications_via_notification_center: true
-  "style/color_scheme": dark
-  # https://github.com/rime/squirrel/blob/3f77486747f0c834f69c0cce9f4781ab4b07ca7d/SquirrelPanel.m#L562
+  # 参考内容：
+  #   https://github.com/rime/squirrel/blob/3f77486747f0c834f69c0cce9f4781ab4b07ca7d/SquirrelPanel.m#L562
+  #   https://github.com/catppuccin/squirrel/blob/a73f0d19d7f46f8ebe28fa62518dcdbf1a9407c4/theme/squirrel.custom.yaml
+  style:
+    color_scheme: dark
+    color_scheme_dark: dark
+    inline_preedit: true                       # 拼音位于： 候选框 false | 行内 true
+    #Squirrel 1.0 Breaking Changes: style/horizontal 即将废弃，1.0以上版本请使用 style/candidate_list_layout 和 style/text_orientation
+    horizontal: true                           # 候选窗是否横向显示：true横排，false竖排（Squirrel 1.0起使用新的UI配置）
+    candidate_list_layout: linear              # 候选框样式，默认stacked，水平线型(linear)/垂直堆叠（stacked）
+    #text_orientation: horizontal              # 候选框文字方向，默认horizontal，横排自左至右(horizontal)/竖排自右至左(vertical)
+
   "preset_color_schemes/dark":
     author: "c4605 <bolasblack at gmail>"
     name: "dark"
-    horizontal: true # 水平排列
-    inline_preedit: true # true: 单行显示，false: 双行显示
-    corner_radius: 3 # 候选条圆角
-    border_width: 0 # 窗口边界宽度，大于圆角半径才生效
-    border_height: 4 # 窗口边界高度，大于圆角半径才生效
+    corner_radius: 5                           # 候选条圆角
+    hilited_corner_radius: 5                   # 高亮圆角
+    border_width: 1                            # 窗口边界宽度
+    border_height: 3                           # 窗口边界高度
     candidate_format: "\u2005%c\u2005%@\u2005" # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间
     alpha: 0.95
-    # line_spacing: 20
+    line_spacing: 10                           # 行间距(适用于竖排)
     # spacing: 0
 
-    font_face: 'Hiragino Sans GB' # 候选词字体
-    font_point: 16 # 候选字词大小
+    font_face: PingFangSC                      # 候选词字体
+    font_point: 16                             # 候选字词大小
 
-    # label_font_face: # 候选词编号字体
-    label_font_point: 12 # 候选编号大小
-    # label_color: # 候选编号颜色
-    # label_hilited_color: # 第一候选项编号颜色
+    # label_font_face:                         # 候选词编号字体
+    label_font_point: 13                       # 候选编号大小
+    # label_color:                             # 候选编号颜色
+    # label_hilited_color:                     # 第一候选项编号颜色
 
-    comment_text_color: 0x999999 # 提示文字颜色（中英文切换的提示窗口）
-    hilited_comment_text_color: 0x362b00 # 提示文字高亮
+    comment_text_color: 0x999999               # 提示文字颜色（中英文切换的提示窗口）
+    hilited_comment_text_color: 0x362b00       # 提示文字高亮
 
-    text_color: 0xffffff # 拼音行文字颜色，24位色值，16进制，BGR顺序
-    back_color: 0x101010 # 候选条背景色
-    border_color: 0x362b00 # 边框色
-    candidate_text_color: 0xffffff # 预选项文字颜色
-    # hilited_text_color: # 高亮拼音 (需要开启内嵌编码)
+    text_color: 0xffffff                       # 拼音行文字颜色，24位色值，16进制，BGR顺序
+    back_color: 0x101010                       # 候选条背景色
+    border_color: 0x362b00                     # 边框色
+    candidate_text_color: 0xffffff             # 预选项文字颜色
+    # hilited_text_color:                      # 高亮拼音 (需要开启内嵌编码)
     # hilited_back_color:
-    hilited_candidate_text_color: 0xffffff # 第一候选项文字颜色
-    hilited_candidate_back_color: 0x4a4a4a # 第一候选项背景背景色
+    hilited_candidate_text_color: 0xffffff     # 第一候选项文字颜色
+    hilited_candidate_back_color: 0x4a4a4a     # 第一候选项背景背景色
+
+  # 特定App默认中/英文输入
+  app_options:
+    com.apple.Spotlight:           # Spotlight
+      ascii_mode: true               # true默认英文, false默认中文
+    com.runningwithcrayons.Alfred: # alfred
+      ascii_mode: true
+    com.raycast.macos:             # Raycast
+      ascii_mode: true
+    at.obdev.LaunchBar:            # LaunchBar
+      ascii_mode: true
+
+    com.googlecode.iterm2:         # iTerm2
+      ascii_mode: true
+    com.apple.Terminal:            # 终端
+      ascii_mode: true
+    com.termius-dmg.mac:           # termius
+      ascii_mode: true
+
+    com.microsoft.VSCode:          # Visual Studio Code
+      ascii_mode: true
+      # ascii_punct: true            # 中文状态输出英文标点(半角)
+    com.apple.dt.Xcode:            # Xcode
+      ascii_mode: true
+    com.jetbrains.intellij:        # idea
+      ascii_mode: true
+    com.jetbrains.WebStorm:        # WebStorm
+      ascii_mode: true
+
+    com.nektony.App-Cleaner-SII:   # App Cleaner & Uninstaller
+      ascii_mode: true
