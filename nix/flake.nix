@@ -1,9 +1,9 @@
 {
   inputs = {
     # Package sets
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     c4overlay = {
@@ -99,7 +99,7 @@
             home = {
               inherit username;
               homeDirectory = "/home/${username}";
-              stateVersion = "24.05";
+              stateVersion = "25.05";
             };
           }];
         };
@@ -114,7 +114,7 @@
               home = {
                 inherit username;
                 homeDirectory = "/Users/${username}";
-                stateVersion = "24.05";
+                stateVersion = "25.05";
               };
             }];
         };
