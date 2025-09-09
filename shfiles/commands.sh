@@ -67,7 +67,7 @@ alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 alias color256='( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )'
 
 alias sl=ls # often screw this up
-alias ls='ls --color=auto'
+alias ls='ls --hyperlink --color=auto'
 alias lsa='ls -lah'
 alias l='ls -la'
 alias ll='ls -l'

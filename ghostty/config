@@ -1,0 +1,59 @@
+config-file = colors.conf
+config-file = keybinds.conf
+
+command = /bin/zsh
+term = xterm-256color
+# working-directory will inherit from current directory
+background-opacity = 0.95
+background-blur = 10
+
+# Font Configuration  
+font-family = "Monaco"
+font-size = 18
+font-thicken = true
+font-thicken-strength = 25
+font-synthetic-style = true
+
+# Cursor Configuration
+cursor-style = underline
+cursor-style-blink = false
+
+# Window Configuration
+window-height = 25
+window-width = 80
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = sudo, title, no-cursor
+
+# Mouse configuration
+mouse-hide-while-typing = true
+
+# Clipboard configuration  
+clipboard-read = ask
+clipboard-write = ask
+
+# Window behavior
+confirm-close-surface = true
+quit-after-last-window-closed = true
+window-step-resize = true
+
+# Window padding for better appearance
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
+
+# Additional settings based on iTerm2 behavior
+scrollback-limit = 1000000
+bold-is-bright = true
+copy-on-select = false
+
+# Status and reporting
+title-report = false
+
+# macOS specific settings (uncomment if on macOS)
+window-decoration = auto
+macos-option-as-alt = true
+macos-titlebar-style = transparent  
+macos-non-native-fullscreen = visible-menu
+macos-window-shadow = true
