@@ -7,16 +7,20 @@ term = xterm-256color
 background-opacity = 0.95
 background-blur = 10
 
-# Font Configuration  
-font-family = "Monaco"
+# Font Configuration
+font-family = "Maple Mono Normal NF CN"
 font-size = 18
 font-thicken = true
 font-thicken-strength = 25
-font-synthetic-style = true
+font-synthetic-style = false
+#font-feature = -calt, +ss03, +cv96, +cv97, +cv98
+font-feature = +cv96, +cv97, +cv98, +ss01, +ss02, +ss03, +ss04, +ss05, +ss06
 
 # Cursor Configuration
 cursor-style = underline
+cursor-opacity = 1
 cursor-style-blink = false
+adjust-cursor-thickness = 3
 
 # Window Configuration
 window-height = 25
@@ -24,7 +28,7 @@ window-width = 80
 
 # Shell integration
 shell-integration = detect
-shell-integration-features = sudo, title, no-cursor
+shell-integration-features = sudo, title, ssh-terminfo, no-cursor
 
 # Mouse configuration
 mouse-hide-while-typing = true
@@ -57,3 +61,4 @@ macos-option-as-alt = true
 macos-titlebar-style = transparent  
 macos-non-native-fullscreen = visible-menu
 macos-window-shadow = true
+
