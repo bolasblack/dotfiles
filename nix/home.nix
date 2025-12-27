@@ -1,8 +1,8 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, stdenv, lib, ... }:
 
 let
 
-  vimWithLuaSupport = lib.overrideDerivation pkgs.vim_configurable (o: {
+  vimWithLuaSupport = lib.overrideDerivation pkgs.vim-full (o: {
     gui = false;
     luaSupport = true;
   });
@@ -198,8 +198,8 @@ in
     ledger
     wireguard-tools
     pre-commit
-    gitAndTools.git-subrepo
-    gitAndTools.git-secret
+    git-subrepo
+    git-secret
     editorconfig-core-c
     syncthing
     babashka
@@ -213,6 +213,8 @@ in
     #awscli
     #azure-cli
 
+    maple-mono.Normal-NF-CN
+
     # Python
     (python310.withPackages (ps: with ps; [
     ]))
@@ -223,9 +225,23 @@ in
 
   home.shell.enableShellIntegration = true;
 
+  home.sessionPath =
+    [] ++
+    lib.optionals pkgs.stdenv.isDarwin [
+      "/opt/homebrew/bin/"
+      "/opt/homebrew/opt/trash/bin"
+    ];
+
   home.sessionVariables = {
     LIBRARY_PATH = "$LIBRARY_PATH:$HOME/.nix-profile/lib/";
     PYTHONPATH = "$HOME/.nix-profile/lib/python3.10/site-packages/:$PYTHONPATH";
+  };
+
+  home.file.home-manager-config = {
+    enable = true;
+    recursive = false;
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nix";
+    target = ".config/home-manager";
   };
 
   # home.activation.exampleProfile = lib.hm.dag.entryAfter ["writeBoundary"] (
