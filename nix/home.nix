@@ -1,6 +1,15 @@
-{ config, pkgs, stdenv, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
+
+  stdenv = pkgs.stdenv;
+
+  dotfilePath = "${config.home.homeDirectory}/dotfiles";
 
   vimWithLuaSupport = lib.overrideDerivation pkgs.vim-full (o: {
     gui = false;
@@ -10,6 +19,10 @@ let
 in
 {
   # Packages with configuration --------------------------------------------------------------- {{{
+  imports = [
+    ./modules/home/homebrew-bundle.nix
+  ];
+
   programs.home-manager = {
     enable = true;
   };
@@ -43,7 +56,7 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = ''
-      source-file ~/dotfiles/tmuxfiles/tmux.conf
+      source-file ${dotfilePath}/tmuxfiles/tmux.conf
     '';
   };
 
@@ -51,8 +64,8 @@ in
   programs.neovim = {
     enable = true;
     extraConfig = ''
-      if filereadable($HOME . "/.vim/vimrc")
-        source $HOME/.vim/vimrc
+      if filereadable(${dotfilePath}/vim/vimrc)
+        source ${dotfilePath}/vim/vimrc
       endif
     '';
   };
@@ -61,7 +74,7 @@ in
   programs.emacs = {
     enable = true;
     extraConfig = ''
-      (load "~/.emacsrc/init.el")
+      (load "${dotfilePath}/emacsrc/init.el")
     '';
   };
 
@@ -81,8 +94,7 @@ in
       load_dotenv = true;
     };
 
-    stdlib = ''
-    '';
+    stdlib = '''';
   };
 
   # https://mise.jdx.dev/
@@ -136,113 +148,157 @@ in
   # }}}
 
   # Other packages ----------------------------------------------------------------------------- {{{
-  home.packages = (with pkgs; [
-    # nix 工具
-    nix-prefetch # https://github.com/msteen/nix-prefetch
-    nix-inspect
-    nix-bundle # https://github.com/matthewbauer/nix-bundle
-    nix-index # https://github.com/bennofs/nix-index
-    nixpkgs-fmt
-    # nix-du
-    cachix
-    comma
+  home.packages = (
+    with pkgs;
+    [
+      # nix 工具
+      nix-prefetch # https://github.com/msteen/nix-prefetch
+      nix-inspect
+      nix-bundle # https://github.com/matthewbauer/nix-bundle
+      nix-index # https://github.com/bennofs/nix-index
+      nixfmt
+      nixpkgs-fmt
+      cachix
+      comma
 
-    # 系统工具
-    coreutils
-    findutils
-    diffutils
-    moreutils
-    gnumake
-    gnugrep
-    gnused
-    gawk
-    gnutar
-    less
-    gnupg
-    curl
-    wget
-    which
-    tree
-    gzip
-    unzip
-    vimWithLuaSupport
-    rsync
+      # 系统工具
+      coreutils
+      findutils
+      diffutils
+      moreutils
+      gnumake
+      gnugrep
+      gnused
+      gawk
+      gnutar
+      less
+      gnupg
+      curl
+      wget
+      which
+      tree
+      gzip
+      unzip
+      vimWithLuaSupport
+      rsync
 
-    # 开发工具
-    git
-    git-lfs
-    subversion
-    mercurial
-    gcc
+      # 开发工具
+      git
+      git-lfs
+      subversion
+      mercurial
+      gcc
 
-    # Rust
-    # cargo
-    cargo-binstall
-    libiconv # needed by cargo
-    rustup
-    evcxr
+      # Rust
+      # cargo
+      cargo-binstall
+      libiconv # needed by cargo
+      rustup
+      evcxr
 
-    # 其他
-    #jupyter
-    mosh
-    age
-    fd
-    ripgrep
-    jq
-    aria2
-    ffmpeg
-    cloc
-    entr
-    #eternal-terminal
-    iperf
-    ledger
-    wireguard-tools
-    pre-commit
-    git-subrepo
-    git-secret
-    editorconfig-core-c
-    syncthing
-    babashka
-    netcat-gnu
-    sshuttle
-    rclone-c4
-    graphviz
+      # 其他
+      #jupyter
+      mosh
+      age
+      fd
+      ripgrep
+      jq
+      aria2
+      ffmpeg
+      cloc
+      entr
+      #eternal-terminal
+      iperf
+      ledger
+      wireguard-tools
+      pre-commit
+      git-subrepo
+      git-secret
+      editorconfig-core-c
+      syncthing
+      babashka
+      netcat-gnu
+      sshuttle
+      rclone-c4
+      graphviz
 
-    fn-cli-c4
-    yt-dlp
-    #awscli
-    #azure-cli
+      fn-cli-c4
+      yt-dlp
+      #awscli
+      #azure-cli
 
-    maple-mono.Normal-NF-CN
+      maple-mono.Normal-NF-CN
 
-    # Python
-    (python310.withPackages (ps: with ps; [
-    ]))
-  ]);
+      # Python
+      (python310.withPackages (
+        ps: with ps; [
+        ]
+      ))
+    ]
+  );
   # }}}
 
   # https://github.com/nix-community/home-manager/blob/bf893ad4cbf46610dd1b620c974f824e266cd1df/modules/home-environment.nix
 
   home.shell.enableShellIntegration = true;
 
-  home.sessionPath =
-    [] ++
-    lib.optionals pkgs.stdenv.isDarwin [
-      "/opt/homebrew/bin/"
-      "/opt/homebrew/opt/trash/bin"
+  home.homebrewBundle = {
+    enable = true;
+
+    extraBrewfile = "${dotfilePath}/nix/private/Brewfile";
+
+    taps = [
+      "homebrew/core"
+      "beeftornado/rmtree"
     ];
+
+    brews = [
+      "mas"
+      "beeftornado/rmtree/brew-rmtree"
+    ];
+
+    casks = [
+      "wezterm"
+    ];
+
+    mas = [
+      # { name = "Xcode"; id = 497799835; }
+    ];
+  };
 
   home.sessionVariables = {
     LIBRARY_PATH = "$LIBRARY_PATH:$HOME/.nix-profile/lib/";
     PYTHONPATH = "$HOME/.nix-profile/lib/python3.10/site-packages/:$PYTHONPATH";
   };
 
-  home.file.home-manager-config = {
-    enable = true;
-    recursive = false;
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nix";
-    target = ".config/home-manager";
-  };
+  home.file = lib.mkMerge [
+    # common
+    {
+      home-manager-config = {
+        enable = true;
+        recursive = false;
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilePath}/nix";
+        target = ".config/home-manager";
+      };
+    }
+
+    # darwin
+    (lib.mkIf stdenv.isDarwin {
+      rime-custom-default = {
+        enable = true;
+        recursive = false;
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilePath}/Rime/default.custom.yaml";
+        target = "Library/Rime/default.custom.yaml";
+      };
+
+      rime-custom-squirrel = {
+        enable = true;
+        recursive = false;
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilePath}/Rime/squirrel.custom.yaml";
+        target = "Library/Rime/squirrel.custom.yaml";
+      };
+    })
+  ];
 
   # home.activation.exampleProfile = lib.hm.dag.entryAfter ["writeBoundary"] (
   #   ''

@@ -1,9 +1,8 @@
 {
   inputs = {
-    # Package sets
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -12,101 +11,47 @@
       flake = false;
     };
 
-    brew-api = {
-      url = "github:BatteredBunny/brew-api";
-      flake = false;
+    home-manager-darwin = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
+    };
+    home-manager-linux = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
-    # Environment/system management
-    darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    c4overlay = {
-      url = "github:bolasblack/nix-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    c4overlay.url = "github:bolasblack/nix-overlay";
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, flake-utils, ... }@inputs:
-    let
-      nixVersion = "25.11";
+  outputs = { self, flake-utils, ... }@inputs: let
+    overlays = {
+      c4overlay = inputs.c4overlay.overlay;
+    };
 
-      overlays = {
-        c4overlay = inputs.c4overlay.overlay;
+    nixpkgsConfig = {
+      config = { allowUnfree = true; };
+      overlays = builtins.attrValues overlays;
+    };
 
-        brewCasks = final: prev: {
-          brewCasks = import ./brew-casks.nix rec {
-            pkgs = nixpkgs.legacyPackages.${final.system};
-            brew-api = inputs.brew-api;
-            lib = pkgs.lib;
-            stdenv = pkgs.stdenv;
-          };
-        };
-      };
+    homeManagerCommonImports = [
+      ./home.nix
+    ];
 
-      nixConfig = {
-        registry = {
-          nixpkgs.flake = nixpkgs;
-        };
-      };
-
-      nixpkgsConfig = with inputs; {
-        config = { allowUnfree = true; };
-        overlays = builtins.attrValues overlays;
-      };
-
-      pkgs = system: import nixpkgs {
-        inherit system;
-        inherit (nixpkgsConfig) config overlays;
-      };
-
-      homeManagerCommonImports = [
-        ./home.nix
-      ];
-
-      homeManagerDarwinImports = [
-        ./darwin-home.nix
-      ];
-
-      mkDarwinConfig = { system, username }:
-        darwin.lib.darwinSystem {
-          inherit system;
-          modules = [
-            {
-              nix = nixConfig // {
-                package = inputs.nixpkgs-unstable.legacyPackages.${system}.nix;
-              };
-              nixpkgs = nixpkgsConfig;
-              users.users.${username}.home = "/Users/${username}";
-            }
-            ./nix-darwin.nix
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.users.${username} = {
-                imports =
-                  homeManagerCommonImports ++
-                  homeManagerDarwinImports;
-              };
-            }
-          ];
-        };
-
-    mkHomeConfig = { system, username, homeDirectory, extraImports ? [] }:
+    mkHomeConfig = {
+      home-manager,
+      nixpkgs,
+      system,
+      username,
+      homeDirectory,
+      extraImports ? []
+    }:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs system;
+        pkgs = import nixpkgs {
+          inherit system;
+          inherit (nixpkgsConfig) config overlays;
+        };
+
         modules = [{
-          nix = nixConfig // {
-            package = inputs.nixpkgs-unstable.legacyPackages.${system}.nix;
-          };
-
-          nixpkgs = nixpkgsConfig;
-
           imports =
             homeManagerCommonImports ++
             extraImports;
@@ -114,7 +59,7 @@
           home = {
             inherit username;
             inherit homeDirectory;
-            stateVersion = nixVersion;
+            stateVersion = "25.11";
           };
         }];
       };
@@ -123,28 +68,20 @@
     {
       homeConfigurations = {
         linux = mkHomeConfig rec {
+          home-manager = inputs.home-manager-linux;
+          nixpkgs = inputs.nixpkgs-linux-stable;
           system = builtins.currentSystem;
           username = "c4605";
           homeDirectory = "/home/${username}";
         };
 
         darwin = mkHomeConfig rec {
+          home-manager = inputs.home-manager-darwin;
+          nixpkgs = inputs.nixpkgs-darwin-stable;
           system = "aarch64-darwin";
           username = "c4605";
           homeDirectory = "/Users/${username}";
-          extraImports = homeManagerDarwinImports;
         };
       };
-      darwinConfigurations = {
-        darwin = mkDarwinConfig {
-          system = "aarch64-darwin";
-          username = "c4605";
-        };
-      };
-    } // flake-utils.lib.eachDefaultSystem (system: {
-      legacyPackages = import nixpkgs {
-        inherit system;
-        inherit (nixpkgsConfig) config overlays;
-      };
-    });
+    };
 }

@@ -31,8 +31,8 @@ Rime/*/*.userdb.txt
 Rime/*/installation.yaml
 
 # Private
-private/*
-!private/.gitkeep
+**/private/*
+!**/private/.gitkeep
 
 # AI Agent
 **/.claude/settings.local.json
