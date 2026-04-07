@@ -26,6 +26,9 @@
   outputs = { self, flake-utils, ... }@inputs: let
     overlays = {
       c4overlay = inputs.c4overlay.overlay;
+      direnvFix = final: prev: {
+        direnv = prev.direnv.overrideAttrs (old: { doCheck = false; });
+      };
     };
 
     nixpkgsConfig = {
@@ -49,6 +52,13 @@
         pkgs = import nixpkgs {
           inherit system;
           inherit (nixpkgsConfig) config overlays;
+        };
+
+        extraSpecialArgs = {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
+            inherit system;
+            config = { allowUnfree = true; };
+          };
         };
 
         modules = [{

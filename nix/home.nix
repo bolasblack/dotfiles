@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-unstable,
   lib,
   ...
 }:
@@ -9,12 +10,14 @@ let
 
   stdenv = pkgs.stdenv;
 
+  misePkg = pkgs-unstable.mise;
+
+  homePath = config.home.homeDirectory;
   dotfilePath = "${config.home.homeDirectory}/dotfiles";
 
-  vimWithLuaSupport = lib.overrideDerivation pkgs.vim-full (o: {
-    gui = false;
-    luaSupport = true;
-  });
+  vimWithLuaSupport = pkgs.vim-full.override {
+    guiSupport = false;
+  };
 
 in
 {
@@ -74,7 +77,7 @@ in
   programs.emacs = {
     enable = true;
     extraConfig = ''
-      (load "${dotfilePath}/emacsrc/init.el")
+      (load "${homePath}/.emacsrc/init.el")
     '';
   };
 
@@ -85,7 +88,10 @@ in
     enableBashIntegration = true;
     enableZshIntegration = true;
 
-    mise.enable = true;
+    mise = {
+      enable = true;
+      package = misePkg;
+    };
 
     nix-direnv.enable = true;
 
@@ -101,20 +107,21 @@ in
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.mise.enable
   programs.mise = {
     enable = true;
+    package = misePkg;
     enableBashIntegration = true;
     enableZshIntegration = true;
 
     settings = {
       experimental = true;
     };
-
-    globalConfig = {
-      tools = {
-        pipx = "latest";
-        "pipx:uv" = "latest";
-      };
-    };
   };
+
+  xdg.configFile."mise/conf.d/home-manager.toml".text = ''
+    [tools]
+    pipx = "latest"
+    "pipx:uv" = "latest"
+  '';
+
 
   # https://github.com/nix-community/home-manager/blob/bf893ad4cbf46610dd1b620c974f824e266cd1df/modules/programs/bash.nix
   programs.bash = {
