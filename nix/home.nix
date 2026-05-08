@@ -10,8 +10,6 @@ let
 
   stdenv = pkgs.stdenv;
 
-  misePkg = pkgs-unstable.mise;
-
   homePath = config.home.homeDirectory;
   dotfilePath = "${config.home.homeDirectory}/dotfiles";
 
@@ -90,7 +88,7 @@ in
 
     mise = {
       enable = true;
-      package = misePkg;
+      package = pkgs.mise;
     };
 
     nix-direnv.enable = true;
@@ -107,7 +105,7 @@ in
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.mise.enable
   programs.mise = {
     enable = true;
-    package = misePkg;
+    package = pkgs.mise;
     enableBashIntegration = true;
     enableZshIntegration = true;
 

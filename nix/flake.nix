@@ -26,6 +26,9 @@
   outputs = { self, flake-utils, ... }@inputs: let
     overlays = {
       c4overlay = inputs.c4overlay.overlay;
+      mise = final: prev: {
+        mise = prev.callPackage ./pkgs/mise-bin.nix { };
+      };
       direnvFix = final: prev: {
         direnv = prev.direnv.overrideAttrs (old: { doCheck = false; });
       };
