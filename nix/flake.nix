@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
-    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-darwin-stable.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
+    nixpkgs-linux-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -12,11 +12,11 @@
     };
 
     home-manager-darwin = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin-stable";
     };
     home-manager-linux = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs-linux-stable";
     };
 
@@ -72,7 +72,7 @@
           home = {
             inherit username;
             inherit homeDirectory;
-            stateVersion = "25.11";
+            stateVersion = "26.05";
           };
         }];
       };

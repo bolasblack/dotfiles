@@ -24,6 +24,7 @@ in
     ./modules/home/homebrew-bundle.nix
   ];
 
+  # https://nix-community.github.io/home-manager/options.xhtml
   programs.home-manager = {
     enable = true;
   };
@@ -108,13 +109,10 @@ in
     package = pkgs.mise;
     enableBashIntegration = true;
     enableZshIntegration = true;
-
-    settings = {
-      experimental = true;
-    };
   };
-
   xdg.configFile."mise/conf.d/home-manager.toml".text = ''
+    [settings]
+    experimental = true
     [tools]
     pipx = "latest"
     "pipx:uv" = "latest"
@@ -235,7 +233,7 @@ in
       maple-mono.Normal-NF-CN
 
       # Python
-      (python310.withPackages (
+      (python315.withPackages (
         ps: with ps; [
         ]
       ))
