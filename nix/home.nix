@@ -3,6 +3,7 @@
   pkgs,
   pkgs-unstable,
   lib,
+  builtins,
   ...
 }:
 
@@ -24,14 +25,14 @@ in
     ./modules/home/homebrew-bundle.nix
   ];
 
-  # https://nix-community.github.io/home-manager/options.xhtml
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/home-manager.html
   programs.home-manager = {
     enable = true;
   };
 
   # Bat, a substitute for cat.
   # https://github.com/sharkdp/bat
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.bat.enable
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/bat.html
   programs.bat = {
     enable = true;
     config = {
@@ -39,30 +40,41 @@ in
     };
   };
 
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.htop.enable
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/htop.html
   programs.htop = {
     enable = true;
     settings.show_program_path = true;
   };
 
-  # https://rycee.gitlab.io/home-manager/options.xhtml#opt-programs.fzf.enable
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    defaultCommand = "fd --type file --color=always";
-    defaultOptions = [ "--ansi" ];
-  };
-
-  # https://rycee.gitlab.io/home-manager/options.xhtml#opt-services.tmux.enable
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/tmux.html
   programs.tmux = {
     enable = true;
     extraConfig = ''
+      bind-key s run-shell "${./files/tmux/fzf-select-session.sh}"
+      bind-key w run-shell "${./files/tmux/fzf-select-window.sh}"
       source-file ${dotfilePath}/tmuxfiles/tmux.conf
     '';
   };
 
-  # https://rycee.gitlab.io/home-manager/options.xhtml#opt-services.neovim.enable
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/sesh.html
+  programs.sesh = {
+    enable = true;
+    enableTmuxIntegration = false; # we replaced it with our own version
+  };
+
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/fzf.html
+  programs.fzf = {
+    enable = true;
+
+    defaultCommand = "fd --type file --color=always";
+    defaultOptions = [ "--ansi" ];
+
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    tmux.enableShellIntegration = true;
+  };
+
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/neovim.html
   programs.neovim = {
     enable = true;
     extraConfig = ''
@@ -72,7 +84,7 @@ in
     '';
   };
 
-  # https://rycee.gitlab.io/home-manager/options.xhtml#opt-services.emacs.enable
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/emacs.html
   programs.emacs = {
     enable = true;
     extraConfig = ''
@@ -81,7 +93,7 @@ in
   };
 
   # https://direnv.net
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.direnv.enable
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/direnv.html
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
@@ -103,7 +115,7 @@ in
   };
 
   # https://mise.jdx.dev/
-  # https://rycee.gitlab.io/home-manager/options.html#opt-programs.mise.enable
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/mise.html
   programs.mise = {
     enable = true;
     package = pkgs.mise;
@@ -119,7 +131,7 @@ in
   '';
 
 
-  # https://github.com/nix-community/home-manager/blob/bf893ad4cbf46610dd1b620c974f824e266cd1df/modules/programs/bash.nix
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/bash.html
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -132,12 +144,12 @@ in
     '';
   };
 
-  # https://github.com/nix-community/home-manager/blob/bf893ad4cbf46610dd1b620c974f824e266cd1df/modules/programs/zsh/default.nix
+  # https://nix-community.github.io/home-manager/options/home-manager/programs/zsh.html
   programs.zsh = {
     enable = true;
     enableCompletion = true;
 
-    # https://rycee.gitlab.io/home-manager/options.xhtml#opt-programs.zsh.initContent
+    # https://nix-community.github.io/home-manager/options/home-manager/programs/zsh.html#programs-zsh-initContent
     initContent = lib.mkMerge [
       # make sure this config is on the bottom of configs to make sure the custom config is loaded last
       (lib.mkOrder 2000 ''
@@ -241,7 +253,7 @@ in
   );
   # }}}
 
-  # https://github.com/nix-community/home-manager/blob/bf893ad4cbf46610dd1b620c974f824e266cd1df/modules/home-environment.nix
+  # https://nix-community.github.io/home-manager/options/home-manager/home.html
 
   home.shell.enableShellIntegration = true;
 
